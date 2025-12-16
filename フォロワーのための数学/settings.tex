@@ -1,0 +1,20 @@
+\usepackage{amsmath}
+\usepackage{makeidx}
+
+\NewDocumentCommand\IndexTerm{m}{%
+  \index{#1}%
+}
+
+\NewDocumentCommand\IndexTerms{>{\SplitList{,}} m}{%
+  \ProcessList{#1}{\IndexTerm}
+}
+
+% 用語
+\NewDocumentCommand\Term{m o}{%
+  \emph{#1}%
+  \index{#1}%
+  \IfValueT{#2}{%
+    (#2)%
+    \IndexTerms{#2}%
+  }%
+}
