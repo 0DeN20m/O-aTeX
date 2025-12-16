@@ -1,0 +1,19 @@
+{
+    "name": "LaTeX",
+    "image": "texlive/texlive",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "james-yu.latex-workshop"
+            ],
+            "settings": {
+                "[latex]": {
+                    "editor.formatOnPaste": false,
+                    "editor.suggestSelection": "recentlyUsedByPrefix",
+                    "editor.insertSpaces": true,
+                    "editor.tabSize": 2
+                }
+            }
+        }
+    }
+}
