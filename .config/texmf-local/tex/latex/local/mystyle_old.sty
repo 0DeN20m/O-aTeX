@@ -1,0 +1,103 @@
+\usepackage{amsmath,bm,amsthm,amssymb,enumerate,mathtools,thmtools,pgffor}
+
+\renewcommand{\ker}{\mathop{\mathrm{Ker}}} %Ker表示用
+\newcommand{\N}{\mathbb{N}} %自然数
+\newcommand{\Z}{\mathbb{Z}} %整数
+\newcommand{\Q}{\mathbb{Q}} %有理数
+\newcommand{\R}{\mathbb{R}} %実数
+\newcommand{\C}{\mathbb{C}} %複素数
+\newcommand{\transpose}[1]{\,{\vphantom{#1}}^t\!#1} %転置
+\newcommand{\diagonal}[1]{\mathop{\mathrm{diag}}(#1)} %対角行列
+\newcommand{\set}[2]{\{\,#1\mid#2\,\}} %集合(通常サイズ)
+\newcommand{\Set}[2]{\left\{\left.#1\,\right|\,#2\,\right\}} %集合(左大)
+\newcommand{\seT}[2]{\left\{\,#1\,\left|\,#2\right.\right\}} %集合(右大)
+\DeclareMathOperator{\id}{id} %恒等写像
+\newcommand{\Pow}{\mathop{\mathcal{P}}} %べき集合
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor} %floor function
+\newcommand{\PartialDiff}[3][]{\frac{\partial^{#1} {#2}}{\partial^{} {#3}^{#1}}} %偏微分
+\newcommand{\Diff}[3][]{\frac{d^{#1} {#2}}{d^{} {#3}^{#1}}} %微分
+
+\newcommand{\question}[2]{
+	\setcounter{subsection}0
+	\setcounter{equation}0
+	\setcounter{figure}0
+	\addtocounter{section}1
+	\vspace{3\baselineskip}
+	{\samepage\noindent{\large{\textbf{#1}\ }#2}}
+} %大問見出し
+
+\newcommand{\subquestion}[2]{
+	\addtocounter{subsection}1
+	\vspace{2\baselineskip}
+	{\samepage\noindent{\large #1\ #2}}\vspace{\baselineskip}
+} %小問見出し
+
+\allowdisplaybreaks[1] %数式途中の改行について
+
+%定理環境
+
+\declaretheoremstyle[
+	spaceabove=\baselineskip,
+	spacebelow=\baselineskip, 
+	headfont=\normalfont\bfseries, notefont=\normalfont, notebraces={(}{)}, 
+	postheadspace=1em,
+	numbered=no,
+	headpunct=,
+	qed=\qedsymbol
+]{myproof}
+
+\declaretheoremstyle[
+	spaceabove=\baselineskip, spacebelow=\baselineskip, 
+	headfont=\normalfont\bfseries, notefont=\normalfont, notebraces={(}{)}, 
+	postheadspace=1em,
+	headpunct=,
+	numberwithin=section,
+	qed=$\square$
+]{mytheorem}
+
+\declaretheoremstyle[
+	spaceabove=\baselineskip, spacebelow=\baselineskip, 
+	headfont=\normalfont\bfseries, notefont=\normalfont, notebraces={(}{)}, 
+	postheadspace=1em,
+	headpunct=,
+	numberwithin=section
+]{myexample}
+
+\declaretheorem[title=証明, style=myproof]{myproof}
+
+\renewenvironment{proof}{\begin{myproof}}{\end{myproof}}
+
+\declaretheorem[title=定理, style=mytheorem]{theorem}
+\declaretheorem[title=定義, style=mytheorem, numbered=no]{definition*}
+\declaretheorem[title=定義, style=mytheorem, sibling=theorem]{definition}
+\declaretheorem[title=補題, style=mytheorem, sibling=theorem]{lemma}
+\declaretheorem[title=命題, style=mytheorem, sibling=theorem]{proposition}
+\declaretheorem[title=命題, style=mytheorem, numbered=no]{proposition*}
+\declaretheorem[title=系, style=mytheorem, sibling=theorem]{corollary}
+\declaretheorem[title=例, style=myexample,sibling=theorem]{example}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+%\renewcommand{\qed}{\unskip\nobreak\qquad\qedsymbol}
+
+\numberwithin{equation}{section} %式番号の表示変更
+\numberwithin{figure}{section} %式番号の表示変更
+
+%\newtheoremstyle{jplain}
+%{20pt}
+%{20pt}
+%{}
+%{}
+%{\bfseries}
+%{.}
+%{ }
+%{\thmname{#1}\thmnumber{#2}\thmnote{ (#3)}}
+
+%\theoremstyle{jplain}
+%\newtheorem{theorem}{定理}[section]
+%\newtheorem*{theorem*}{定理}
+%\newtheorem{lemma}[theorem]{補題}
+%\newtheorem{definition}[theorem]{定義}
+%\newtheorem*{definition*}{定義}
+%\newtheorem{proposition}[theorem]{命題}
+%\newtheorem*{proposition*}{命題}
+%\newtheorem{example}{例}[section]

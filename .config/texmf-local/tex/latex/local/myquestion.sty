@@ -1,0 +1,13 @@
+\newcommand{\question}[2]{		%大問見出し
+	\setcounter{subsection}0
+	\setcounter{equation}0
+	\setcounter{figure}0
+	\addtocounter{section}1
+	\vspace{3\baselineskip}
+	{\samepage\noindent{\large{\textbf{#1}\ }#2}}
+}
+\newcommand{\subquestion}[2]{	%小問見出し
+	\addtocounter{subsection}1
+	\vspace{2\baselineskip}
+	{\samepage\noindent{\large #1\ #2}}\vspace{\baselineskip}
+}

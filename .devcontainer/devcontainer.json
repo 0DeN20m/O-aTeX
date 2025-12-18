@@ -1,12 +1,18 @@
 {
     "name": "LaTeX",
-    "image": "texlive/texlive",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
     "customizations": {
         "vscode": {
             "extensions": [
                 "james-yu.latex-workshop"
             ],
             "settings": {
+                "latex-workshop.intellisense.package.dirs": [
+                    "LaTeX/.config/LaTeX-Workshop/dev/packages"
+                ],
                 "[latex]": {
                     "editor.formatOnPaste": false,
                     "editor.suggestSelection": "recentlyUsedByPrefix",
