@@ -11,7 +11,7 @@
             ],
             "settings": {
                 "latex-workshop.intellisense.package.dirs": [
-                    "LaTeX/.config/LaTeX-Workshop/dev/packages"
+                    "/workspaces/LaTeX/.config/intellisense"
                 ],
                 "[latex]": {
                     "editor.formatOnPaste": false,

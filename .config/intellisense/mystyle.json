@@ -1,0 +1,161 @@
+{
+  "deps": [
+    {
+      "name": "amsmath"
+    },
+    {
+      "name": "amssymb"
+    },
+    {
+      "name": "amsthm"
+    },
+    {
+      "name": "thmtools"
+    },
+    {
+      "name": "enumitem"
+    }
+  ],
+  "macros": [
+    {
+      "name": "nolimits"
+    },
+    {
+      "name": "Aut"
+    },
+    {
+      "name": "BurnsideRing"
+    },
+    {
+      "name": "C"
+    },
+    {
+      "name": "Card",
+      "arg": {
+        "format": "{}",
+        "snippet": "Card{${1:set}}"
+      }
+    },
+    {
+      "name": "CatAbGrps"
+    },
+    {
+      "name": "CatFinSets"
+    },
+    {
+      "name": "CatSets"
+    },
+    {
+      "name": "CatSheaves"
+    },
+    {
+      "name": "Colim"
+    },
+    {
+      "name": "Def"
+    },
+    {
+      "name": "End"
+    },
+    {
+      "name": "FixedPtMap"
+    },
+    {
+      "name": "FunctCat",
+      "arg": {
+        "format": "{}{}",
+        "snippet": "FunctCat{${1:dom}}{${2:codom}}"
+      }
+    },
+    {
+      "name": "Hom"
+    },
+    {
+      "name": "Hom",
+      "arg": {
+        "format": "[]",
+        "snippet": "Hom[${1:cat}]"
+      }
+    },
+    {
+      "name": "id"
+    },
+    {
+      "name": "Im",
+      "detail": "ℑ",
+      "doc": "\\mathfrak{i} (eufrak), imaginary part"
+    },
+    {
+      "name": "Ker"
+    },
+    {
+      "name": "Lim"
+    },
+    {
+      "name": "MarkHom"
+    },
+    {
+      "name": "Maps",
+      "arg": {
+        "format": "{}{}",
+        "snippet": "Maps{${1:dom}}{${2:codom}}"
+      }
+    },
+    {
+      "name": "N"
+    },
+    {
+      "name": "Normalizer"
+    },
+    {
+      "name": "Normalizer",
+      "arg": {
+        "format": "[]",
+        "snippet": "Normalizer[${1:grp}]"
+      }
+    },
+    {
+      "name": "Op",
+      "arg": {
+        "format": "{}",
+        "snippet": "Op{${1:obj}}"
+      }
+    },
+    {
+      "name": "OpOperator",
+      "arg": {
+        "format": "{}",
+        "snippet": "OpOperator{${1:operator}}"
+      }
+    },
+    {
+      "name": "OrderGrp",
+      "arg": {
+        "format": "{}",
+        "snippet": "OrderGrp{${1:grp}}"
+      }
+    },
+    {
+      "name": "Power"
+    },
+    {
+      "name": "Q"
+    },
+    {
+      "name": "R"
+    },
+    {
+      "name": "Tuple",
+      "arg": {
+        "format": "{}",
+        "snippet": "Tuple{${1:entries}}"
+      }
+    },
+    {
+      "name": "Z"
+    }
+  ],
+  "envs": [],
+  "keys": {},
+  "args": []
+}
