@@ -13,6 +13,13 @@
                 "latex-workshop.intellisense.package.dirs": [
                     "/workspaces/LaTeX/.config/intellisense"
                 ],
+                "latex-workshop.formatting.latexindent.args": [
+                    "-c",
+                    "%DIR%/",
+                    "%TMPFILE%",
+                    "-l",
+                    "/workspaces/LaTeX/.config/latexindent.yaml"
+                ],
                 "[latex]": {
                     "editor.formatOnPaste": false,
                     "editor.suggestSelection": "recentlyUsedByPrefix",
