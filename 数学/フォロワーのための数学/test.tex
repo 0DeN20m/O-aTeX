@@ -1,0 +1,139 @@
+\documentclass{jlreq}
+\usepackage{common}
+
+\jlreqsetup{}
+
+\begin{document}
+
+\part{見出しの確認}[副題あり]
+
+パートの文章．
+
+\section{セクション}[副題]
+
+セクションの文章．
+
+\subsection{サブセクション}[副題]
+
+サブセクションの文章．
+
+\subsubsection{サブサブセクション}[副題]
+
+サブサブセクションの文章．
+
+\part{見出しの確認}
+
+パートの文章．
+
+\section{セクション}
+
+セクションの文章．
+
+\subsection{サブセクション}
+
+サブセクションの文章．
+
+\subsubsection{サブサブセクション}
+
+サブサブセクションの文章．
+
+\part{本文の確認}
+
+\section{定理環境}
+
+\begin{axiom}[コメント]
+  公理の内容．
+\end{axiom}
+
+\begin{axiom*}
+  公理の内容．
+\end{axiom*}
+
+\begin{definition}[コメント]
+  定義の内容．
+\end{definition}
+
+\begin{definition*}
+  定義の内容．
+\end{definition*}
+
+\begin{theorem}[コメント]
+  定理の内容．
+\end{theorem}
+
+\begin{theorem*}
+  定理の内容．
+\end{theorem*}
+
+\begin{proposition}[コメント]
+  命題の内容．
+\end{proposition}
+
+\begin{proposition*}
+  命題の内容．
+\end{proposition*}
+
+\begin{lemma}[コメント]
+  補題の内容．
+\end{lemma}
+
+\begin{lemma*}
+  補題の内容．
+\end{lemma*}
+
+\begin{corollary}[コメント]
+  系の内容．
+\end{corollary}
+
+\begin{corollary*}
+  系の内容．
+\end{corollary*}
+
+\begin{example}[コメント]
+  例の内容．
+\end{example}
+
+\begin{example*}
+  例の内容．
+\end{example*}
+
+\part{サンプル}
+
+GitHub Copilot によって生成されたサンプル文章．
+
+\section{群}
+
+\subsection{定義}
+
+群は，様々な数学的対象の対称性を記述するための基本的な構造である．
+
+\begin{definition}
+  群とは，集合 $G$ と二項演算 $\cdot : G \times G \to G$ の組 $(G, \cdot)$ であって，次の公理を満たすものをいう：
+  \begin{enumerate}
+    \item (結合律) 任意の $a, b, c \in G$ に対して，$(a \cdot b) \cdot c = a \cdot (b \cdot c)$ が成り立つ．
+    \item (単位元の存在) $G$ に属する元 $e$ が存在して，任意の $a \in G$ に対して，$e \cdot a = a \cdot e = a$ が成り立つ．
+    \item (逆元の存在) 任意の $a \in G$ に対して，$G$ に属する元 $b$ が存在して，$a \cdot b = b \cdot a = e$ が成り立つ．
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  整数全体の集合 $\mathbb{Z}$ と加法 $+$ は群 $(\mathbb{Z}, +)$ を形成する．
+\end{example}
+
+\begin{example}
+  非零実数全体の集合 $\mathbb{R}^*$ と乗法 $\times$ は群 $(\mathbb{R}^*, \times)$ を形成する．
+\end{example}
+
+\subsection{諸性質}
+
+群の基本的な性質についていくつか述べる．
+
+\begin{theorem}
+  群において，単位元は一意である．
+\end{theorem}
+
+\begin{proof}
+  群 $(G, \cdot)$ において，単位元が $e$ と $e'$ の二つ存在すると仮定する．すると，任意の $a \in G$ に対して，$e \cdot a = a$ および $e' \cdot a = a$ が成り立つ．特に，$a = e'$ とすると，$e \cdot e' = e'$ となる．同様に，$a = e$ とすると，$e' \cdot e = e$ となる．したがって，$e = e'$ が成り立ち，単位元は一意であることが示された．
+\end{proof}
+
+\end{document}
