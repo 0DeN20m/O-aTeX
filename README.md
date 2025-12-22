@@ -6,12 +6,9 @@
 
 ## 各ディレクトリの説明
 
-### .container
+### .config
 LaTeX周りの設定ファイルを配置しています．
 ここを見ても数学は無いです．
-
-#### texmf-local
-私の使っている.bibや.styが格納されています． 
 
 ### .devcontainer
 Dev Containerの構成ファイルです．

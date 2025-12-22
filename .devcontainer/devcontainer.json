@@ -13,6 +13,7 @@
                 "latex-workshop.intellisense.package.dirs": [
                     "/workspaces/LaTeX/.config/intellisense"
                 ],
+                "latex-workshop.latex.recipe.default": "latexmk (lualatex)",
                 "latex-workshop.formatting.latexindent.args": [
                     "-c",
                     "%DIR%/",
