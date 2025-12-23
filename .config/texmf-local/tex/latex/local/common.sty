@@ -45,6 +45,6 @@
 %   -> 偏微分方程式（Partial Differential Equation; PDE）
 \NewDocumentCommand\Term{o m o}{%
   \emph{#2}%
-  \IfValueT{#1}{\index{#1@#2}}%
-  \IfValueT{#3}{(#3)}%
+  \IfValueTF{#1}{\index{#1@#2}}{\index{#2}}%
+  \IfValueT{#3}{（#3）}%
 }
