@@ -1,0 +1,106 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle}
+
+\title{作用について}
+\author{オ}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+		群の作用の一般化について述べた．
+	\end{abstract}
+
+	\section{群の作用}
+
+	$G$を群とする．
+	$G$が集合$X$に作用するとは，以下の条件を満たす写像$G\times X\ni (g,x)\mapsto gx\in X$が存在することをいう．
+	\begin{enumerate}
+		\item 任意の$g,h\in G,\ x\in X$に対して，$(gh)x=g(hx)$が成り立つ．	\label{item:gp_act_1}
+		\item 任意の$x\in X$に対して，$ex=x$が成り立つ．	\label{item:gp_act_2}
+	\end{enumerate}
+	ここで，$e\in G$は$G$の単位元である．
+	まずは，この定義について考察してみよう．
+	
+	任意の$g\in G$に対して，$G\times X\rightarrow X$は写像$X\rightarrow X$を誘導する．
+	つまり，$f_g\colon X\rightarrow X$が
+	\begin{equation*}
+		f_g(x)=gx\quad (x\in X)
+	\end{equation*}
+	によって定まる．
+	ここで，写像$X\rightarrow X$全体の集合を$X^X$と書けば，この対応は写像$f\colon G\rightarrow X^X$と見なすことができる．
+	実際，任意の$g\in G$に対して$f(g)=f_g$と定めればよい．
+	
+	群の作用の定義を，今述べた写像によって書き換えてみよう．
+	\ref{item:gp_act_1}は，任意の$g,h\in G,\ x\in X$に対して，
+	\begin{equation*}
+		f_{gh}(x)=f_g(f_h(x))=(f_g\circ f_h)(x)
+	\end{equation*}
+	が成り立つことと書き換えられる．
+	これは，写像として$f_{gh}=f_g\circ f_h$が成り立つことを意味する．
+	また，\ref{item:gp_act_2}も同様にして考えれば，これは$f_e=\id_X$であることと同値だと分かる．
+	
+	ここで，$X^X$は写像の合成についてモノイド
+	\footnote{
+		モノイドとは，群の公理のうち，逆元の存在以外を満たす演算を備えた集合のこと．
+	}
+	を成す．
+	また，$M,M'$をモノイドとしたとき，写像$f\colon M\rightarrow M'$がモノイド準同型写像であるとは，$f$がモノイドの構造を保つことをいう．
+	つまり，以下の条件を満たす写像$f$のことをいう．
+	\begin{enumerate}
+		\item 任意の$m,n\in M$に対して，$f(mn)=f(m)f(n)$が成り立つ．
+		\item 単位元$e\in M$に対して，$f(e)$は$M'$の単位元である．
+	\end{enumerate}
+	これらの条件が，群の作用の定義を書き換えたものと全く同じであることに気付くだろう．
+	
+	つまり，まとめると，群$G$が集合$X$に作用するとは，モノイド準同型写像$G\rightarrow X^X$が存在することと言い換えられるのである．
+	
+	\section{いろいろな作用}
+	
+	前節のことを踏まえて，一般的な作用を定義しよう．
+	\begin{definition}
+		$M$をモノイド，$C$を圏，$c$を$C$の対象とする．
+		$M$を唯一つの対象$\bullet$から成る圏と見なしたとき，関手$F\colon M\rightarrow C$を$M$の$F(\bullet)$への作用という．
+	\end{definition}
+	例えば，群$G$の集合$X$への作用とは，関手$f\colon G\rightarrow \mathbf{Set}$であって，$f(\bullet)=X$となるもののことである．
+	
+	以下で，いくつかの作用の例を見る．
+	
+	\begin{example}
+		$G$を群，$R$を環とする．
+		$G$の$R$加群$V$への作用は，$V$を表現空間とする$G$の$R$上の表現である．
+	\end{example}
+
+	\begin{example}
+		$H,N$を群とする．
+		$H$の$N$への作用$\phi$は，各$h \in H$に対して，$N$上の自己同型写像${}^h{-} \in \mathop{\mathrm{Aut}}(N)$を与える．
+		このとき，直積$N \times H$上の二項演算を
+		\begin{equation*}
+			(n_1,h_1)(n_2,h_2)=(n_1\,{}^{h_1}n_2,h_1h_2) \quad ((n_1,h_1),(n_2,h_2) \in N \times H)
+		\end{equation*}
+		で定めると，$N \times H$は群になる．
+		この群を$N$と$H$の半直積といい，$N \rtimes H$で表す．
+	\end{example}
+	
+	さらに，環の作用も同様に定義しよう．
+	つまり，$R$を環，$A$を加法圏としたとき，加法関手$F \colon R \rightarrow A$を$R$の$F(\bullet)$への作用という．
+	
+	\begin{example}
+		$R$を環，$V$を可換群とする．
+		$R$の$V$への作用により，$V$は$R$加群となる．
+	\end{example}
+	
+	$G$を群とする．
+	$\Lambda$を集合とし，写像$\Lambda \rightarrow \mathrm{Aut}(G)$が存在するとき，$G$は作用域$\Lambda$を持つ群という．
+	$\Lambda$がモノイドならば，関手$\Lambda \rightarrow G$と見なせる．
+	
+	\bibliographystyle{jplain}
+	\bibliography{myrefs-jp}
+	\nocite{Kondo:群論}
+	\nocite{Nakaoka:圏論の技法}
+	\nocite{Hattori:近代代数学}
+
+\end{document}

@@ -1,0 +1,181 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle}
+\usepackage{cleveref}
+\usepackage{autonum}
+
+\newcommand{\Term}[2][\relax]{%
+	\textsf{#2} \if#1\relax\else{（\textsf{#1}）}\fi%
+}
+
+\crefname{equation}{式}{式}
+\crefname{proposition}{命題}{命題}
+\crefname{theorem}{定理}{定理}
+\crefname{lemma}{補題}{補題}
+\crefname{lstlisting}{コード}{コード}
+\crefname{figure}{図}{図}
+\crefname{example}{例}{例}
+\crefname{definition}{定義}{定義}
+
+\newlist{defenum}{enumerate}{1}
+\setlist[defenum]{label=\arabic*.\ ,ref=\thedefinition.\arabic*}
+\crefalias{defenumi}{definition}
+
+\newlist{propenum}{enumerate}{1}
+\setlist[propenum]{label=\arabic*.\ ,ref=\theproposition.\arabic*}
+\crefalias{propenumi}{proposition}
+
+\newlist{thmenum}{enumerate}{1}
+\setlist[thmenum]{label=\arabic*.\ ,ref=\thetheorem.\arabic*}
+\crefalias{thmenumi}{theorem}
+
+\newcommand{\crefpairconjunction}{と}
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\creflastconjunction}{，および}
+
+\newcommand{\Inverse}[1]{{#1}^{-1}}
+\newcommand{\LambdaMap}{\mathop{\lambda}\nolimits}
+
+\begin{document}
+	
+	\setcounter{section}1
+	\begin{definition}
+		集合$A$とその上の二項演算$\cdot, \circ$が以下の条件を満たすとき，
+		三つ組$\Tuple{A, \cdot, \circ}$を\Term{skew (left) brace}と呼ぶ：
+		\begin{defenum}
+			\item $\Tuple{A, \cdot}$と$\Tuple{A, \circ}$は群である．
+			\item 任意の$a, b, c \in A$が\Term[brace relation]{brace関係式}
+			\begin{equation}
+				a \circ (b \cdot c) = (a \circ b) \cdot \Inverse{a} \cdot (a \circ c)
+			\end{equation}
+			を満たす．
+			ここで，
+			$\Inverse{a}$は$a$の$\cdot$に関する逆元である．
+		\end{defenum}
+	\end{definition}
+	
+	以下，
+	$\Tuple{A, \cdot, \circ}$はskew braceとする．
+	
+	群$\Tuple{A, \cdot}$を\Term[additive group]{$A$の加法群}と呼び，
+	群$\Tuple{A, \circ}$を\Term[multiplicative group]{$A$の乗法群}と呼ぶ．
+	$a \in A$の乗法に関する逆元を$\overline{a}$で表す．
+	
+	加法$\cdot$と乗法$\circ$が混ざった式においては，
+	加法を優先的に計算すると取り決めておく．
+	また，
+	加法の記号は適宜省略する．
+	この取り決めによって，
+	例えば，
+	brace関係式は
+	\begin{equation}
+		a \circ bc = (a \circ b) \Inverse{a} (a \circ c)
+	\end{equation}
+	と表される．
+	
+	\begin{proposition}
+		$\Tuple{A, \cdot}$の単位元と$\Tuple{A, \circ}$の単位元は一致する．
+	\end{proposition}
+	
+	$A$の単位元を$1$で表す．
+	
+	$A$上の二項演算$\OpOperator{\cdot}$を
+	\begin{equation}
+		a \Op{\cdot} b = ba
+	\end{equation}
+	と定めると，
+	三つ組$\Tuple{A, \Op{\cdot}, \circ}$はskew braceとなる．
+	このskew braceを$\Op{A}$で表す．
+	
+	任意の$a \in A$に対して，
+	写像$\LambdaMap_a \colon A \to A$を
+	\begin{equation}
+		\LambdaMap_a(b) = \Inverse{a} (a \circ b)
+	\end{equation}
+	で定める．
+	さらに，
+	$A$に関する\Term[lambda map]{ラムダ写像}$\LambdaMap \colon A \to \Maps{A}{A}$を
+	\begin{equation}
+		\LambdaMap(a) = \LambdaMap_a
+	\end{equation}
+	で定める．
+	
+	\begin{proposition}\label{prop:lambda_map}
+		以下が成り立つ：
+		\begin{propenum}
+			\item ラムダ写像$\LambdaMap$は乗法に関する群準同型である．
+			\item 任意の$a \in A$に対して，
+			$\LambdaMap_a \in \Aut \Tuple{A, \cdot}$である．
+		\end{propenum}
+	\end{proposition}
+	
+	\begin{proof}
+		\quad
+		\begin{enumerate}
+			\item 任意の$a, b, c \in A$に対して，
+			\begin{align}
+				\left(\LambdaMap_a \circ \LambdaMap_b\right)(c)
+				&= \Inverse{a} (a \circ \Inverse{b} (b \circ c)) \\
+				&= \Inverse{a} (a \circ \Inverse{b}) \Inverse{a} (a \circ b \circ c) \\
+				&= \Inverse{(a \circ b)}((a \circ b) \circ c) \\
+				&= \LambdaMap_{a \circ b}(c)
+			\end{align}
+			が成り立つ．
+			したがって，
+			$\LambdaMap_{a \circ b} = \LambdaMap_a \circ \LambdaMap_b$だから，
+			$\LambdaMap$は群準同型写像である．
+			\item 任意の$b, c \in A$に対して，
+			\begin{align}
+				\LambdaMap_a(bc)
+				&= \Inverse{a} (a \circ bc) \\
+				&= \Inverse{a} (a \circ b) \Inverse{a} (a \circ c) \\
+				&= \LambdaMap_a(b) \LambdaMap_a(c)
+			\end{align}
+			が成り立つから，
+			$\LambdaMap_a \in \End \Tuple{A, \cdot}$である．
+			また，
+			$\LambdaMap_{\overline{a}} = \Inverse{\LambdaMap_a}$なので，
+			$\LambdaMap_a$は群同型写像である．\qedhere
+		\end{enumerate}
+	\end{proof}
+	
+	$\Op{A}$に関するラムダ写像を$\Op{\LambdaMap}$で表す．
+	\cref{prop:lambda_map}より，
+	$\Op{\LambdaMap}$は$\Tuple{A, \circ}$から$\Aut \Tuple{A, \Op{\cdot}} = \Aut \Tuple{A, \cdot}$への群準同型写像である．
+	また，
+	\begin{equation}
+		\Op{\LambdaMap}_a (b) = (a \circ b) \Inverse{a}
+	\end{equation}
+	である．
+	
+	$\Tuple{\Tuple{A, \cdot}, \Op{\LambdaMap}}$は$\Tuple{A, \circ}$の群としての作用であるから，
+	半直積$\Lambda_A = \Tuple{A, \cdot} \rtimes_{\Op{\LambdaMap}} \Tuple{A, \circ}$が定まる．
+	
+	\begin{definition}
+		$X$を集合とする．
+		$X$への2つの作用$\beta \colon \Tuple{A, \cdot} \to \Hom(X, X)$と$\rho \colon \Tuple{A, \circ} \to \Hom(X, X)$が，
+		関係式
+		\begin{equation}
+			\beta(\Op{\LambdaMap}_a(b)) = \rho(a) \circ \beta(b) \circ \Inverse{\rho(a)}
+		\end{equation}
+		を満たすとき，
+		三つ組$\Tuple{X, \beta, \rho}$を$A$の作用と呼ぶ．
+	\end{definition}
+	
+	$\Lambda_A$は自然に$A$集合となる．
+	
+	$X$を$A$集合とする．
+	
+	\begin{proposition}
+		$X$を$A$集合としたとき，
+		以下が成り立つ：
+		\begin{propenum}
+			\item 任意の$a \in A$と$x \in X$に対して，
+			$a \circ A \cdot x = A \cdot (a \circ x)$が成り立つ．
+			\item $A \cdot (A \circ x)$は$A$集合である．
+			\item 
+		\end{propenum}
+	\end{proposition}
+	
+\end{document}

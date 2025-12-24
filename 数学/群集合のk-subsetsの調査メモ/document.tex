@@ -1,0 +1,276 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle}
+
+\begin{document}
+
+	$G$を有限群とし，$H \le G \trianglerighteq N$とする．
+	
+	\section{$m(G)$を与えるBurnside環の元について}
+	
+	\subsection{Deflationによる$m(G)$の導出}
+	
+	\begin{lemma}
+		$\displaystyle |H \backslash G / N| = \frac{(G : N)}{(H : H \cap N)} = (G : HN)$．
+	\end{lemma}
+	
+	\begin{proof}
+		自然な作用$H \curvearrowright G/N$を考えればよい．
+	\end{proof}
+	
+	$G$集合$X$と$n \in \Z_{\ge 0}$に対して，
+	\begin{equation*}
+		\binom{X}{n} = \{\, A \subset X \mid |A| = n \,\}
+	\end{equation*}
+	とおく．
+	Gill-Lod\`a~\cite{Gill-Loda:Statistics_for_Sn_act_on_k-subsets}ではこの集合を\emph{$n$-subsets of X}と呼んでいる．
+	
+	\begin{lemma}
+		\begin{equation*}
+			\left| \binom{G/N}{n}^H \right| = \begin{cases}
+				0 & ((H : H \cap N) \nmid n), \\
+				\displaystyle \binom{(G : N) / (H : H \cap N)}{n / (H : H \cap N)} & ((H : H \cap N) \mid n). 
+			\end{cases} \qedhere
+		\end{equation*}
+	\end{lemma}
+	
+	\begin{proof}
+		$A \in \binom{G/N}{n}^H$と仮定すると，$H$は$A$に作用する．
+		$H_{gN} = H \cap {}^gN = H \cap N$より，$A \cong \bigsqcup H/(H \cap N)$が成り立つから，$(H : H \cap N) \mid n$．
+		
+		$(H : H \cap N) \mid n$のとき，$A$は相異なる$H.gN \in H \backslash G/N$の直和なので，代表元の選び方を考えて$|\binom{G/N}{n}^H|=\binom{|H\backslash G/N|}{n/(H : H \cap N)}$を得る．
+	\end{proof}
+	
+	一般の$G$集合の$k$-subsetsの構造についての先行研究は見つかっていない．
+	ただし，$n$次対称群$S_n$に関しては，$[n] = \{1, 2, \dotsc ,n\}$の$k$-subsetsの$S_n$集合としての構造がHalasi~\cite{Halasi:On_the_base_size_for_the_sym_gp_act_on_subsets}やGill, Lod\`aら~\cite{Gill-Loda:Statistics_for_Sn_act_on_k-subsets}などによりある程度調べられている．
+	
+	\begin{corollary}[{\cite[p.31, LEMMA 1']{Dress-Siebeneicher-Yoshida:An_Appl_of_BRs_in_Elem_FGT}}]
+		\begin{equation*}
+				\left| \binom{G/\mathbf{1}}{n}^H \right| = \begin{cases}
+					0 & (|H| \nmid n), \\
+					\displaystyle \binom{(G : H)}{n / |H|} & (|H| \mid n).
+				\end{cases} \qedhere
+		\end{equation*}
+	\end{corollary}
+	
+	\begin{theorem}[Yoshida]\label{th:idemp_of_BR}
+		\begin{equation*}
+			e^G_H = \frac{1}{|N_G(H)|} \sum_{K \le H} |K| \mu(K, H) [G/H]
+		\end{equation*}
+		は$\Q B(G)$における原始的べき等元であり，$\{\, e^G_H \mid [H]_G \in \mathop{\mathrm{Cl}}(G) \,\}$は$\Q B(G)$の原始的べき等元全体の集合である．
+	\end{theorem}
+	
+	\begin{equation*}
+		\sigma^G_N = \sum_{[H]_G \in \mathop{\mathrm{Cl}}(G)} \binom{G/N}{(H : H \cap N)}e^G_H = \sum_{[H]_G \in \mathop{\mathrm{Cl}}(G)} \frac{(G : N)}{(H : H \cap N)} e^G_H
+	\end{equation*}
+	とおく．
+	
+	\begin{definition}[{\cite[p.\,77, 5.2.2]{Bouc:biset_functors_for_f_gps}}]
+		$N \triangleleft G$に対して，
+		\begin{equation*}
+			m_{G, N} = \frac{1}{|G|} \sum_{XN = G} |X| \mu(X, G)
+		\end{equation*}
+		とおく．
+	\end{definition}
+	
+	\begin{proposition}[{\cite[p.\,91, 5.6.1]{Bouc:biset_functors_for_f_gps}}]
+		\begin{equation*}
+			m_{G,G} = \begin{cases}
+				0 & (\text{$G$: non-cyclic}), \\
+				\varphi(|G|) / |G| & (\text{$G$: cyclic}).
+			\end{cases} \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proposition}\label{prop:def_fix}
+		\begin{equation*}
+			|(\Def^G_{G/G} \sigma^G_N)^{G/G}| = \frac{1}{|N|} \sum_{\langle g \rangle \le G} \frac{\varphi(o(g))}{(\langle g \rangle : \langle g \rangle \cap N)}. \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proof}
+		\begin{align*}
+			|(\Def^G_{G/G} \sigma^G_N)^{G/G}|
+				&= \sum_{[H]_G \in \mathop{\mathrm{Cl}}(G)} \frac{(G : N)}{(H : H \cap N)} \frac{1}{(N_G(H) : H)} m_{H, H} \\
+				&= \frac{1}{|N|} \sum_{\substack{[H]_G \in \mathop{\mathrm{Cl}}(G) \\ \text{$H$: cyclic}}} (G : N_G(H)) \frac{\varphi(|H|)}{(H : H \cap N)} \\
+				&= \frac{1}{|N|} \sum_{\substack{H \le G \\ \text{$H$: cyclic}}} \frac{\varphi(|H|)}{(H : H \cap N)} \\
+				&= \frac{1}{|N|} \sum_{\langle g \rangle \le G} \frac{\varphi(o(g))}{(\langle g \rangle : \langle g \rangle \cap N)}. \qedhere
+		\end{align*}
+	\end{proof}
+	
+	$m(G) = \sum_{g \in G} \frac{1}{o(g)}$とおく．
+	
+	\begin{corollary}\label{cor:m(G)}
+		$|\Def^G_{G/G}(\sigma^G_{\mathbf{1}})^{G/G}| = m(G).$
+	\end{corollary}
+	
+	\subsection{$\sigma^G_N$のその他の性質について}
+	
+	\begin{proposition}[{\cite[p.\,79, 5.3.1]{Bouc:biset_functors_for_f_gps}}]
+		$N \triangleleft M \triangleleft G$に対して，$m_{G,M} = m_{G,N} m_{G/N,M/N}$．
+	\end{proposition}
+	
+	特に，任意の$H \le G$に対して，
+	\begin{equation}\label{eq:rel_of_m}
+		m_{H,H} = m_{H,H \cap N} m_{H/(H \cap N),H/(H \cap N)}
+	\end{equation}
+	が成り立つ．
+	
+	この命題から，$M, N \triangleleft G$に対して，命題\ref{prop:def_fix}の一般化
+	\begin{equation*}
+		\Def^G_{G/M}\sigma^G_N = \frac{1}{|N|} \sum_{\langle g \rangle \le G} (N_G(\langle g \rangle M) : \langle g \rangle M) \frac{|\langle g \rangle \cap N|}{|\langle g \rangle \cap M|} \frac{\varphi(o(g))}{\varphi((\langle g \rangle : \langle g \rangle \cap M))} e^{G/M}_{\langle g \rangle M/M}. \qedhere
+	\end{equation*}
+	が想像できる．
+	しかし，これを導出するには式\eqref{eq:rel_of_m}の両辺を$m_{H/(H \cap N),H/(H \cap N)}$で割る必要がある．
+	
+	定理\ref{th:idemp_of_BR}における$e^G_H$の具体的な表示を用いれば，次の関係式を得る．
+	
+	\begin{proposition}
+		\begin{equation*}
+			m(G) = |S(G)| + \sum_{K < H \le G} \frac{\mu(K, H)}{(H : K)}.
+		\end{equation*}
+		ここで，$S(G)$は$G$の部分群全体の集合である．
+	\end{proposition}
+	
+	\begin{proof}
+		\begin{align*}
+			\sigma^G_{\mathbf{1}} 
+				&= \sum_{[H]_G \in \mathop{\mathrm{Cl}}(G)} (G : H) \left(\frac{1}{|N_G(H)|} \sum_{K \le H} |K| \mu(K,H) [G/H] \right) \\
+				&= \sum_{K \le H \le G} \frac{\mu(K, H)}{(H : K)}[G/H]
+		\end{align*}
+		であり，$\Def^G_{G/G}([G/H]) = [G/HG] = [G/G]$なので，
+		\begin{align*}
+			m(G) 
+				&= |\Def^G_{G/G}(\sigma^G_{\mathbf{1}})^{G/G}| \\
+				&= \sum_{K \le H \le G} \frac{\mu(K, H)}{(H : K)} \\
+				&= |S(G)| + \sum_{K < H \le G} \frac{\mu(K, H)}{(H : K)}. \qedhere
+		\end{align*}
+	\end{proof}
+	
+	系\ref{cor:m(G)}の一般化が得られる．
+	
+	\begin{proposition}
+		$M \triangleleft G$に対して
+		\begin{equation*}
+			|(\Def^G_{G/M} \sigma^G_\mathbf{1})^{M/M}| = (G : M) m(M). \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proof}
+		\begin{align*}
+			\Def^G_{G/M} \sigma^G_N
+				&= \sum_{\substack{[H]_G \in \mathop{\mathrm{Cl}}(G) \\ H \le M}} \frac{(G : N)}{(H : H \cap N)} \frac{(N_G(M) : M)}{(N_G(H) : H)} m_{H, H} e^{G/M}_{M/M} \\
+				& \phantom{=\qquad} + \sum_{\substack{[H]_G \in \mathop{\mathrm{Cl}}(G) \\ H \nleq M}} \frac{(G : N)}{(H : H \cap N)} \frac{(N_G(HM) : HM)}{(N_G(H) : H)} m_{H, H \cap M} e^{G/M}_{HM/M}
+		\end{align*}
+		である．
+		$HM = M \iff H \le M$なので，命題\ref{prop:def_fix}の証明と同様の議論により
+		\begin{align*}
+			|(\Def^G_{G/M} \sigma^G_N)^{M/M}|
+				&= (N_G(M) : M) \sum_{\substack{[H]_G \in \mathop{\mathrm{Cl}}(G) \\ H \le M}} \frac{(G : N)}{(H : H \cap N)} \frac{1}{(N_G(H) : H)} m_{H, H} \\
+				&= (G : MN) \sum_{\langle g \rangle \le M} \frac{\varphi(o(g))}{(\langle g \rangle : \langle g \rangle \cap N)}
+		\end{align*}
+		が分かる．
+		$N = \mathbf{1}$とすれば，
+		\begin{align*}
+			|(\Def^G_{G/M} \sigma^G_\mathbf{1})^{M/M}|
+				&= (G : M) \sum_{\langle g \rangle \le M} \frac{\varphi(o(g))}{o(g)} \\
+				&= (G : M) m(M). \qedhere
+		\end{align*}
+	\end{proof}
+	
+	写像$a \colon \mathrm{Cl}(G) \to \Q$に対して，$a_H := a([H]_G)$とする．
+	\begin{equation*}
+		\sigma^G_a = \sum_{[H]_G \in \mathop{\mathrm{Cl}}(G)} a_H e^G_H
+	\end{equation*}
+	とおく．
+	
+	\begin{proposition}
+		$M \triangleleft G$に対して
+		\begin{equation*}
+			| (\Def^G_{G/M} \sigma^G_a)^{M/M} | = \frac{1}{|M|}\sum_{g \in M} a_{\langle g \rangle}. \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proof}
+		\begin{align*}
+			|(\Def^G_{G/M} \sigma^G_a)^{M/M}|
+			&= (N_G(M) : M) \sum_{\substack{[H]_G \in \mathop{\mathrm{Cl}}(G) \\ H \le M}} a_H \frac{1}{(N_G(H) : H)} m_{H, H} \\
+			&= \frac{1}{|M|} \sum_{\langle g \rangle \le M} a_{\langle g \rangle} \varphi(o(g)) \\
+			&= \frac{1}{|M|} \sum_{g \in M} a_{\langle g \rangle}. \qedhere
+		\end{align*}
+	\end{proof}
+	
+	\section{群の作用する集合の$n$-subsetsの構造について}
+	
+	$n$は非負整数とする．
+	$n = |G|_p$の場合の作用を考えることでSylow $p$部分群の存在などが証明できる．
+	
+	\begin{proposition}
+		$G$集合$X, Y$に対して
+		\begin{equation*}
+			\binom{X \sqcup Y}{n} \cong \bigsqcup_{k=0}^n \binom{X}{n - k} \times \binom{Y}{k}. \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proof}
+		写像$f \colon \binom{X \sqcup Y}{n} \to \bigsqcup_{0 \le k \le n} \binom{X}{k} \times \binom{Y}{n-k}$を，任意の$A = A_X \sqcup A_Y \in \binom{X \sqcup Y}{n}\ (A_{\bullet} \subset {\bullet})$に対して
+		\begin{equation*}
+			f(A) = (A_X, A_Y)
+		\end{equation*}
+		で定める．
+		
+		このとき，$\bullet$は$G$集合だから，任意の$g \in G, A \in \binom{X \sqcup Y}{n}$に対して，$A_\bullet$は$G$の作用で$\binom{\bullet}{|A_\bullet|}$の元となるので
+		\begin{equation*}
+			f(g.A) = f(g.A_X \sqcup g.A_Y) = g.f(A)
+		\end{equation*}
+		が成り立つ．
+		よって，$f$は$G$写像である．
+		$f$が全単射なことは明らかなので，$f$は$G$同型写像である．
+	\end{proof}
+	
+	一般には次が成り立つ．
+	
+	\begin{proposition}\label{prop:n-subsets_of_disjoint_union}
+		$X_i\ (i=1, \dotsc, d)$を$G$集合とする．
+		このとき，
+		\begin{equation*}
+			\binom{\bigsqcup_{i=1}^d X_i}{n} \cong \bigsqcup_{\sum_{i=1}^{d} p_i = n} \prod_{i=1}^d \binom{X_i}{p_i}. \qedhere
+		\end{equation*}
+	\end{proposition}
+	
+	\begin{proof}
+		$d$に関する帰納法で示す．
+		$d = 1$のときは明らか．
+		また，$d$で成り立つと仮定すれば
+		\begin{align*}
+			\binom{\sqcup_{i=1}^{d+1} X_i}{n} &\cong \bigsqcup_{p_{d+1} = 0}^n \binom{\bigsqcup_{i=1}^d X_i}{n - p_{d+1}} \times \binom{X_{d+1}}{p_{d+1}} \\
+			&\cong \bigsqcup_{p_{d+1} = 0}^n \left(\bigsqcup_{\sum_{i=1}^{d} p_i = n - p_{d+1}} \prod_{i=1}^{d} \binom{X_i}{p_i}\right) \times \binom{X_{d+1}}{p_{d+1}} \\
+			&\cong \bigsqcup_{\sum_{i=1}^{d+1} p_i = n} \prod_{i=1}^{d+1} \binom{X_i}{p_i}. \qedhere
+		\end{align*}
+	\end{proof}
+	
+	任意の$G$集合は推移的$G$集合の非交和となるから，命題\ref{prop:n-subsets_of_disjoint_union}により，任意の$G$集合の$n$-subsetsの非交和への分解が得られる．
+	
+	\begin{example}
+		$H, K \le G$とし，$H \backslash G/K$の完全代表系を$C = \{\, Hg_iK \mid i = 1, \dotsc, d \,\}$とする．
+		このとき，
+		\begin{equation*}
+			\binom{G/H \times G/K}{n} \cong \bigsqcup_{\sum_{i=1}^{d} p_i = n} \prod_{i=1}^d \binom{G/(H \cap {}^{g_i}K)}{p_i}. \qedhere
+		\end{equation*}
+	\end{example}
+	
+	母関数的な考えもできる．
+	\begin{equation*}
+		b_X^H(x) = \sum_{n=0}^{|X|} \left| \binom{X}{n}^H \right| x^n
+	\end{equation*}
+	とおけば，命題\ref{prop:n-subsets_of_disjoint_union}より$b_{X \sqcup Y}^H(x) = b_X^H(x) b_Y^H(x)$が成り立つ．
+	また，任意の$[H]_G \le \mathop{\mathrm{Cl}}(G)$に対して$b_X^H(x) = b_Y^H(x)$が成り立つことと，$X \cong Y$であることは同値である．
+	これは，$B_+(G) = \{\, [X] \mid X \in \mathbf{set}^G \,\}$から$(\N[x] - \{0\}, \times)$へのモノイド準同型を誘導する．
+	
+	$A \in \binom{X}{n}$の固定群は，$A$に作用する$G$の部分群のうち最大のものである．
+	
+	\bibliographystyle{jplain}
+	\bibliography{myrefs-en}
+	\nocite{Bouc:biset_functors_for_f_gps}
+
+\end{document}

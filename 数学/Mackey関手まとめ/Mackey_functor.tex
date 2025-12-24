@@ -1,0 +1,397 @@
+\documentclass{jlreq}
+
+\usepackage{
+	mystyle,
+	tikz-cd
+}
+
+%\tikzcdset{diagrams={	%図式の設定
+%		column sep=	2.4em,
+%		row sep=	2.4em
+%	}
+%}
+
+\DeclareEmphSequence{\bfseries}
+
+\newcommand{\Conj}[1]{{}^{#1}}
+\DeclareMathOperator{\Transporter}{N}
+\DeclareMathOperator{\Mack}{Mack}
+
+\title{Mackey関手まとめ}
+\author{オ}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+		Mackey関手のまとめです．
+	\end{abstract}
+
+	\section{Mackey関手}
+	
+	$G$は有限群，$R$は単位元を持つ可換とは限らない環とする．
+	また，$R\mathchar`-\mathbf{Mod}$で$R$加群全体の成す圏，$G\mathchar`-\mathbf{set}$で有限$G$集合全体の成す圏を表す．
+	
+	\subsection{Greenによる定義}
+	
+	\begin{definition}\label{def:MF_Green}
+		以下の条件を満たす対応の組$(M,t,r,c)$を$G$の$R\mathchar`-\mathbf{Mod}$に値を持つ\emph{Mackey関手}と呼ぶ．
+		\begin{enumerate}
+			\item 任意の部分群$H \le G$に対して，$M(H)$は$R$加群である．
+			\item 任意の部分群$H \le K \le G$と$g \in G$に対して，
+			\begin{gather*}
+				r_H^K \colon M(K) \rightarrow M(H), \\
+				t_H^K \colon M(H) \rightarrow M(K), \\
+				c_{g,H} \colon M(H) \rightarrow M(\Conj{g}H)
+			\end{gather*}
+			は$R$加群の準同型写像である．
+			\item 任意の$H \le K \le L \le G$と$x, y \in G$に対して，図式
+			\begin{equation*}
+				\begin{gathered}
+					\begin{tikzcd}
+						& M(L) \arrow[d, "r^L_K"] \arrow[ld, "r^L_H"'] \\
+						M(H) & M(K) \arrow[l, "r^K_H"]                     
+					\end{tikzcd}, \qquad 
+					\begin{tikzcd}
+						& M(L)                     \\
+						M(H) \arrow[r, "t^K_H"'] \arrow[ru, "t^L_H"] & M(K) \arrow[u, "t^L_K"']
+					\end{tikzcd}, \qquad
+					\begin{tikzcd}
+						& M(\Conj{yx}H)                                \\
+						M(H) \arrow[r, "{c_{x,H}}"'] \arrow[ru, "{c_{yx,H}}"] & M(\Conj{x}H) \arrow[u, "{c_{y,\Conj{x}H}}"']
+					\end{tikzcd}　\\
+					\begin{tikzcd}
+						M(K) \arrow[d, "r_H^K"'] \arrow[r, "{c_{x,K}}"] & M(\Conj{x}K) \arrow[d, "r_{\Conj{x}H}^{\Conj{x}K}"] \\
+						M(H) \arrow[r, "{c_{x,H}}"']                    & M(\Conj{x}H)                                       
+					\end{tikzcd}, \qquad
+					\begin{tikzcd}
+						M(K) \arrow[r, "{c_{x,K}}"]                     & M(\Conj{x}K)                                         \\
+						M(H) \arrow[r, "{c_{x,H}}"'] \arrow[u, "t_H^K"] & M(\Conj{x}H) \arrow[u, "t_{\Conj{x}H}^{\Conj{x}K}"']
+					\end{tikzcd}
+				\end{gathered}
+			\end{equation*}
+			は可換である．
+			\item 任意の$g \in H \le G$に対して，$r_H^H=t_H^H=c_{g,H}=\id_{M(H)}$である．
+			\item (Mackeyの公理)\ 任意の$K \le H \ge L$に対して，
+			\begin{equation*}
+				r^H_L \circ t_K^H
+				= \sum_{LxK \in L \backslash H / K} t_{L \cap \Conj{x}K}^L \circ c_{x, L^x \cap K} \circ r^K_{L^x \cap K}.\qedhere
+			\end{equation*}
+		\end{enumerate}
+	\end{definition}
+	
+	\subsection{Dressによる定義}
+	
+	\begin{definition}\label{def:MF_Dress}
+		以下の条件を満たす関手の組$M=(M^\ast, M_\ast)$を，$G$の$R\mathchar`-\mathbf{Mod}$に値を持つ\emph{Mackey関手}と呼ぶ．
+		\begin{enumerate}
+			\item $M^\ast \colon G\mathchar`-\mathbf{set} \rightarrow R\mathchar`-\mathbf{Mod}$は反変関手，$M_\ast \colon G\mathchar`-\mathbf{set} \rightarrow R\mathchar`-\mathbf{Mod}$は共変関手である．
+			\item 任意の$X \in G\mathchar`-\mathbf{set}$に対して，$M^\ast(X) = M_\ast(X) = M(X)$．
+			\item 任意の$X,Y \in G\mathchar`-\mathbf{set}$とその直和
+			$\begin{tikzcd}[cramped]
+				X \arrow[r, "i_X"] & X \sqcup Y & \arrow[l, "i_Y"'] Y
+			\end{tikzcd}$
+			に対して，
+			\begin{gather*}
+				\begin{bmatrix}
+					M^\ast i_X \\
+					M^\ast i_Y
+				\end{bmatrix}
+				= M^\ast i_X \times M^\ast i_Y
+				\colon M(X \sqcup Y) \rightarrow M(X) \oplus M(Y), \\
+				\begin{bmatrix}
+					M_\ast i_X & M_\ast i_Y
+				\end{bmatrix}
+				= M_\ast i_X \sqcup M_\ast i_Y
+				\colon M(X) \oplus M(Y) \rightarrow M(X \sqcup Y)
+			\end{gather*}
+			が同型$M(X) \oplus M(Y) \cong M(X \sqcup Y)$を与える．
+			\item 任意の$G\mathchar`-\mathbf{set}$の引き戻し
+			\begin{equation*}
+				\begin{tikzcd}
+					P \arrow[r, "\pi_f"] \arrow[d, "\pi_g"'] \arrow[rd, "\mathrm{PB}", phantom] & X \arrow[d, "f"] \\
+					Y \arrow[r, "g"']                                                           & Z               
+				\end{tikzcd}
+			\end{equation*}
+			に対して，
+			\begin{equation*}
+				\begin{tikzcd}
+					M(P) \arrow[d, "M_\ast \pi_g"'] & M(X) \arrow[l, "M^\ast \pi_f"'] \arrow[d, "M_\ast f"] \\
+					M(Y)                            & M(Z) \arrow[l, "M^\ast g"]                           
+				\end{tikzcd}
+			\end{equation*}
+			は可換である．\qedhere
+		\end{enumerate}
+	\end{definition}
+	
+	\begin{proposition}
+		定義\ref{def:MF_Green}の意味でのMackey関手と，定義\ref{def:MF_Dress}の意味でのMackey関手は，1対1に対応する．
+	\end{proposition}
+	
+	\begin{proof}
+		$M$が定義\ref{def:MF_Green}の意味でのMackey関手だとする．
+		任意の$X\in G\mathchar`-\mathbf{set}$に対して
+		\begin{gather*}
+			\widetilde{M}_\ast(X)
+			= \widetilde{M}^\ast(X)
+			= \widetilde{M}(X)
+			= \bigoplus_{Gx \in G \backslash X} M(G_x)
+		\end{gather*}
+		と定める．
+		また，部分群$H,K \le G$と$a \in G$が$H \le \Conj{a}K$を満たすならば，任意の$k \in K$に対して
+		\begin{equation*}
+			c_{(ak)^{-1}, \Conj{ak}K} \circ t_H^{\Conj{ak}K}
+			= c_{k^{-1}, K} \circ c_{a^{-1}, \Conj{a}K} \circ t_H^{\Conj{a}K}
+			= c_{a^{-1}, \Conj{a}H} \circ t_H^{\Conj{a}K}
+		\end{equation*}
+		が成り立つ．
+		よって，任意の$f \in \Hom_{G\mathchar`-\mathbf{set}}(G/H, G/K)$に対して，
+		\begin{equation*}
+			\widetilde{M}_\ast(f)
+			= c_{a^{-1}, \Conj{a}K} \circ t_H^{\Conj{a}K} \quad (f(H)=aK)
+		\end{equation*}
+		と定められる．
+		このとき，任意の$\begin{tikzcd}[cramped]
+			G/H \arrow[r, "f"] & G/K \arrow[r, "g"] & G/L
+		\end{tikzcd}$
+		に対して，$f(H)=aK,\ g(K)=bL$とすると，図式
+		\begin{equation*}
+			\begin{tikzcd}[sep=3.0em]
+				&                                                                                                                    & \widetilde{M}(G/L)                                               \\
+				& M(\Conj{ab}L) \arrow[r, "{c_{a^{-1}, \Conj{ab}L}}"'] \arrow[ru, "{c_{(ab)^{-1}, \Conj{ab}L}}"]         & M(\Conj{b}L) \arrow[u, "{c_{b^{-1}, \Conj{b}L}}"'] \\
+				\widetilde{M}(G/H) \arrow[r, "t_H^{\Conj{a}K}"'] \arrow[ru, "t_H^{\Conj{ab}L}"] & M(\Conj{a}K) \arrow[r, "{c_{a^{-1}, \Conj{a}K}}"'] \arrow[u, "t_{\Conj{a}K}^{\Conj{ab}L}" description] & \widetilde{M}(G/K) \arrow[u, "t_K^{\Conj{b}L}"']                
+			\end{tikzcd}
+		\end{equation*}
+		が可換になる．
+		よって，$\widetilde{M}_\ast(gf)=\widetilde{M}_\ast(g)\widetilde{M}_\ast(f)$が成り立つ．
+		また，
+		\begin{equation*}
+			\widetilde{M}_\ast(\id_{G/H})
+			= c_{e_G, H} t_H^H
+			= \id_{M(H)}
+			= \id_{\widetilde{M}(H)}
+		\end{equation*}
+		が成り立つ．
+		したがって，任意の$f \in \Hom_{G\mathchar`-\mathbf{set}}(X,Y)$に対して
+		\begin{equation*}
+			\widetilde{M}_\ast(f)
+			= \begin{bmatrix}
+				i_{M(G_{f(x)})} \widetilde{M}_\ast(f|_{Gx})
+			\end{bmatrix}_{Gx \in G \backslash X}
+			= \bigsqcup_{Gx \in G \backslash X} i_{M(G_{f(x)})} \widetilde{M}_\ast(f|_{Gx})
+		\end{equation*}
+		と定めると，$\widetilde{M}_\ast \colon G\mathchar`-\mathbf{set} \rightarrow R\mathchar`-\mathbf{Mod}$は関手になる．
+		ただし，$i_{M(G_{f(x)})}$は自然な入射$M(G_{f(x)}) \hookrightarrow \widetilde{M}(Y)$であり，$f|_{Gx} \colon Gx \rightarrow Gf(x)$は同型により$G/G_x$から$G/G_{f(x)}$への$G$写像と見なす．
+		さらに，写像$\pi \colon G \backslash X \rightarrow G \backslash Y$を$\pi(Gx) = Gf(x)$と定め，任意の$f \in \Hom_{G\mathchar`-\mathbf{set}}(X,Y)$に対して
+		\begin{gather*}
+			\widetilde{M}^\ast(f)
+			= \begin{bmatrix}
+				\displaystyle\sum_{Gx \in \pi^{-1}(Gy)} i_{M(G_x)} \widetilde{M}^\ast(f|_{Gx})
+			\end{bmatrix}_{Gy \in G \backslash Y}
+			= \bigsqcup_{Gy \in G \backslash Y} \left(\sum_{Gx \in \pi^{-1}(Gy)} i_{M(G_x)} \widetilde{M}^\ast(f|_{Gx})\right), \\
+			\widetilde{M}^\ast(f|_{Gx})
+			= r^{\Conj{a}G_{f(x)}}_{G_x} c_{a,G_{f(x)}} \quad (f(G_x)=aG_{f(x)})
+		\end{gather*}
+		とおけば，同様にして$\widetilde{M}^\ast \colon G\mathchar`-\mathbf{set} \rightarrow R\mathchar`-\mathbf{Mod}$が反変関手となることが分かる．
+		
+		直和
+		$\begin{tikzcd}[cramped]
+			G/H \arrow[r, "i_{G/H}"] & G/H \sqcup G/K & \arrow[l, "i_{G/K}"'] G/K
+		\end{tikzcd}$
+		に対して，
+		\begin{gather*}
+			\widetilde{M}^\ast i_{G/H} = \id_{M(H)} \sqcup 0, \qquad \widetilde{M}^\ast i_{G/K} = 0 \sqcup \id_{M(K)} \\
+			\widetilde{M}_\ast i_{G/H} = i_{M(H)}, \quad
+			\widetilde{M}^\ast i_{G/K} = i_{M(K)}
+		\end{gather*}
+		となるから
+		\begin{equation*}
+			\begin{bmatrix}
+				\widetilde{M}^\ast\,i_{G/H} \\
+				\widetilde{M}^\ast\,i_{G/K}
+			\end{bmatrix}
+			= \begin{bmatrix}
+				\widetilde{M}_\ast\,i_{G/H} & \widetilde{M}_\ast\,i_{G/K}
+			\end{bmatrix}
+			= \id_{M(H) \oplus M(K)}.
+		\end{equation*}
+		したがって，これらが同型$\widetilde{M}(G/H \sqcup G/K) = M(H) \oplus M(K)$を与える．
+		さらに，$\begin{tikzcd}[cramped]
+			G/H \arrow[r, "f"] & G/L & \arrow[l, "g"'] G/K
+		\end{tikzcd}$
+		の引き戻し
+		\begin{equation}\label{diag:pullback}
+			\begin{tikzcd}
+				\displaystyle\bigsqcup_{HxK \in H \backslash aLb^{-1} / K} G / H \cap \Conj{x}K \arrow[r, "\pi_g"] \arrow[d, "\pi_f"'] & G/K \arrow[d, "g"] \\
+				G/H \arrow[r, "f"'] & G/L
+			\end{tikzcd}
+		\end{equation}
+		に対して，図式
+		\begin{equation}\label{diag:Mackey_axiom}
+			\begin{tikzcd}
+				\displaystyle\bigoplus_{HxK \in H \backslash aLb^{-1} / K} M(H \cap \Conj{x}K) \arrow[d, "\widetilde{M}_\ast\,\pi_f"'] & \arrow[l, "\widetilde{M}^\ast\,\pi_g"'] G/K \arrow[d, "\widetilde{M}_\ast\,g"] \\
+				G/H & \arrow[l, "\widetilde{M}^\ast\,f"] G/L
+			\end{tikzcd}
+		\end{equation}
+		の可換性を示す．
+		\begin{align*}
+			\widetilde{M}_\ast\,\pi_f \circ \widetilde{M}^\ast\,\pi_g
+			& = \left(\bigsqcup_{HxK} t_{H \cap \Conj{x}K}^H\right) \circ \left( \sum_{HxK} i_{M(G_{(H,xK)})}r^{\Conj{x}K}_{H \cap \Conj{x}K} c_{x,K} \right) \\
+			& = \sum_{HxK} \left( \bigsqcup_{HyK} t_{H \cap \Conj{x}K}^H \right) i_{M(G_{(H,xK)})} \, c_{x,H^x \cap K} \, r^K_{H^x \cap K} \\
+			& = \sum_{HxK} t_{H \cap \Conj{x}K}^H \, c_{x,H^x \cap K} \, r^K_{H^x \cap K} \\
+			& = \sum_{H^{ab^{-1}}xK \in H^{ab^{-1}} \backslash \Conj{b}L / K} t_{H \cap \Conj{ab^{-1}x}K}^H\, c_{ab^{-1}x,H^{ab^{-1}x} \cap K}\, r^K_{H^{ab^{-1}x} \cap K} \\
+			& = \sum_{H^{ab^{-1}}xK \in H^{ab^{-1}} \backslash \Conj{b}L / K} t_{H \cap \Conj{ab^{-1}x}K}^H\, c_{ab^{-1},H^{ab^{-1}} \cap \Conj{x}K}\, c_{x,H^{ab^{-1}x} \cap K}\, r^K_{H^{ab^{-1}x} \cap K} \\
+			& = \sum_{H^{ab^{-1}}xK \in H^{ab^{-1}} \backslash \Conj{b}L / K} c_{ab^{-1},H^{ab^{-1}}}\, t_{H^{ab^{-1}} \cap \Conj{x}K}^{H^{ab^{-1}}}\, c_{x,H^{ab^{-1}x} \cap K}\, r^K_{H^{ab^{-1}x} \cap K} \\
+			& = c_{ab^{-1},H^{ab^{-1}}} \, r^{\Conj{b}L}_{H^{ab^{-1}}} \, t_K^{\Conj{b}L} \\
+			& = r^{\Conj{a}L}_H \, c_{ab^{-1}, \Conj{b}L} \, t_K^{\Conj{b}L} \\
+			& = (r^{\Conj{a}L}_H \, c_{a,L}) \circ (c_{b^{-1}, \Conj{b}L} \, t_K^{\Conj{b}L}) \\
+			& = \widetilde{M}^\ast f \circ \widetilde{M}_\ast g
+		\end{align*}
+		より，\eqref{diag:Mackey_axiom}は可換である．
+		したがって，$\widetilde{M}=(\widetilde{M}^\ast, \widetilde{M}_\ast)$は$G$の定義\ref{def:MF_Dress}の意味でのMackey関手となる．
+		
+		逆に，$M=(M^\ast, M_\ast)$を定義\ref{def:MF_Dress}の意味での$G$のMackey関手とする．
+		任意の$H \le K \le G$と$x \in G$に対して，
+		\begin{equation*}
+			M_1(H) = M(G/H), \quad r^K_H = M^\ast p^K_H, \quad t_H^K = M_\ast p^K_H, \quad c_{x,H} = M^\ast \gamma_{x^{-1},\Conj{x}H}
+		\end{equation*}
+		とおく．
+		ここで，$p^K_H \colon G/H \rightarrow G/K$は自然な射影，$\gamma_{x,H}$は$\gamma_{x,H}(H)=x^{-1}\Conj{x}H$で定まる$G$写像である．
+		この$M_1$が定義\ref{def:MF_Green}の意味でのMackey関手になることを確認するには，Mackeyの公理を満たすことを確認すればよい．
+		
+		引き戻し図式\eqref{diag:pullback}において，$H \le L \ge K$だとし，$f = p^L_H, \ g = p^L_K$とする．
+		このとき，$\pi_f = \bigsqcup_{HxK \in H\backslash L / K} p^H_{H \cap \Conj{x}K}, \ \pi_g = \bigsqcup_{HxK \in H\backslash L / K} p^K_{H^x \cap K} \, \gamma_{x^{-1},H \cap \Conj{x}K}$である．
+		また，
+		\begin{gather*}
+			\widetilde{M}_\ast\pi_f \circ \widetilde{M}^\ast\pi_g
+			= \left(\bigsqcup_{HxK} t_{H \cap \Conj{x}K}^H\right) \left(\sum_{HxK} c_{x,H^x \cap K} \, r^K_{H^x \cap K} \right)
+			= \sum_{HxK} t_{H \cap \Conj{x}K}^H \, c_{x,H^x \cap K} \, r^K_{H^x \cap K}, \\
+			\widetilde{M}^\ast f \circ \widetilde{M}_\ast g
+			= r^L_H \, t_K^L
+		\end{gather*}
+		である．
+		よって，図式\eqref{diag:Mackey_axiom}の可換性からMackeyの公理を得る．
+		したがって，組$(M_1,t,r,c)$は定義\ref{def:MF_Green}の意味でのMackey関手となる．
+	\end{proof}
+	
+	\subsection{Mackey代数による定義}
+	
+	Mackey関手はMackey代数上の加群と見なすこともできる．
+	
+	\begin{definition}
+		$G$の部分群全体を頂点集合とし，辺集合が
+		\begin{gather*}
+			\{ t_H^K \mid H, K \le G,\ \mathop{\mathrm{out}}(t_H^K)=H,\ \mathop{\mathrm{in}}(t_H^K)=K \}, \\
+			\{ r_H^K \mid H, K \le G,\ \mathop{\mathrm{out}}(r_H^K)=K,\ \mathop{\mathrm{in}}(r_H^K)=H \}, \\
+			\{ c_{x,H} \mid H \le G,\ x \in G,\ \mathop{\mathrm{out}}(c_{x,H}) = H,\ \mathop{\mathrm{in}}(c_{x,H}) = {}^xH \}
+		\end{gather*}
+		の和集合から成る箙の$\Z$上の道代数を$Q$とおく．
+		また，$Q$の部分代数$\Lambda$を
+		\begin{align*}
+			\Lambda = \bigg\langle	&	r^K_H r^L_K - r^L_K,\ t_K^L t_H^K - t_H^L,\ c_{y, {}^xH} c_{x, H} - c_{yx, H},	\\
+				&	c_{x, H} r^K_H - r^{{}^xK}_{{}^xH} c_{x, K},\ c_{x, K} t_H^K = t_{{}^xH}^{{}^xK} c_{x, H},	\\
+				&	r^H_H - c_{h, H},\ t_H^H - c_{h, H},	\\
+				&	r^H_L t_K^H - \sum_{LxK \in L \backslash H / K} t_{L \cap \Conj{x}K}^L c_{x, L^x \cap K} r^K_{L^x \cap K},	\\
+				&	\sum_{J \le G} r^J_J - 1,\ \sum_{J \le G} t^J_J - 1 \;\bigg|\; H, K \le L \le G,\ x \in G,\ h \in H \bigg\rangle_\Z
+		\end{align*}
+		で定める．
+		
+		このとき，$R$代数$\mu_R(G) = R \otimes_\Z (Q / \Lambda)$を$G$の$R$上の\emph{Mackey代数}という．
+	\end{definition}
+	
+	$G$の$\Z$上のMackey代数を$\mu(G)$と表す．
+	
+	\subsection{Mackey関手の圏}
+	
+	以下，特に断らない限り，Mackey関手は$R\mathchar`-\mathbf{Mod}$に値を持つものとする．
+	
+	\begin{definition}
+		$M, N$を$G$のMackey関手とする．
+		$R$準同型写像の族$\theta = \{ \theta_X \in R\mathchar`-\mathbf{Mod}(MX, NX) \}_{X \in \mathbf{set}^G}$が，任意の$f \in \mathbf{set}^G(X, Y)$に対して，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				M(X) \arrow[d, "M_\ast(f)"'] \arrow[r, "\theta_X"] & N(X) \arrow[d, "N_\ast (f)"] \\
+				M(Y) \arrow[r, "\theta_Y"']                                   & N(Y)                        
+			\end{tikzcd}, \qquad
+			\begin{tikzcd}
+				M(X) \arrow[r, "\theta_X"]              & N(X)                          \\
+				M(Y) \arrow[u, "M^\ast(f)"] \arrow[r, "\theta_Y"'] & N(Y) \arrow[u, "N^\ast (f)"']
+			\end{tikzcd}
+		\end{equation*}
+		を可換にするとき，$\theta$を$M$から$N$への\emph{Mackey関手の射}という．
+	\end{definition}
+	
+	\begin{definition}
+		対象が$G$のMackey関手全体，射がMackey関手の射，合成が自然変換の垂直合成であるような圏を$\Mack(G)$で表す．
+	\end{definition}
+	
+	\section{Mackey関手の構成}
+	
+	\begin{lemma}
+		$M$を$G$の$R\mathchar`-\mathbf{Mod}$に値を持つMackey関手とする．
+		任意の$G$集合$Y$に対して，関手の組$M_Y = ({M_Y}^\ast, {M_Y}_\ast)$を
+		\begin{gather*}
+			{M_Y}^\ast(X) = {M_Y}_\ast(X) = M_Y(X) = M(X \times Y), \\
+			{M_Y}^\ast(f) = M^\ast(f \times \id_Y),\quad {M_Y}_\ast(f) = M_\ast(f \times \id_Y)
+		\end{gather*}
+		で定める．このとき，$M_Y$は$G$の$R\mathchar`-\mathbf{Mod}$に値を持つMackey関手となる．
+	\end{lemma}
+	
+	\begin{lemma}
+		$M$を$G$のMackey関手，$g \in \mathbf{set}^G(Y,Y')$をG写像とする．
+		$M_Y$から$M_{Y'}$への$R$準同型写像の族$M^g,\, M_g$をそれぞれ
+		\begin{equation*}
+			{M^g}_X = M^\ast(\id_X \times g),\qquad (M_g)_X = M_\ast(\id_X \times g)
+		\end{equation*}
+		で定めると，$M^g,\, M_g$は$M_Y$から$M_{Y'}$へのMackey関手の射となる．
+	\end{lemma}
+	
+	\begin{proof}
+		$M_g$についてのみ示す．
+		任意の$f \in \mathbf{set}^G(X,Y)$に対して，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				M_Y(X) \arrow[d, "(M_Y)_\ast(f)"'] \arrow[r, "(M_g)_X"] & M_{Y'}(X) \arrow[d, "(M_{Y'})_\ast(f)"] \\
+				M_Y(X') \arrow[r, "(M_g)_{X'}"']                            & M_{Y'}(X')                      
+				\end{tikzcd} = \begin{tikzcd}[column sep=huge]
+				M(X \times Y) \arrow[d, "M_\ast(f \times \id_Y)"'] \arrow[r, "M_\ast(\id_X \times g)"] & M(X \times Y') \arrow[d, "M_\ast(f \times \id_{Y'})"] \\
+				M(X' \times Y) \arrow[r, "M_\ast(\id_X \times g)"']                                             & M(X' \times Y')                                      
+				\end{tikzcd}
+		\end{equation*}
+		は，$G\mathchar`-\mathbf{set}$の可換図式
+		\begin{equation}
+			\begin{tikzcd}[column sep=large] \label{diag:PB_for_M_Y}
+				X \times Y \arrow[d, "f \times \id_Y"'] \arrow[r, "\id_X \times g"] & X \times Y' \arrow[d, "f \times \id_{Y'}"] \\
+				X' \times Y \arrow[r, "\id_{X'} \times g"'] & X' \times Y'
+			\end{tikzcd}
+		\end{equation}
+		の$M_{\ast}$による像なので，可換である．
+		さらに，図式$\eqref{diag:PB_for_M_Y}$は$G\mathchar`-\mathbf{set}$における$\id_{X'} \times g$と$f \times \id_{Y'}$の引き戻しなので，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				{M_Y}(X) \arrow[r, "(M_g)_X"] & {M_{Y'}}(X) \\
+				{M_Y}(X') \arrow[u, "{M_Y}^\ast(f)"] \arrow[r, "(M_g)_{X'}"']                            & {M_{Y'}}(X') \arrow[u, "{M_{Y'}}^\ast(f)"']                      
+			\end{tikzcd} = \begin{tikzcd}[column sep=huge]
+				M(X \times Y) \arrow[r, "M_\ast(\id_X \times g)"] & M(X \times Y') \\
+				M(X' \times Y) \arrow[u, "M^\ast(f \times \id_Y)"] \arrow[r, "M_\ast(\id_X \times g)"']                                             & M(X' \times Y') \arrow[u, "M^\ast(f \times \id_{Y'})"']                                      
+			\end{tikzcd}
+		\end{equation*}
+		は可換である．
+		したがって，$M_g$は$M_Y$から$M_{Y'}$へのMackey関手の射である．
+	\end{proof}
+	
+	関手$M^\square, M_\square \colon G\mathchar`-\mathbf{set} \rightarrow \Mack(G)$が$M^\square(g) = M^g,\, M_\square(g) = M_g$により定まる．
+	また，$\Mack(G) \cong \mu_R(G)\mathchar`-\mathbf{Mod}$なので，次の定理が成り立つ．
+	
+	\begin{theorem}
+		$M$を$G$のMackey関手とする．
+		関手の組$(M^\square, M_\square)$は$G$の$\mu_R(G)\mathchar`-\mathbf{Mod}$に値を持つMackey関手となる．
+	\end{theorem}
+	
+	\bibliographystyle{jplain}
+	\bibliography{myrefs-en}
+	\nocite{Bouc:GF}
+
+\end{document}

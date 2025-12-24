@@ -1,0 +1,1684 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle}
+\usepackage{cleveref}
+\usepackage{autonum}
+\usepackage{listings, jvlisting}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tikz-cd}
+
+\renewcommand{\lstlistingname}{コード}
+
+\lstset{
+	basicstyle={\ttfamily},
+	identifierstyle={\small},
+	commentstyle=\color{green},
+	keywordstyle={\small\bfseries},
+	ndkeywordstyle={\small},
+	stringstyle={\small\ttfamily},
+	frame={tb},
+	breaklines=true,
+	columns=[l]{fullflexible},
+	numbers=left,
+	xrightmargin=0\zw,
+	xleftmargin=2\parindent,
+	numberstyle={\scriptsize},
+	stepnumber=1,
+	numbersep=1\zw,
+	lineskip=-0.5ex
+}
+
+\crefname{equation}{式}{式}
+\crefname{proposition}{命題}{命題}
+\crefname{theorem}{定理}{定理}
+\crefname{lemma}{補題}{補題}
+\crefname{lstlisting}{コード}{コード}
+\crefname{figure}{図}{図}
+\crefname{example}{例}{例}
+\crefname{definition}{定義}{定義}
+
+\newlist{defenum}{enumerate}{1}
+\setlist[defenum]{label=\arabic*.\ ,ref=\thedefinition.\arabic*}
+\crefalias{defenumi}{definition}
+
+\newlist{propenum}{enumerate}{1}
+\setlist[propenum]{label=\arabic*.\ ,ref=\theproposition.\arabic*}
+\crefalias{propenumi}{proposition}
+
+\newlist{thmenum}{enumerate}{1}
+\setlist[thmenum]{label=\arabic*.\ ,ref=\thetheorem.\arabic*}
+\crefalias{thmenumi}{theorem}
+
+\newcommand{\crefpairconjunction}{と}
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\creflastconjunction}{，および}
+
+\title{memo}
+\author{オ}
+\date{\today}
+
+\newcommand{\Term}[2][\relax]{%
+	\textsf{#2} \if#1\relax\else{（\textsf{#1}）}\fi%
+}
+
+%\everymath{\displaystyle}
+
+%\DeclareEmphSequence{\itshape,\bfseries,\bfseries}
+\newcommand{\MoebiusFunc}[1][\relax]{\mathop{\mu}\nolimits_{#1}}
+\DeclareMathOperator{\SubGrps}{S}
+\DeclareMathOperator{\EulerTotientFunc}{\varphi}
+\newcommand{\Nilrad}{\mathfrak{N}}
+\newcommand{\JacobsonRad}{\mathfrak{R}}
+\newcommand{\GeneratedSubmodBy}[2][\relax]{\left\langle #2 \right\rangle_{#1}}
+\DeclarePairedDelimiterX{\GeneratedSubmodByComprehension}[2]{\langle}{\rangle}{\, #1 \mathrel{\delimsize\vert} #2 \,}
+\newcommand{\GeneratedIdealBy}[1]{\left(#1\right)}
+\DeclareMathOperator{\Radical}{r}
+\newcommand{\FixedPts}[2]{{#1}^{#2}}
+\newcommand{\Index}[2]{\left(#2 : #1\right)}
+\DeclareMathOperator{\GhostRing}{\tilde{\Omega}}
+\newcommand{\ConjClassesSubgrps}[1]{\mathrm{s}_{#1}}
+\newcommand{\CompReps}[1]{\left(#1\right)}
+\newcommand{\WeylGrp}[1][\relax]{\mathop{\mathrm{W}}\nolimits_{#1}}
+\DeclareMathOperator{\ObsGrp}{Obs}
+\newcommand{\GeneratedGrpBy}[1]{\left\langle #1 \right\rangle}
+\DeclarePairedDelimiterX{\Comprehension}[2]{\,}{\,}{#1 \mathrel{\delimsize\vert} #2}
+\DeclareMathOperator{\IncidenceAlg}{A}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\UpprTriangularMats}{U}
+\newcommand{\OrderExt}[1]{\mathrel{{#1}^\ast}}
+\newcommand{\NaturalNumsLE}[1]{\left[#1\right]}
+\newcommand{\MatEntry}[1]{\left(#1\right)}
+\newcommand{\Inverse}[1]{{#1}^{-1}}
+\newcommand{\UnitOfRing}[1]{1_{#1}}
+\newcommand{\ZeroOfRing}[1]{0_{#1}}
+\newcommand{\LowerSum}{\mathop{S}\nolimits_{\le}}
+\newcommand{\UpperSum}{\mathop{S}\nolimits_{\ge}}
+\newcommand{\IntervalOC}[2]{\left( #1, #2 \right]}
+\newcommand{\IntervalCO}[2]{\left[ #1, #2 \right)}
+\newcommand{\IntervalCC}[2]{\left[ #1, #2 \right]}
+\newcommand{\PosetZeta}[1][\relax]{\mathop{\zeta}\nolimits_{#1}}
+\newcommand{\IsoClassesGset}[1]{\left[#1\right]}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Cok}{Coker}
+\DeclareMathOperator{\Image}{Im}
+\newcommand{\Res}[2]{\mathop{\mathrm{Res}}\nolimits^{#1}_{#2}}
+\newcommand{\Ind}[2]{\mathop{\mathrm{Ind}}\nolimits_{#1}^{#2}}
+\newcommand{\Def}[2]{\mathop{\mathrm{Def}}\nolimits^{#1}_{#2}}
+\newcommand{\Inf}[2]{\mathop{\mathrm{Inf}}\nolimits_{#1}^{#2}}
+\newcommand{\Conj}[1]{{}^{#1}\!}
+\newcommand{\Stab}[2]{{#2}_{#1}}
+\newcommand{\FinGSets}[1]{{#1}\mathchar`-\mathbf{set}}
+\newcommand{\Order}[1]{\left| #1 \right|}
+\newcommand{\TrivGrp}{\mathbf{1}}
+\DeclareMathOperator{\SL}{SL}
+\newcommand{\QBurnsideRing}{\Q\!\BurnsideRing}
+\DeclareMathOperator{\LambdaMap}{\lambda}
+\DeclareMathOperator{\LambdaMapOp}{\lambda^{\mathrm{op}}}
+\DeclareMathOperator{\Iso}{Iso}
+\newcommand{\Lan}[1]{{#1}^\dagger}
+\newcommand{\Ran}[1]{{#1}^\ddagger}
+\DeclareMathOperator{\Obj}{Obj}
+\renewcommand{\Colim}{\mathop{\mathrm{colim}}}
+\newcommand{\CommaCat}[2]{{#1}\downarrow{#2}}
+\DeclareMathOperator{\dom}{dom}
+\newcommand{\RelationSchema}[1]{\mathop{\mathcal{#1}}\nolimits}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{雑多}
+	
+	\subsection{posetの隣接代数}
+	
+	$(P, {\le})$をposetとする．
+	$P$は\Term[locally small]{局所有限},
+	つまり，
+	任意の$x, y \in P$に対して$\Card{\IntervalCC{x}{y}} < \infty$が成り立っているとする．
+	
+	$R$を単位的可換環とする．
+	$\IncidenceAlg_R(P) = \SetComprehension{f \colon P \times P \to R }{x \nleq y \implies f(x, y) = 0}$は自然に$R$加群となり，
+	さらに，
+	$\IncidenceAlg_R(P)$上の積$\ast$を
+	\begin{equation}
+		(f \ast g)(x, y)
+		= \sum_{x \le z \le y} f(x, z) g(z, y) \quad (f, g \in \IncidenceAlg_R(P),\, x, y \in P)
+	\end{equation}
+	で定めれば，
+	$\IncidenceAlg_R(P)$はこの積により$R$代数となり，
+	$P$の$R$上の\Term[incidence algebra]{隣接代数}と呼ばれる~\cite{oda2022}．
+	単位元$\delta \in \IncidenceAlg_R(P)$は
+	\begin{equation}
+		\delta(x, y)
+		= \begin{cases}
+			\UnitOfRing{R} & (x = y) \\
+			\ZeroOfRing{R} & (x \ne y)
+		\end{cases}
+	\end{equation}
+	で与えられる．
+	
+	\begin{proposition}\label{prop:incidence_alg_iso}
+		$P$が有限集合\footnote{
+			$P$が無限集合でも，
+			任意の$x \in P$に対して$\IntervalOC{\infty}{x}$が有限集合でさえあれば，
+			無限次元上三角行列を考えることで同型を与えられると思う．
+		}
+		のとき，
+		$R$代数として$\IncidenceAlg_R(P) \cong \UpprTriangularMats_{\Card{P}}(R)$である．
+		ここで，
+		$\UpprTriangularMats_{\Card{P}}(R)$は，
+		各成分が$R$の元であるような$\Card{P}$次の上三角行列全体の成す$R$代数である．
+	\end{proposition}
+	
+	\begin{proof}
+		$P$を$I = \NaturalNumsLE{\Card{P}}$で，
+		$i \le j$なら$x_i \le x_j$となるように添え字付けておく
+		\footnote{
+			添え字付けられることはorder-extension principleにより保証される．
+			つまり，
+			$P$上の全順序$\OrderExt{\le}$で，
+			任意の$x, y \in P$に対して，$x \le y$なら$x \OrderExt{\le} y$を満たすようなものが存在する．
+			このような$\OrderExt{\le}$を$\le$のlinear extensionと呼ぶらしい．
+		}
+		．
+		$\phi \colon \IncidenceAlg_R(P) \to \UpprTriangularMats_{\Card{P}}(R)$を
+		\begin{equation}
+			\phi(f)
+			= \MatEntry{f(x_i, x_j)}_{i, j \in I}
+		\end{equation}
+		で定めると，
+		$\phi$が同型を与えている．
+	\end{proof}
+	
+	\begin{proposition}[{\cite[補題7.18]{oda2022}}]\label{prop:incidence_alg_unit}
+		$f \in \IncidenceAlg_R(P)$とする．
+		$f$が$\IncidenceAlg_R(P)$の単元であることの必要十分条件は，
+		任意の$x \in P$に対して$f(x, x)$が$R$の単元であることである．
+	\end{proposition}
+	
+	\begin{proof}
+		$f$が単元であるとすると，
+		任意の$x \in P$に対して，
+		\begin{equation}
+			(f \ast f^{-1})(x, x)
+			= f(x, x) f^{-1}(x, x)
+			= \UnitOfRing{R}
+		\end{equation}
+		より$f(x, x) \ne 0$が従う．
+%		また，
+%		任意の$x, y \in P$に対して，
+%		\begin{equation}
+%			(f \ast f^{-1})(x, y)
+%			= f(x, x) f^{-1}(x, y) + \sum_{x < z \le y} f(x, z) f^{-1}(z, y)
+%			= \ZeroOfRing{R}
+%		\end{equation}
+%		より
+%		\begin{equation}\label{eq:incidence_alg_inverse}
+%			f^{-1}(x, y)
+%			= -{f(x, x)}^{-1} \sum_{x < z \le y} f(x, z) f^{-1}(z, y)
+%		\end{equation}
+%		が分かる．
+		逆を示すために，
+		任意の$x \in P$に対して$f(x, x)$が単元であるとする．
+		$g, h \in \IncidenceAlg_R(P)$を，
+		任意の$x, y \in P$に対して
+		\begin{align}
+			&g(x, y)
+			= \begin{cases}
+				{f(x, x)}^{-1} & (x = y) \\
+				-{f(y, y)}^{-1} \sum_{x \le z < y} g(x, z) f(z, y) & (x < y) \\
+				\ZeroOfRing{R} & (x \nleq y)
+			\end{cases}, \\
+			&h(x, y)
+			= \begin{cases}
+				{f(x, x)}^{-1} & (x = y) \\
+				-{f(x, x)}^{-1} \sum_{x < z \le y} f(x, z) h(z, y) & (x < y) \\
+				\ZeroOfRing{0} & (x \nleq y)
+			\end{cases}
+		\end{align}
+		で定めれば，
+		$g \ast f = f \ast h = \delta$が成り立つ．
+		したがって，
+		$f$は単元であり，
+		$f^{-1} = g = h$である．
+	\end{proof}
+	
+	\subsection{posetのMöbius関数}
+	
+	$P$上の$R$に値を持つ\Term[zeta function]{ゼータ関数}$\PosetZeta[P] \in \IncidenceAlg_{R}(P)$を
+	\begin{equation}
+		\PosetZeta[P](x, y)
+		= \begin{cases}
+			\UnitOfRing{R} & (x \le y) \\
+			\ZeroOfRing{R} & (x \nleq y)
+		\end{cases}
+	\end{equation}
+	で定める．
+	文脈によって$P$が明らかなとき，
+	添え字は省略する．
+	\cref{prop:incidence_alg_unit}より，
+	$\PosetZeta$の逆元$\MoebiusFunc[P] \in \IncidenceAlg_{R}(P)$が存在して，
+	さらに
+	\begin{align}
+		\MoebiusFunc[P](x, y)
+		&= \begin{cases}
+			\UnitOfRing{R} & (x = y) \\
+			-\sum_{x \le z < y} \MoebiusFunc(x, z) & (x < y) \\
+			\ZeroOfRing{R} & (x \nleq y)
+		\end{cases} \\
+		&= \begin{cases}
+			\UnitOfRing{R} & (x = y) \\
+			-\sum_{x < z \le y} \MoebiusFunc(z, y) & (x < y) \\
+			\UnitOfRing{R} & (x \nleq y)
+		\end{cases}
+	\end{align}
+	となる．
+	この$\MoebiusFunc$を$P$上の$R$を値に持つ\Term[Möbius function]{Möbius関数}と呼ぶ．
+	$\MoebiusFunc$は$\PosetZeta$の逆元なので，
+	\begin{equation}\label{eq:MoebiusFuncFormula}
+		\sum_{x \le z \le y} \MoebiusFunc(z, y)
+		= \sum_{x \le z \le y} \MoebiusFunc(x, z)
+		= \begin{cases}
+			\UnitOfRing{R} & (x = y) \\
+			\UnitOfRing{R} & (x \ne y)
+		\end{cases}
+	\end{equation}
+	が成り立つ．
+	
+	\subsection{Möbiusの反転公式}
+	
+	$P$の部分集合$P_{\le}$と$P_{\ge}$を，
+	それぞれ
+	\begin{equation}
+		P_{\le} = \SetComprehension{x \in P}{\Card{\IntervalOC{\infty}{x}} < \infty}, \quad P_{\ge} = \SetComprehension{x \in P}{\Card{\IntervalCO{x}{\infty}} < \infty}
+	\end{equation}
+	で定める\footnote{
+		名称ないのかな．
+	}
+	．
+	また，
+	$f \colon P \to R$に対して，
+	$f$の\Term{lower sum}$\LowerSum(f) \colon P_{\le} \to R$と\Term{upper sum}$\UpperSum(f) \colon P_{\ge} \to R$をそれぞれ
+	\begin{equation}
+		\LowerSum(f)(x) = \sum_{y \le x} f(y), \quad \UpperSum(f)(x) = \sum_{x \le y} f(y)
+	\end{equation}
+	で定める．
+	
+	\begin{theorem}[Möbiusの反転公式~{\cite[Theorem 2.1]{hetyei2007}}]\label{thm:Moebius_inversion_formula}
+		任意の$f, g \colon P \to R$に対して，
+		以下が成り立つ．
+		\begin{thmenum}
+			\item\label{thm:Moebius_inversion_formula.1} 任意の$x \in P_{\le}$に対して，
+			$g(x) = \LowerSum(f)(x) \iff f(x) = \LowerSum(g({-})\MoebiusFunc({-}, x))(x)$が成り立つ．
+			\item 任意の$x \in P_{\ge}$に対して，
+			$g(x) = \UpperSum(f)(x) \iff f(x) = \UpperSum(g({-})\MoebiusFunc(x, {-}))(x)$が成り立つ．
+		\end{thmenum}
+	\end{theorem}
+	
+	\begin{proof}
+		\cref{thm:Moebius_inversion_formula.1}のみ示す．
+		各$x \in P_{\le}$に対して，
+		$\IntervalOC{\infty}{x}$は有限posetとなる．
+		$\LowerSum(f)(x) = \sum_{y \in x} \PosetZeta(y, x) f(y)$なので，
+		\cref{prop:incidence_alg_iso}の記号を用いれば，
+		主張は
+		\begin{equation}
+			(g(x_i))_{i \in I} = (f(x_i))_{i \in I} \phi(\PosetZeta)
+			\iff (f(x_i))_{i \in I} = (g(x_i))_{i \in I} \phi(\MoebiusFunc)
+		\end{equation}
+		と同値である．
+		したがって，
+		$\phi(\PosetZeta)^{-1} = \phi(\MoebiusFunc)$を示せばよいが，
+		これは$\MoebiusFunc$の定義から明らかである．
+	\end{proof}
+	
+%	\begin{example}
+%		$f$を数論的関数，
+%		つまり，
+%		$f$は$\Z$から$\C$への写像だとする．
+%		このとき，
+%		$\Z_{> 0}$は整除関係によりposetを成し，
+%		さらに$\Card{\IntervalOC{\infty}{n}} < \infty$だから，
+%		\cref{thm:Moebius_inversion_formula}より
+%		\begin{equation}
+%			g(n) = \sum_{0 < d \mid n} f(d) \iff f(n) = \sum_{0 < d \mid n} g(d) \MoebiusFunc(d, n)
+%		\end{equation}
+%		が成り立つ．
+%		特に，
+%		$f = 1$とすれば，
+%		$g(n) = \tau(n) = \Card{\IntervalOC{0}{n}}$なので
+%		\begin{equation}
+%			\sum_{0 < d \mid n} \tau(n) \MoebiusFunc(d, n)
+%		\end{equation}
+%		が成り立つ．
+%	\end{example}
+	
+	\subsection{全射準同型が素イデアルを保たない例}
+	
+	$\phi_1 \colon \Z[x] \to \Z$を代入写像とすると，
+	$(x)$は$\Z[x]$における素イデアルだが，
+	$\phi_1((x)) = \Z$は$\Z$における素イデアルとならない．
+	
+	\subsection{共通部分の生成するイデアルについて}
+	
+	\begin{proposition}
+		$R$を環，
+		$\{S_i\}_{i \in I}$を$R$の部分集合の族とする．
+		このとき，
+		\begin{equation}
+			\GeneratedIdealBy{\bigcap_{i \in I} S_i} \subseteq \bigcap_{i \in I} \GeneratedIdealBy{S_i}
+		\end{equation}
+		が成り立つ．
+	\end{proposition}
+	
+	\begin{proof}
+		任意の$j \in I$に対して$\bigcap_{i \in I} E_i \subseteq \GeneratedIdealBy{E_j}$なので，
+		$\bigcap_{i \in I} E_i \subseteq \bigcap_{i \in I} \GeneratedIdealBy{E_i}$である．
+		したがって，
+		最小性より，
+		$\GeneratedIdealBy{\bigcap_{i \in I} E_i} \subseteq \bigcap_{i \in I} \GeneratedIdealBy{E_i}$が分かる．
+	\end{proof}
+	
+	逆は一般に成り立たない．
+	実際，
+	$R = \Z$としたとき，
+	\begin{equation}
+		\GeneratedIdealBy{2} \cap \GeneratedIdealBy{3}
+		= \GeneratedIdealBy{6} \ne 0
+		= \GeneratedIdealBy{\{2\} \cap \{3\}}
+	\end{equation}
+	である．
+	
+	\subsection{単位行列を\texorpdfstring{$E$}{E}で表す由来}
+	
+	単位行列はドイツ語でEinheitsmatrixと呼ぶところから来ている．
+	初出はCourantとHilbertの\textit{Methods of mathematical physics}~\cite{courant1953}らしい．
+	
+	\subsection{\texorpdfstring{$G$集合の$k$-subsets}{G集合のk-subsets}}
+	
+	$G$を有限群とする．
+	
+	\begin{proposition}\label{prop:k-subsets_fixed_pts}
+		$k$を非負整数とする．
+		任意の$H \le G,\, N \trianglelefteq G$に対して，
+		\begin{equation}
+			\Card{\FixedPts{\binom{G/N}{k}}{H}}
+			= \begin{cases}
+				\dbinom{\Index{HN}{G}}{k/\Index{N}{HN}} & (\Index{N}{HN} \mid k) \\
+				0 & (\Index{N}{HN} \nmid k)
+			\end{cases}
+		\end{equation}
+		が成り立つ．
+	\end{proposition}
+	
+	\begin{proof}
+		ある$X \in \FixedPts{\binom{G/N}{k}}{H}$が存在したとする．
+		このとき，
+		$H$は$X$に作用しているので，
+		$X$の$H$集合としての軌道分解
+		\begin{equation}\label{eq:orbit_decomp_subset}
+			X \cong \bigsqcup_{gN \in \CompReps{H \backslash X}} H/\Stab{gN}{H}
+		\end{equation}
+		を得る．
+		$\Stab{gN}{H} = H \cap N$だから，
+		$\Card{X} = k$より
+		\begin{equation}
+			k = \Index{H \cap N}{H} \Card{H \backslash X}
+		\end{equation}
+		が分かるが，
+		これは第2同型定理より$\Index{N}{HN} = \Index{H \cap N}{H} \mid k$を意味する．
+		さらに，
+		このような$X$は$H \backslash (G/N)$の元の$k/\Index{N}{HN}$個の直和となることも従うが，
+		集合としての同型$H \backslash (G/N) \cong G/HN$より，
+		直和因子の選び方は$\binom{\Index{HN}{G}}{k/\Index{N}{HN}}$である．
+	\end{proof}
+	
+	\begin{corollary}
+		${\FixedPtMap^G}_H \binom{G/N}{k} = {\FixedPtMap^G}_{HN} \binom{G}{k \Order{N}} = {\FixedPtMap^{G/N}}_{HN/N} \binom{G/N}{k}$である．
+	\end{corollary}
+	
+	\begin{proposition}
+		$k$を非負整数，
+		$H, K \le G$とする．
+		このとき，
+		$\Card{\FixedPts{\binom{G/K}{k}}{H}} \ne 0$ならば$\Order{H} \mid k \Order{K}$である．
+	\end{proposition}
+	
+	\begin{proof}
+		$\Card{\FixedPts{\binom{G/K}{k}}{H}} \ne 0$とする．
+		このとき，
+		$X \in \FixedPts{\binom{G/K}{k}}{H}$に対して，
+		${\cup}X \in \FixedPts{\binom{G}{k \Order{K}}}{H}$であることを示す．
+		$X = \SetComprehension{g_i K}{i = 1, \dotsc, k}$とすると，
+		各$g_i K$は互いに素であるから，
+		$\Card{{\cup}X} = k \Card{K}$である．
+		さらに，
+		$H$は$X$に作用しているので，
+		任意の$h \in H,\, i$に対して，
+		$h g_i K = g_j K$となる$j$が存在する．
+		したがって，
+		$h {\cup}X = \bigcup_{i=1}^k h g_i K \subseteq {\cup}X$だから，
+		$H$は${\cup}X$に作用する．
+		よって，
+		${\cup}X \in \FixedPts{\binom{G}{k \Order{K}}}{H}$である．
+		このとき，
+		\cref{prop:k-subsets_fixed_pts}より$\Order{H} \mid k \Order{K}$が成り立つ．
+	\end{proof}
+	
+	\begin{proof}
+		$X \in \FixedPts{\binom{G/K}{k}}{H}$の軌道分解を考えると，
+		等式
+		\begin{equation}\label{eq:orbit_decomp_subset_cosets}
+			k = \sum_{gK \in \CompReps{H \backslash X}} \frac{\Order{H}}{\Order{H \cap \Conj{g}K}}
+		\end{equation}
+		を得る．
+		この式の両辺に$\Order{K}/\Order{H}$を乗じれば，
+		\begin{equation}
+			\frac{k \Order{K}}{\Order{H}} = \sum_{gK \in \CompReps{H \backslash X}} \frac{\Order{K}}{\Order{H^g \cap K}} \in \Z
+		\end{equation}
+		となるから，
+		$\Order{H} \mid k \Order{K}$が分かる．
+	\end{proof}
+	
+	$\mathcal{X}_k = \SetComprehension{H \le G}{\Order{H} \mid k}$とおく．
+	
+	\begin{proposition}
+		任意の$H \le G$に対して，
+		$\binom{G/H}{k/\Order{H}} \in \BurnsideRing(G, \mathcal{X}_k)$である．
+	\end{proposition}
+	
+	\begin{conjecture}
+		$\SetComprehension{\binom{G/H}{k/\Order{H}}}{H \in \CompReps{\mathcal{X}_k/\mathrm{conj}}}$は$\QBurnsideRing(G, \mathcal{X}_k)$の基底である．
+	\end{conjecture}
+	
+	\begin{conjecture}
+		$k \mid \Order{G}$とする．
+		環$R$の中で$\Order{G}/k$のすべての約数が可逆なとき，
+		$R \otimes_\Z \BurnsideRing(G, \mathcal{X}_k)$は単位的環となる．
+		特に，
+		$\pi$を$\Order{G}/k$の素因数の集合とすれば，
+		$\Z_{(\pi')} \otimes_\Z \BurnsideRing(G, \mathcal{X}_k)$は単位的環となる．
+	\end{conjecture}
+	
+	\subsection{Hallの部分群定理}
+	
+	\begin{theorem}[Hallの部分群定理]\label{Hall_subgrp_thm}
+		$G$を有限群とする．
+		このとき，
+		$G$が可解であることと，
+		任意の素数の集合$\pi$に対して，
+		$\Card{H} = \Card{G}_\pi$なる部分群$H \le G$が存在することは同値である．
+	\end{theorem}
+	
+	\cref{Hall_subgrp_thm}における$H$を，
+	$G$のHall $\pi$部分群と呼ぶ．
+	この定理の別証明を考えたい．
+	よく似た事実に，
+	有限群に対するSylowの定理が知られている，
+	特に，
+	$G$のSylow $p$部分群は，
+	$G$の$\Card{G}_p$-subsets $\binom{G}{\Card{G}_p}$を考えることで証明できる．
+	
+	正整数$k$を取ったとき，
+	$G$の位数$k$の部分群が存在する必要十分条件が，
+	$G$の$k$-subsetsを考えることで得られる．
+	
+	\begin{proposition}\label{prop:Hall-subgroup}
+		$G$を有限群，
+		$k$を正整数とする．
+		このとき，
+		$G$の位数$k$の部分群が存在することと，
+		等式
+		\begin{equation}\label{eq:pi-part}
+			\Card{\FixedPts{\binom{G}{k}}{H}} = \frac{\Card{G}}{k}
+		\end{equation}
+		が成り立つような部分群$H \le G$が存在することは同値である．
+		特に，
+		$k \ne \Card{G}$のとき，
+		\cref{eq:pi-part}における$H$が位数$k$の部分群となる．
+	\end{proposition}
+	
+	\begin{proof}
+		$k = \Card{G}$のときは明らかなので，
+		$k \ne \Card{G}$の場合を示す．
+		
+		\cref{prop:k-subsets_fixed_pts}より，
+		任意の$H \le G$に対して，
+		$\Card{H} \mid k$なら
+		\begin{equation}
+			\Card{\FixedPts{\binom{G}{k}}{H}}
+			= \binom{\Index{H}{G}}{k / \Card{H}}
+		\end{equation}
+		が成り立つ．
+		$H \le G$が$\Card{H} = k$を満たすとき，
+		\begin{align}
+			\Card{\FixedPts{\binom{G}{k}}{H}}
+			&= \binom{\Card{G}/k}{1} \\
+			&= \frac{\Card{G}}{k}
+		\end{align}
+		である．
+		逆に，
+		$H$が\cref{eq:pi-part}を満たすとすれば，
+		\cref{prop:k-subsets_fixed_pts}より$\Card{H} \mid k$であり，
+		さらに
+		\begin{align}
+			\frac{\Card{G}}{k}
+			&= \Card{\FixedPts{\binom{G}{k}}{H}} \\
+			&= \binom{\Index{H}{G}}{k / \Card{H}} \\
+			&\ge \frac{\Card{G}}{\Card{H}} \\
+			&= \frac{\Card{G}}{k} \frac{k}{\Card{H}} \\
+			&\ge \frac{\Card{G}}{k}
+		\end{align}
+		だから，
+		$\Card{H} = k$を得る．
+	\end{proof}
+	
+	したがって，
+	Hallの部分群定理は，
+	有限可解群$G$の$\Card{G}_\pi$-subsetsを$G$集合として解析することで証明されることが期待できる．
+	特に，
+	$\Card{\FixedPts{\binom{G}{\Card{G}_\pi}}{H}} \ne 0$となるような最大の部分群$H$を取り，
+	$\Card{G}_\pi \le \Card{H}$を示すことができれば十分である．
+%	このときの$H$は，
+%	最大性より$H = \Normalizer[G](H)$を満たし，
+%	このような$H$をself-normalizingであると呼ぶ\cite{sawabe2011}．
+
+	\begin{conjecture}
+		$\pi \ne \emptyset$を素数の集合とする．
+		このとき，
+		以下は同値である．
+		\begin{enumerate}
+			\item $G$は可解群である．
+			\item $H \le G$を$\Order{\FixedPts{\binom{G}{k}}{H}} \ne 0$となる$G$の部分群のうち，
+			位数が最大のものとする．
+			このとき，
+			任意の$K \le G$に対して，
+			$\Order{K} \mid \Order{G}_\pi$ならば$\Order{\FixedPts{\binom{G/K}{\Order{G}_\pi/\Order{K}}}{H}} \ne 0$が成り立つ．
+		\end{enumerate}
+	\end{conjecture}
+	
+	この予想は正しくない！
+	実際，
+	$G = \SL(2, 5)$を$\Z/5\Z$上の2次特殊線形群とすると，
+	$G$は非可解群で位数15の群を持たないにもかかわらず，
+	$\binom{G/K}{15/\Order{K}}\ (\Order{K} \mid 15)$の各マークは
+	\begin{gather}
+		\MarkHom\left(\binom{G}{15}\right) = (4730523156632595024, 0, 658008, 0, 2024, 0, 0, 0, 0, 0, 0, 0), \\
+		\MarkHom\left(\binom{G/C_3}{5}\right) = (658008, 0, 72, 0, 8, 0, 0, 0, 0, 0, 0, 0), \\
+		\MarkHom\left(\binom{G/C_5}{3}\right) = (2024, 0, 8, 0, 4, 0, 0, 0, 0, 0, 0, 0)
+	\end{gather}
+	となり，
+	第5成分が消失していない．
+	
+	\subsection{GAPでHasse図を出力する}
+	
+	有限群\texttt{g}のHasse図は，
+	GAPとGraphVizを組み合わせて出力できる．
+	以下にその手順を示す．
+	
+	\begin{enumerate}
+		\item GAP上で\texttt{g}の部分群束\texttt{l}を計算する．
+		\item \texttt{l}から\texttt{g}のHasse図のdotファイルD8{.}dotを出力する．
+		\item GraphVizでD8{.}dotをpdfファイルなどに変換する．
+	\end{enumerate}
+	
+	\begin{example}
+		位数8の二面体群$D_4$のHasse図を出力しよう．
+		\cref{code:hasse_GAP,code:hasse_cmd}は，
+		$D_4$のHasse図のpdfファイルD4{.}pdfを出力する例である．
+		
+		\begin{lstlisting}[caption={GAPでの操作}, label=code:hasse_GAP, language=GAP]
+gap> g := DihedralGroup(8);;
+gap> l := LatticeSubgroups(g);
+<subgroup lattice of <pc group of size 8 with 3 generators>, 8 classes, 10 subgroups>
+gap> DotFileLatticeSubgroups(l, "D4.dot");
+gap>
+		\end{lstlisting}
+		\begin{lstlisting}[caption={コマンドプロンプト上での操作}, label=code:hasse_cmd]
+C:\Users\user\Documents>dot -T pdf "D4.dot" -o "D4.pdf"
+		\end{lstlisting}
+		
+		\cref{code:hasse_GAP,code:hasse_cmd}によって，
+		D4{.}dotの置かれているフォルダ（今の場合はC{:}{\textbackslash}User{\textbackslash}user{\textbackslash}Documents）に，
+		$D_4$のHasse図D4{.}pdfが生成される（\cref{fig:hasse_d4}）．
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width=.7\linewidth]{D4.pdf}
+			\caption{D4{.}pdf（$D_4$のHasse図）}
+			\label{fig:hasse_d4}
+		\end{figure}
+		
+		\cref{fig:hasse_d4}において，
+		一番左の列の数字は，
+		対応する行に位置する群の位数を表している．
+		また，
+		四角で囲まれたノードは正規部分群に対応し，
+		丸で囲まれたノードでは，
+		1つ目の数字が同じであれば，
+		対応する部分群は同じ共役類に属する．
+		各ノードa-bに対応する部分群が知りたければ，
+		今回の場合は\texttt{ConjugacyClassesSubgroup(l)[a][b]}とすればよい．
+	\end{example}
+	
+	もし，
+	pdfファイルを出力した際に，
+	各ノードをつなぐ線が消えてしまうようであれば，
+	dotファイルのsizeを編集すればよい．
+	
+	\subsection{Burnside環の基本定理}
+	
+	$G$を有限群とする．
+	$\mathcal{X}$を$G$の部分群の集合で，
+	$G$共役で閉じていると仮定する．
+	$G$のBurnside環$\BurnsideRing(G)$の部分群$\BurnsideRing(G, \mathcal{X})$を
+	\begin{equation}
+		\BurnsideRing(G, \mathcal{X})
+		= \GeneratedSubmodByComprehension{\IsoClassesGset{G/H}}{H \in \CompReps{\mathcal{X}/\mathrm{conj}}}
+	\end{equation}
+	で定める．
+	また，
+	$\GhostRing(G, \mathcal{X}) = \Z^{\Card{\mathcal{X}/\mathrm{conj}}}$と置く．
+	さらに，
+	マーク準同型写像$\MarkHom \colon \BurnsideRing(G, \mathcal{X}) \to \GhostRing(G, \mathcal{X})$を
+	\begin{equation}
+		\MarkHom(\IsoClassesGset{X})
+		= (\Card{\FixedPts{X}{S}})_{S \in \CompReps{\mathcal{X}/\mathrm{conj}}}
+	\end{equation}
+	と定める．
+	また，
+	任意の$H \le G$に対して$\overline{H} = {\cap}\SetComprehension{S \in \mathcal{X}}{H \le S}$と置く．
+	
+	\begin{theorem}[Yoshida~{\cite[Theorem~3.11]{yoshida1990}}]
+		任意の$S \in \mathcal{X}$に対して，
+		$gS \in \WeylGrp[G]S$なら$\overline{\GeneratedGrpBy{g}\! S} \in \mathcal{X}$が成り立つとき，
+		$\BurnsideRing(G, \mathcal{X})$は$\MarkHom$が環準同型となるような唯一の環構造を持つ．
+	\end{theorem}
+	
+	\begin{theorem}[Fundamental theorem; Yoshida~{\cite[Theorem~3.10]{yoshida1990}}]
+		写像$\psi \colon \GhostRing(G, \mathcal{X}) \to \ObsGrp(G, \mathcal{X})$を
+		\begin{equation}
+			\psi(v) := \left( \sum_{gS \in \WeylGrp[G]S} v_{\overline{\GeneratedGrpBy{g}\! S}} \mod \Card{\WeylGrp[G]S} \right)_{S \in \CompReps{\mathcal{X}/\mathrm{conj}}} \quad (v = (v_S)_{S \in \CompReps{\mathcal{X}/\mathrm{conj}}} \in \GhostRing(G, \mathcal{X}))
+		\end{equation}
+		で定める．
+		このとき，
+		Abel群の系列
+		\begin{equation}
+			\begin{tikzcd}
+				% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRGJAF9T1Nd9CKAIzkqtRizYAdKQCEmAJzDZYAJSxgA5gAoA4qQAEMgLZ0cACwDGjYAA1OASi48QGbHgJEATKOr1mrIggMrrmmDjqWnqGJmZWNvZO3LzuAkQAzL7iAdJSAPIARnA4CkyWHmCROvpGUqYW1gx2js4p-J4oACxZ-pJBHJxiMFCa8ESgAGYKEMZIZCA4EEhCySBTM8vUi0g+2X3BUgCydAoA1gASG6vrs4i724iZe4EHaNita9O3Tw+dg5xAA
+				0 \arrow[r] & {\BurnsideRing(G, \mathcal{X})} \arrow[r, "\MarkHom"] & {\GhostRing(G, \mathcal{X})} \arrow[r, "\psi"] & {\ObsGrp(G, \mathcal{X})} \arrow[r] & 0
+			\end{tikzcd}
+		\end{equation}
+		は完全である．
+	\end{theorem}
+
+	\subsection{\texorpdfstring{$\Z$}{Z}加群の余像}
+	
+	\begin{proposition}
+		$M, N$を有限生成自由$\Z$加群とし，
+		$\Rank M = \Rank N = n$だとする．
+		このとき，
+		任意の準同型$f \colon M \to N$に対して，
+		$\det f \ne 0$なら$\Card{\Cok f} = \det f$が成り立つ．
+	\end{proposition}
+	
+	\begin{proof}
+		$f$のSmith標準形を
+		\begin{equation}
+			\begin{pmatrix}
+				e_1 &  &  &  \\
+				& e_2 &  &  \\
+				&  & \ddots &  \\
+				&  &  & e_n
+			\end{pmatrix} \quad (e_i \in \Z,\, e_i \mid e_{i+1})
+		\end{equation}
+		と置けば，
+		$\det f \ne 0$より$e_i \ne 0$である．
+		よって，
+		$\Image f \cong \prod_{i = 1}^n e_i \Z$であり，
+		したがって
+		\begin{equation}
+			\Card{\Cok f}
+			= \prod_{i = 1}^n e_i
+			= \det f
+		\end{equation}
+		が成り立つ．
+	\end{proof}
+	
+	\subsection{制限，誘導，deflation，inflation覚書}
+	
+	$G$を群とする．
+	右$G$集合$X$と左$G$集合$Y$に対して，
+	直積$X \times Y$への$G$の右からの作用を
+	\begin{equation}
+		(x, y) g
+		= (xg, g^{-1}y) \quad ((x, y) \in X \times Y,\, g \in G)
+	\end{equation}
+	で定め，
+	この作用による$G$軌道全体の集合を$X \times_G Y$と置く．
+	$X \times_G Y$を$X$と$Y$の\Term[composition]{合成}と呼ぶ．
+	
+	\begin{proposition}
+		$G'$を群，
+		$X$を$(G', G)$-biset，
+		$Y$を左$G$集合とする．
+		このとき，
+		$X \times_G Y$は左$G'$集合となる．
+	\end{proposition}
+	
+	\begin{proof}
+		$(x, y)G = (x', y')G \in X \times_G Y$とすると，
+		ある$g \in G$が存在して$(x, y) = (x' g, g^{-1} y)$が成り立つ．
+		このとき
+		\begin{align}
+			(g' x, y)G
+			&= (g' x' g, g^{-1} y')G \\
+			&= (g' x', y')G
+		\end{align}
+		だから，
+		$G'$の$X \times_G Y$への作用を
+		\begin{equation}
+			g' (x, y)G
+			= (g' x, y)G \quad ((x, y)G \in X \times_G Y,\, g' \in G')
+		\end{equation}
+		で定められる．
+	\end{proof}
+	
+	\begin{definition}[{Bouc~\cite[2.3.9]{bouc2010}}]
+		$H \le G,\, N \trianglelefteq G$とする．
+		\begin{defenum}
+			\item $G$集合$X$に対して，
+			$H$集合$\Res{G}{H} X = G \times_G X$を$X$の$G$から$H$への\Term[restriction]{制限}と呼ぶ．
+			ここで，
+			$G$への左$H$作用，
+			右$G$作用はどちらも$G$の積である．
+			\item $H$集合$Y$に対して，
+			$G$集合$\Ind{H}{G} Y = G \times_H Y$を$Y$の$H$から$G$への\Term[induction]{誘導}と呼ぶ．
+			ここで，
+			$G$への左$G$作用，
+			右$H$作用はどちらも$G$の積である．
+			\item $G$集合$U$に対して，
+			$G/N$集合$\Def{G}{G/N} U = G/N \times_G U$を$U$の$G$から$G/N$への\Term{deflation}と呼ぶ．
+			ここで，
+			$G/N$への左$G/N$作用は$G/N$の積，
+			右$G$作用は$G/N$への射影と積である．
+			\item $G/N$集合$V$に対して，
+			$G$集合$\Inf{G/N}{G} V = G/N \times_{G/N} V$を$V$の$G/N$から$G$への\Term{inflation}と呼ぶ．
+			ここで，
+			$G/N$への左$G$作用は標準的な作用，
+			右$G/N$作用は$G/N$の積である．
+		\end{defenum}
+	\end{definition}
+	
+	\begin{proposition}
+		$H \le G,\, N \trianglelefteq G$とする．
+		\begin{propenum}
+			\item 任意の$G$集合$(X, \rho)$に対して，
+			$\Res{G}{H} X \cong (X, \rho|_H)$が成り立つ．
+			\item 任意の$G$集合$U$に対して，
+			$\Def{G}{G/N} U \cong N \backslash U$が成り立つ．
+			\item 任意の$G/N$集合$(V, \sigma)$に対して，
+			$\Inf{G/N}{G} V \cong (V, \sigma \circ \pi)$が成り立つ．
+			ここで，
+			$\pi \colon G \to G/N$は自然な射影である．
+		\end{propenum}
+	\end{proposition}
+	
+	\begin{proposition}
+		$H \le G$とする．
+		\begin{propenum}
+			\item 任意の$K \le G$に対して，
+			$\Res{G}{H} G/K \cong \bigsqcup_{HgK \in H \backslash G / K} H/(H \cap \Conj{g}K)$が成り立つ．
+			\item 任意の$L \le H$に対して，
+			$\Ind{H}{G} H/L \cong G/L$が成り立つ．
+			\item 任意の$K \le G$に対して，
+			$\Def{G}{G/N} G/K = G/NK$が成り立つ．
+			\item 任意の$M/N \le G/N$に対して，
+			$\Inf{G/N}{G} (G/N)/(M/N) = G/M$が成り立つ．
+		\end{propenum}
+	\end{proposition}
+	
+	\begin{proof}
+		\quad
+		\begin{enumerate}
+			\item 任意の$gK \in G/K$と$h \in H$に対して，
+			\begin{equation}
+				hgK = gK \iff h \in \Conj{g}K
+			\end{equation}
+			が成り立つから，
+			$gK$の$H$固定化群は$H \cap \Conj{g}K$である．
+			また，
+			任意の$gK, g'K \in G/K$に対して，
+			\begin{equation}
+				\text{ある$h \in H$が存在して$h gK = g'K$} \iff HgK = Hg'K
+			\end{equation}
+			だから，
+			\begin{equation}
+				\Res{G}{H} G/K
+				\cong \bigsqcup_{HgK \in H \backslash G / K} H/(H \cap \Conj{g}K)
+			\end{equation}
+			である．
+		\end{enumerate}
+	\end{proof}
+	
+	\begin{proposition}
+		$\FinGSets{G}$における図式$% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAHEB6ACRAF9S6TLnyEUARnJVajFmy4AZfoJAZseAkQBMU6vWatEHTgGl+0mFADm8IqABmAJwgBbJGRA4ISSTINsAHQC0AAssZQdnN0QdT29EX305IyC0bBBqBjoAIxgGAAVhDTEQRywrEJxzPiA
+		\begin{tikzcd}[cramped, sep = scriptsize]
+			G/H \arrow[r, "\phi"] & G/L & G/K \arrow[l, "\psi"']
+		\end{tikzcd}$
+		に対して，
+		$\phi(H) = aL,\, \psi(K) = bL$としたとき，
+		\begin{equation}
+			% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQBxAegAkQBfUuky58hFOQrU6TVu24AZAUJAZseAkUnFpDFm0ScuAaWXD1YomR009cwwB0HAIywBzOAEcAxszQB9YB43YwACJywwUJ5wl3pvAGs4Rno4AAtQ+gVnAD1gAFpyfhN+UO4AChinb3o0WIBhAgArYDd+YwBKAWkYKDd4IlAAMwAnCABbJDIQHAgkSRl9dic0NKwQGhTnGEYABRENcRAR9zScMxBRiaQAJhpZ+dtZAxAV7A2QLZ39i01DE7cZwuV0miAAzPc5og7ot7K8HGgsIEVmt+MCxqCITModMvnsDpZ-qdzk8lo4EUjgG8sGj+JR+EA
+			\begin{tikzcd}
+				\displaystyle\bigsqcup_{HgK \in H \backslash aLb^{-1}/K} G/(H \cap \Conj{g}K) \arrow[r, "\pi_{\phi}"] \arrow[d, "\pi_{\psi}"'] & G/K \arrow[d, "\psi"] \\
+				G/H \arrow[r, "\phi"']                                                                                            & G/L                   
+			\end{tikzcd} \qquad \begin{aligned}
+				&\pi_{\phi}(x(H \cap \Conj{g}K))
+				= xg^{-1}K, \\
+				&\pi_{\psi}(x(H \cap \Conj{g}K))
+				= xH
+			\end{aligned}
+		\end{equation}
+		は$\FinGSets{G}$における引き戻しである．
+	\end{proposition}
+	
+	\begin{proof}
+		直積のイコライザーを取ればよい．
+	\end{proof}
+	
+	\begin{proposition}
+		$H, K \le G$とする．
+		任意の$H(gK) \in H \backslash (G/K)$に対して，
+		$\Card{H(gK)} = \Index{H \cap \Conj{g}K}{H}$である．
+	\end{proposition}
+	
+	\begin{proof}
+		$H(gK) \cong H/\Stab{gK}{H}$であり，
+		$\Stab{gK}{H} = H \cap \Conj{g}K$である．
+		したがって，
+		$\Card{H(gK)} = \Index{H \cap \Conj{g}K}{H}$が成り立つ．
+	\end{proof}
+	
+	\begin{proposition}
+		$\iota H \to G$を包含写像とする．
+		このとき，
+		$\iota^{-1} \colon \FunctCat{G}{\CatSets} \to \FunctCat{H}{\CatSets}$は$\Res{G}{H}$である．
+		さらに，
+		$\Lan{(\iota^{-1})} \cong \Ind{H}{G},\ \Ran{(\iota^{-1})} \cong \Hom[\FunctCat{H}{\CatSets}](G, {-})$が成り立つ．
+		したがって，
+		随伴
+		\begin{equation}
+			\Ind{H}{G} \dashv \Res{G}{H} \dashv \Hom[\FunctCat{H}{\CatSets}](G, {-})
+		\end{equation}
+		が成り立つ．
+	\end{proposition}
+	
+	\begin{proof}
+		$\Obj(G) = \{ \bullet \},\ \Obj(H) = \{ \ast \}$とする．
+		
+		$\rho \colon G \to \CatSets$を$G$集合とし，
+		$\rho(\bullet) = X$とする．
+		このとき，
+		$\iota^{-1}(\rho) = \rho \circ \iota$であり，
+		とすれば，
+		\begin{gather}
+			\iota^{-1}(\rho)(\ast)
+			= X
+			= \Res{G}{H}(X), \\
+			\iota^{-1}(\rho)(h)
+			= \rho(h)
+			= \rho |_H(h)
+			= \Res{G}{H}(h)
+		\end{gather}
+		が成り立つ．
+		よって，
+		$\iota^{-1} = \Res{G}{H}$である．
+		
+		$\sigma \in \FunctCat{H}{\CatSets}$を$H$集合とし，
+		$\sigma(\ast) = Y$とする．
+		$\CatSets$は余完備なので，
+		$\sigma$の$\iota^{-1}$に沿った各点左Kan拡張$\Lan{(\iota^{-1})} \sigma$が存在する．
+		$P_0 \colon \CommaCat{\iota}{\bullet} \to H$を$P_0(\Tuple{\ast, g}) = \ast$とし，
+		$T = \sigma \circ P_0$とすれば，
+		任意の$\Tuple{\ast, g} \in \CommaCat{\iota}{\bullet}$と$h \in \Hom[\CommaCat{\iota}{\bullet}](\Tuple{\ast, g_0}, \Tuple{\ast, g_1})$に対して$T(\Tuple{\ast, g}) = \sigma(\ast) = Y,\ T(h) = \sigma(h)$であり，
+		\begin{equation}
+			\Lan{(\iota^{-1})} \sigma(\bullet)
+			\cong \Colim T
+		\end{equation}
+		が成り立つ．
+		このとき，
+		$\mu \colon T \Rightarrow \Delta \Colim T$を普遍射とすれば，
+		図式
+		\begin{equation}
+			\begin{tikzcd}
+				Y \arrow[r, "\sigma(h)"] \arrow[rd, "\mu_{g_0}"']	& Y \arrow[d, "\mu_{g_1}"] \\
+															& \Colim T 
+			\end{tikzcd}
+		\end{equation}
+		が可換になる．
+		$\Tuple{\mathfrak{Y} = \bigsqcup_{g \in G} Y, \kappa_g}$を$Y$の$\Card{G}$個の直和，
+		$\mathfrak{Y}$上の2項関係$R$を
+		\begin{equation}
+			y_{g_0} R y_{g_1}
+			\iff \text{ある$h \in \Hom[\CommaCat{\iota}{\bullet}](\Tuple{\ast, g_0}, \Tuple{\ast, g_1})$が存在して$\sigma(h)(y_{g_0}) = y_{g_1}$が成り立つ}
+		\end{equation}
+		とし，
+		$R$を含む最小の同値関係を$\sim$と置けば，
+		一般論より$\Colim T \cong \mathfrak{Y}/\sim$である．
+		さらに，
+		$\mathfrak{Y} \cong G \times Y$が$y_g \mapsto (g, y)$で定まり，
+		この同型により$R$から誘導される2項関係$R_H$は，
+		$h \in \Hom[\CommaCat{\iota}{\bullet}](\Tuple{\ast, g_0}, \Tuple{\ast, g_1})$と$h = {g_1}^{-1} g_0$が同値であることを用いて
+		\begin{equation}
+			(g_0, y) R_H (g_1, y')
+			\iff \text{${g_1}^{-1} g_0 \in H$かつ$\sigma({g_1}^{-1} g_0)(y) = y'$が成り立つ}
+		\end{equation}
+		となる\footnote{
+			分かりやすく書けば，
+			$(g_0, y) R_H (g_1, \sigma({g_1}^{-1} g_0)(y))$である．
+		}．
+		したがって，
+		任意の$(g, y) \in G \times Y$と$h \in H$に対して
+		\begin{equation}
+			(g, \sigma(h)(y)) = (g, \sigma(g^{-1} g h)(y)) R_H (gh, y) \label{eq:H-prod}
+		\end{equation}
+		が成り立つ．
+		よって，
+		$R_H$を含む最小の同値関係$\sim_H$は\cref{eq:H-prod}を満たしている．
+		したがって，
+		$\Colim T \cong (G \times Y)/{\sim_H} = \Ind{H}{G} Y$が成り立つ．
+	\end{proof}
+	
+	\subsection{群の性質を測る指標}
+	
+	$G$を有限群とする．
+	$F$を，
+	$G$の部分群全体の集合$\SubGrps(G)$からそれ自身への写像とし，
+	$\mu$を$\SubGrps(G)$から$\R$への単調写像とする．
+	任意の部分群$H \le G$に対して$H \le F(H)$が成り立つとき，
+	写像$c^F(\mu) \colon \SubGrps(G) \setminus \{G\} \to \IntervalCC{0}{1}$を
+	\begin{equation}
+		c^F(H)
+		= \frac{\mu{F(H)} - \mu{H}}{\mu{G} - \mu{H}}
+	\end{equation}
+	で定める．
+	このとき，
+	有理数$a \in \Q$に対して，
+	$G$の部分集合の族$\mathcal{X}^F(a)$を
+	\begin{equation}
+		\mathcal{X}^F(a)
+		= \SetComprehension{H \le G}{c^F(H) = a}
+	\end{equation}
+	と置く．
+	また，
+	任意の部分群$H \le G$に対して$(H) \le H$が成り立つとき，
+	写像$c_F(\mu) \colon \SubGrps(G) \setminus \{\TrivGrp\} \to \IntervalCC{0}{1}$を，
+	先ほどと同様に
+	\begin{equation}
+		c_F(H)
+		= \frac{\mu{F(H)} - \mu{H}}{\mu \TrivGrp - \mu{H}}
+	\end{equation}
+	で定める．
+	このとき，
+	有理数$a \in \Q$に対して，
+	$G$の部分集合の族$\mathcal{X}_F(a)$を
+	\begin{equation}
+		\mathcal{X}_F(a)
+		= \SetComprehension{H \le G}{c_F(H) = a}
+	\end{equation}
+	と置く．
+	
+	\begin{example}
+		$\mu(H) = \Order{H}$とする．
+		$F(H) = \Normalizer[G](H)$と置くと，
+		\begin{gather}
+			\mathcal{X}^F(0)
+			= \SetComprehension{H < G}{\text{$H$: self-normalizing in $G$}}, \\
+			\mathcal{X}^F(1)
+			= \SetComprehension{H < G}{\text{$H$: normal in $G$}}
+		\end{gather}
+		である．
+		$F(H) = [H, H]$と置くと，
+		\begin{gather}
+			\mathcal{X}^F(0)
+			= \SetComprehension{H \le G}{\text{$H$: perfect group, $H \ne \TrivGrp$}}, \\
+			\mathcal{X}^F(1)
+			= \SetComprehension{H \le G}{\text{$H$: Abelian group, $H \ne \TrivGrp$}}
+		\end{gather}
+		である．
+	\end{example}
+	
+	\subsection{variety of groups~\cite{MathStackExchange20220802}}
+	
+	\begin{definition}
+		$\mathfrak{V}$を群からなる空でないクラスとする
+		\footnote{$\mathfrak{V}$はフラクトゥールにおける$V$である．
+		}．
+		$\mathfrak{V}$が部分群，
+		準同型像，
+		直積について閉じているとき，
+		$\mathfrak{V}$を\Term{variety of groups}という．
+	\end{definition}
+	
+	$\mathfrak{V}$は自明群$\TrivGrp$を含む．
+	実際，
+	$G \in \mathfrak{V}$を取れば，
+	$\TrivGrp \cong G/G \in \mathfrak{V}$である．
+	
+	\begin{proposition}\label{prop:variety_of_gps}
+		$G$を群，
+		$\mathfrak{V}$をvariety of groupとする．
+		このとき，
+		$\mathfrak{V}(G) \trianglelefteq G$であって，
+		$G/\mathfrak{V}(G) \in \mathfrak{V}$かつ，
+		$G/N \in \mathfrak{V}$となる$G$の正規部分群$N$の中で最小となるようなものがただ一つ存在する．
+	\end{proposition}
+	
+	\begin{proof}
+		\begin{equation}
+			\mathfrak{V}(G)
+			= \bigcap_{G/N \in \mathfrak{V}} N
+		\end{equation}
+		とおくと，
+		$\mathfrak{V}(G) \trianglelefteq G$である．
+		各$N \trianglelefteq G$に対して，
+		自然な射影を$\pi_N \colon G \to G/N$とおき，
+		$\pi = (\pi_N)_{G/N \in \mathfrak{V}} \colon G \to \prod_{G/N \in \mathfrak{V}} G/N$とする．
+		$\Ker \pi = \mathfrak{V}(G)$なので，
+		準同型定理より単射$G/\mathfrak{V}(G) \to \prod_{G/N \in \mathfrak{V}} G/N$が存在する．
+		$\prod_{G/N \in \mathfrak{V}} G/N \in \mathfrak{V}$だから，
+		$G/\mathfrak{V}(G) \in \mathfrak{V}$である．
+		
+		また，
+		$G/N \in \mathfrak{V}$となる任意の$N \trianglelefteq G$に対して，
+		$\mathfrak{V}(G)$はそのような$N$の共通部分だから，
+		$\mathfrak{V}(G) \le N$である．
+		唯一性もここから分かる．
+	\end{proof}
+	
+	\begin{definition}
+		$\mathfrak{P}$を群からなる空でないクラスとする
+		\footnote{$\mathfrak{P}$はフラクトゥールにおける$P$である．
+		}．
+		$\mathfrak{P}$が部分群，
+		準同型像，
+		有限直積について閉じているとき，
+		$\mathfrak{P}$を\Term{pseudovariety of groups}という．
+	\end{definition}
+	
+	pseudovariety of groupsに対しても，
+	\cref{prop:variety_of_gps}と同様の結果が成り立つ．
+	
+	\begin{proposition}\label{prop:pseudovar_of_gps}
+		$G$を有限群，
+		$\mathfrak{P}$をvariety of groupとする．
+		このとき，
+		$\mathfrak{P}(G) \trianglelefteq G$であって，
+		$G/\mathfrak{P}(G) \in \mathfrak{P}$かつ，
+		$G/N \in \mathfrak{P}$となる$G$の正規部分群$N$の中で最小となるようなものがただ一つ存在する．
+	\end{proposition}
+	
+	\begin{proof}
+		\cref{prop:variety_of_gps}の証明と同様である．
+	\end{proof}
+	
+	\begin{example}
+		$\pi$を素数の集合とする．
+		$O^\pi$を$\pi$可解群\footnote{可解な$\pi$群のことである．}全体から成るクラスとすると，
+		これはpseudovariety of groupsである．
+		したがって，
+		\cref{prop:pseudovar_of_gps}より，
+		任意の有限群$G$に対して，
+		$G/O^\pi(G)$が$\pi$可解群となるような最小の$O^\pi(G) \trianglelefteq G$がただ一つ存在する．
+	\end{example}
+	
+	\subsection{skew braceの作用（試み）}
+	
+	\begin{definition}[{Guarnieri and Vendramin~\cite[Definition~1.1]{guarnieri2017}}]
+		$A$を集合，
+		$\cdot, \circ$を$A$上の2項演算とする．
+		組$\Tuple{A, \cdot, \circ}$が\Term{skew (left) brace}であるとは，
+		以下の条件を満たすことを言う：
+		\begin{enumerate}
+			\item $\Tuple{A, \cdot}, \Tuple{A, \circ}$は群である．
+			\item 任意の$a, b, c \in A$に対して
+			\begin{equation}
+				a \circ (b \cdot c) = (a \circ b) \cdot a^{-1} \cdot (a \circ c)
+			\end{equation}
+			が成り立つ．
+			ここで，
+			$a^{-1}$は$a$の$\Tuple{A, \cdot}$における逆元を表す．
+		\end{enumerate}
+	\end{definition}
+	
+	以下，
+	$A = \Tuple{A, \cdot, \circ}$はskew braceを表すことにする．
+	$a \in A$の$\Tuple{A, \circ}$における逆元は$\overline{a}$で表す．
+	$\Tuple{A, \cdot}$を$A$の\Term[additive group]{加法群}，
+	$\Tuple{A, \circ}$を$A$の\Term[multiplicative group]{乗法群}と呼ぶ．
+	加法群が可換群であるようなskew braceを\Term{brace}と呼び，
+	Yang-Baxter方程式の集合論的対合解(set-theoretical involutive solution)の研究の中でRump~\cite{rump2007}が定義した．
+	
+	$a, b \in A$に対して，
+	$a$から$a \cdot b$を得ることを，
+	$a$に右から$b$を足す，
+	加えると言い表す．
+	また，
+	$a$から$a \circ b$を得ることを，
+	$a$に右から$b$を掛ける，
+	乗じると言い表す．
+	
+	$a \cdot b$を$ab$で表すことがある．
+	
+	\begin{proposition}
+		$A$の加法群と乗法群の単位元は一致する．
+	\end{proposition}
+	
+	\begin{proof}
+		$1 \in \Tuple{A, \cdot}$を加法群の単位元とすると，
+		任意の$a \in A$に対して
+		\begin{align}
+			a \circ 1
+			&= a \circ (1 \cdot 1) \\
+			&= (a \circ 1) a^{-1} (a \circ 1)
+		\end{align}
+		が成り立つ．
+		この式の両辺に右から$(\overline{a \circ 1}) a$を加えると，
+		$a = a \circ 1$を得る．
+		よって，
+		1は$\Tuple{A, \circ}$の単位元である．
+	\end{proof}
+	
+	\begin{definition}
+		$a \in A$とする．
+		$A$から$A$自身への写像$\LambdaMap_a, \LambdaMapOp_a$を，
+		それぞれ
+		\begin{gather}
+			\LambdaMap_a(b) = a^{-1} (a \circ b), \\
+			\LambdaMapOp_a(b) = (a \circ b) a^{-1}
+		\end{gather}
+		と置く．
+	\end{definition}
+	
+	\begin{proposition}
+		任意の$a \in A$に対して，
+		$\LambdaMap_a, \LambdaMapOp_a \in \Aut(\Tuple{A, \cdot})$である．
+	\end{proposition}
+	
+	\begin{proof}
+		任意の$x, y \in A$に対して，
+		\begin{gather}
+			\begin{aligned}
+				\LambdaMap_a(xy)
+				&= a^{-1} (a \circ x y) \\
+				&= a^{-1} (a \circ x) a^{-1} (a \circ y) \\
+				&= \LambdaMap_a(x) \LambdaMap_a(y),
+			\end{aligned} \\
+			\begin{aligned}
+				\LambdaMapOp_a(xy)
+				&= (a \circ x y) a^{-1} \\
+				&= (a \circ x) a^{-1} (a \circ y) a^{-1} \\
+				&= \LambdaMapOp_a(x) \LambdaMapOp_a(y)
+			\end{aligned}
+		\end{gather}
+		が成り立つから，
+		$\LambdaMap_a, \LambdaMapOp_a \in \End(\Tuple{A, \cdot})$である．
+		また，
+		$x \mapsto \overline{a} \circ (a x),\, x \mapsto \overline{a} \circ (x a)$がそれぞれ$\LambdaMap_a, \LambdaMapOp_a$の逆写像となるから，
+		$\LambdaMap_a, \LambdaMapOp_a \in \Aut(\Tuple{A, \cdot})$である．
+	\end{proof}
+	
+	\begin{proposition}
+		$\Tuple{A, \circ}$から$\Aut(\Tuple{A, \cdot})$への群準同型写像$\LambdaMap, \LambdaMapOp$が
+		\begin{equation}
+			\LambdaMap(a) = \LambdaMap_a, \quad \LambdaMapOp(a) = \LambdaMapOp_a
+		\end{equation}
+		で定まる．
+	\end{proposition}
+	
+	\begin{proof}
+		簡単．
+	\end{proof}
+	
+	$\LambdaMap$をlambda mapと呼ぶことがある~\cite{kozakai2024}．
+	
+	\begin{definition}
+		$I \subset A$は部分集合とする．
+		任意の$a \in A$に対して$\LambdaMap_a(I) \subseteq I$を満たすとき，
+		$I$は$A$の左イデアルであるという．
+	\end{definition}
+	
+	\begin{definition}
+		$I \subseteq A$が$A$の\Term[ideal]{イデアル}であるとは，
+		次の条件を満たすことを言う：
+		\begin{defenum}
+			\item $I$は$\Tuple{A, \cdot}, \Tuple{A, \circ}$の正規部分群である．
+			\item\label{def:skew_brace_ideal_2} 任意の$a \in A$に対して，
+			$\LambdaMap_a(I) \subseteq I$が成り立つ．
+		\end{defenum}
+	\end{definition}
+	
+	$B \subseteq A$が\cref{def:skew_brace_ideal_2}を満たすとき，
+	$B$は$A$内で安定していると言うことにする．
+	
+	\begin{definition}
+		$H \subseteq A$が$\Tuple{A, \cdot}, \Tuple{A, \circ}$の部分群であり，
+		かつ$A$内で安定しているとき，
+		$H$を$A$の半イデアルと呼ぶ．
+		また，
+		$Q \subseteq A$が$\Tuple{A, \cdot}$の部分群であり，
+		かつ$A$内で安定しているとき，
+		$Q$を$A$の準イデアルと呼ぶ．
+	\end{definition}
+	
+	明らかに，
+	イデアルは半イデアルであり，
+	半イデアルは準イデアルである．
+	
+	\begin{proposition}
+		$A$をskew braceとし，
+		$Q \subseteq A$を$A$の準イデアルとする．
+		\begin{enumerate}
+			\item 任意の$a \in A$に対して，
+			$a Q = a \circ Q$が成り立つ．
+			\item $Q$が半イデアルのとき，
+			$\Tuple{Q, \cdot, \circ}$はskew braceである．
+			また，
+			加法群としての自然な射影$\pi \colon A \to A/Q$は，
+			乗法群の準同型となる．
+			\item $Q$がイデアルのとき，
+			$\Tuple{A/Q, \cdot, \circ}$はskew braceである．
+		\end{enumerate}
+	\end{proposition}
+	
+	\begin{proof}
+		$\LambdaMap_a(Q) \subseteq Q$の両辺に左から$a$を加えて$a \circ Q \subseteq aQ$を得る．
+		さらに，
+		左から$\overline{a}$を乗じて$Q \subseteq \overline{a} \circ aQ = (\overline{a})^{-1}(\overline{a} \circ Q)$を得る．
+		左から$\overline{a}$を加えて$\overline{a}Q \subseteq \overline{a} \circ Q$を得る．
+		この式の$a$を$\overline{a}$に取り換えれば，
+		$aQ \subseteq a \circ Q$を得る．
+	\end{proof}
+	
+	\begin{definition}
+		$X$を集合とする．
+		群準同型写像$\beta \colon \Tuple{A, \cdot} \to \Iso(X),\ \rho \colon \Tuple{A, \circ} \to \Iso(X)$が，
+		任意の$a, b \in A$に対して，
+		関係式
+		\begin{equation}\label{eq:brace_act_rel}
+			\beta(\LambdaMapOp_a(b)) = \Conj{\rho(a)}\beta(b)
+		\end{equation}
+		を満たすとき，
+		組$\Tuple{X, \beta, \rho}$を（左）$A$集合という．
+	\end{definition}
+	
+	$X = \Tuple{X, \beta, \rho}$を$A$集合とする．
+	任意の$a \in A,\, x \in X$に対して，
+	$a x = \beta(a)(x),\, a \circ x = \rho(a)(x)$と書くことがある．
+	brace relationをこの記法で表すと
+	\begin{equation}
+		(a \circ b) a^{-1} x = a \circ (b (\overline{a} \circ x)) \quad (x \in X)
+	\end{equation}
+	となる．
+	
+	\begin{proposition}
+		$X$は$\Tuple{A, \cdot}$集合であり，
+		かつ$\Tuple{A, \circ}$集合でもあるとする．
+		このとき，
+		以下は同値である．
+		\begin{enumerate}
+			\item 任意の$a, b \in A$に対して\cref{eq:brace_act_rel}が成り立つ．
+			したがって，
+			$X$は$A$集合である．
+			\item 任意の$a, b \in A$と$x \in A$に対して
+			\begin{equation}\label{eq:act_brace_rel}
+				a \circ bx
+				= (a \circ b) a^{-1} (a \circ x)
+			\end{equation}
+			が成り立つ．
+		\end{enumerate}
+	\end{proposition}
+	
+	\begin{proof}
+		\cref{eq:brace_act_rel}を変形すれば$\rho(a)\beta(b) = \beta(\LambdaMapOp_a(b))\rho(a)$を得る．
+	\end{proof}
+
+	$A$は自然に$A$集合となる．
+	実際，
+	2つの写像$\beta_{\mathrm{reg}} \colon \Tuple{A, \cdot} \to \Iso X,\, \rho_{\mathrm{reg}} \colon \Tuple{A, \circ} \to \Iso X$を
+	\begin{equation}
+		\begin{cases}
+			\beta_{\mathrm{reg}}(a)(x) = ax, \\
+			\rho_{\mathrm{reg}}(a)(x) = a \circ x
+		\end{cases}
+	\end{equation}
+	で定めれば，
+	これらは明らかに群準同型写像であり，
+	さらに，
+	任意の$a, b, x \in A$に対して
+	\begin{align}
+		a \circ (b (\overline{a} \circ x))
+		&= (a \circ b) a^{-1} (a \circ \overline{a} \circ x) \\
+		&= (a \circ b) a^{-1} x
+	\end{align}
+	が成り立つ．
+	したがって，
+	$\Tuple{A, \beta_{\mathrm{reg}}, \rho_{\mathrm{reg}}}$は$A$集合である．
+	一般に，
+	$Q \subseteq A$を準イデアルとしたとき，
+	$A/Q$は同様の方法で$A$集合となる．
+	
+	$X$が$\Tuple{A, \circ}$集合として推移的であるとする．
+	このとき，
+	$\Tuple{A, \circ}$集合として$X \cong \Tuple{A, \circ}/H\ (H \le \Tuple{A, \circ})$であり，
+	$\Tuple{A, \cdot}$集合としての軌道分解
+	\begin{equation}
+		\Tuple{A, \circ}/H \cong \bigsqcup_{x \in \CompReps{\Tuple{A, \cdot} \backslash X}} Ax
+		\cong \bigsqcup_{x \in \CompReps{\Tuple{A, \cdot} \backslash X}} A/A_x
+	\end{equation}
+	が得られる．
+	
+	
+	
+	\subsection{braiding作用素を持つ群とskew brace}
+	
+	\begin{definition}
+		$Z$を集合とする．
+		全単射$r \colon Z \times Z \to Z \times Z$が\Term[satisfies braiding relation]{ブレイド関係式を満たす}とは，
+		等式
+		\begin{equation}
+			(r \times \id_Z) (\id_Z \times r) (r \times \id_Z)
+			= (\id_Z \times r) (r \times \id_Z) (\id_Z \times r) \tag{BRel}
+		\end{equation}
+		が成り立つことをいう．
+	\end{definition}
+	
+	\begin{definition}
+		$\Tuple{A, \circ}$を群とする．
+		$r \colon A \times A \to A \times A$が$A$上の\Term[braiding operator]{ブレイド作用素}であるとは，
+		以下の等式たちを満たすことを言う：
+		\begin{gather}
+			r (\circ \times \id_A)
+			= (\id_A \times \circ) (r \times \id_A) (\id_A \times r), \\
+			r (\id_A \times \circ)
+			= (\circ \times \id_A) (\id_A \times r) (r \times \id_A), \\
+			r (\id_A \times \eta)
+			= \eta \times \id_A, \qquad
+			r (\eta \times \id_A),
+			= \id_A \times \eta \\
+			\circ r
+			= \circ.
+		\end{gather}
+		ここで，
+		$\eta \colon \TrivGrp \to A$はただ一つ存在する群準同型写像である．
+		また，
+		このとき，
+		組$\Tuple{A, \circ, r}$を\Term[group with a braiding operator]{ブレイド作用素を持つ群}と呼ぶ．
+	\end{definition}
+	
+	\begin{lemma}
+		$\Tuple{A, \circ, r}$をブレイド作用素を持つ群とする．
+		このとき，
+		$r$は全単射かつ，
+		ブレイド関係式を満たす．
+	\end{lemma}
+	
+	\section{リレーショナルデータベースまとめ}
+	
+	リレーショナルデータベースの設計について，
+	自分なりに理解しやすいようにまとめようと思う．
+	
+	\begin{definition}
+		$\mathcal{A} = \{ A_1, \dotsc, A_n \}\ (n \in \Z_{\ge 0})$を集合とし，
+		$F \subseteq \SetComprehension{f}{\dom f \subseteq \prod_{i = 1}^n A_i}$とする．
+		組$\Tuple{\mathcal{A}, F}$を\Term[relation schema]{リレーションスキーマ}と呼び，
+		$\RelationSchema{R}(\mathcal{A})$または単に$\RelationSchema{R}$で表す．
+		また，
+		このとき，
+		各$A_i \in \mathcal{A}$を$\RelationSchema{R}$の\Term[attribute name]{属性名}と呼ぶ．
+	\end{definition}
+	
+	以下，
+	属性名の集合$\mathcal{A}$と，
+	$\mathcal{A}$上のリレーションスキーマ$\RelationSchema{R}(\mathcal{A})$を固定する．
+	 
+	\begin{definition}
+		$\RelationSchema{R}(\mathcal{A})$を$\mathcal{A}$上のリレーションスキーマとする．
+		点付き集合$\Tuple{D_i, A_i}\ (1 \le i \le n)$と，
+		部分集合$\Tuple{R, (A_1, \dotsc, A_n)} \subseteq \prod_{i = 1}^n \Tuple{D_i, A_i}$の組$\Tuple{R, D_1, \dotsc, D_n}$を，
+		$\RelationSchema{R}(\mathcal{A})$の\Term[instance]{インスタンス}と呼び，
+		$R(\mathcal{A})$または単に$R$で表す．
+		また，
+		このときの$R$を\Term[table name]{テーブル名}，
+		各$D_i$を\Term[domain]{ドメイン}と呼ぶ．
+	\end{definition}
+	
+	リレーションスキーマ$\RelationSchema{R}(\mathcal{A})$のインスタンス$R$の各ドメイン$D_i$を，
+	$D_i$の基点である属性名$A_i$を用いて$\dom A_i$と表すことがある．
+	
+	
+	
+	\begin{definition}
+		
+	\end{definition}
+	
+	\section{Biset Functors for Finite \texorpdfstring{Groups~\cite{bouc2010}}{Groups}}
+	
+	\begin{proposition}[Proposition~5.6.1]
+		任意の有限群$G$に対して，
+		\begin{equation}
+			m_{G, G}
+			= \begin{cases}
+				\dfrac{\EulerTotientFunc(\Card{G})}{\Card{G}} & (\text{$G$: cyclic}) \\
+				0 & (\text{otherwise})
+			\end{cases}
+		\end{equation}
+		が成り立つ．
+	\end{proposition}
+	
+	\begin{proof}
+		定義より，
+		\begin{align}
+			m_{G, G}
+			&= \frac{1}{\Card{G}} \sum_{X \le G} \Card{X} \MoebiusFunc(X, G) \\
+			&= \frac{1}{\Card{G}} \sum_{X \le G} \sum_{x \in X} \MoebiusFunc(X, G)
+		\end{align}
+		が成り立つ．
+		集合として
+		\begin{align}
+			\bigsqcup_{X \le G} \{\, x \mid x \in X \,\} 
+			&\cong \{\, (x, X) \mid x \in X \le G \,\} \\
+			&\cong \bigsqcup_{x \in G} \{\, X  \mid \langle x \rangle \le X \le G \,\}
+		\end{align}
+		が成り立つから，
+		\begin{align}
+			\frac{1}{\Card{G}} \sum_{X \le G} \sum_{x \in X} \MoebiusFunc(X, G)
+			&= \frac{1}{\Card{G}} \sum_{x \in G} \sum_{\langle x \rangle \le X \le G} \MoebiusFunc(X,G).
+		\end{align}
+		\cref{eq:MoebiusFuncFormula}より，
+		\begin{align}
+			\frac{1}{\Card{G}} \sum_{x \in G} \sum_{\langle x \rangle \le X \le G} \MoebiusFunc(X,G)
+			&= \frac{1}{\Card{G}} \sum_{x \in G} \delta_{\langle x \rangle, G} \\
+			&= \begin{cases}
+				\dfrac{\EulerTotientFunc(\Card{G})}{\Card{G}} & (\text{$G$: cyclic}) \\
+				0 & (\text{otherwise})
+			\end{cases}. \qedhere
+		\end{align}
+	\end{proof}
+	
+	\section{\texorpdfstring{Atiyah--MacDonald可換代数入門~\cite{atiyah2006}}{Atiyah-MacDonald可換代数入門}}
+	
+	本章では，
+	環と言えば単位的可換環を指す．
+	
+	\begin{proposition}[p.\,16; 演習問題1]\label{AM:ex.1.1}
+		$A$を環とする．
+		任意の冪零元$x \in A$と単元$u \in A$に対して，
+		$u + x$は$A$における単元である．
+	\end{proposition}
+	
+	\begin{proof}
+		$x^m = 0$であるとすれば，
+		\begin{equation}
+			(u+x)\sum_{i=0}^{m-1}(-u^{-1}x)^i = u
+		\end{equation}
+		である．
+		したがって，
+		$u^{-1}\sum_{i=0}^{m-1}(-u^{-1}x)^i = (u+x)^{-1}$である．
+	\end{proof}
+	
+	\begin{proof}
+		$\Nilrad$を$A$の冪零元根基，
+		$\JacobsonRad$を$A$のJacobson根基とすると，
+		$-x \in \Nilrad \subseteq \JacobsonRad$が成り立つ．
+		任意の$y \in \JacobsonRad$と$a \in A$に対して，
+		$1-ay$は単元である~\cite[命題1.9]{atiyah2006}から，
+		$1+x = 1-(-x)$は単元である．
+	\end{proof}
+	
+	\begin{proposition}[p.\,16; 演習問題2]
+		$A$を環とし，
+		$f = \sum_{i=0}^{n} a_i x^i \in A[x]\ (a_n \ne 0)$とする．
+		\begin{propenum}
+			\item\label{AM:ex.1.2.1} $f$が$A[x]$において可逆であることは，
+			$a_0$が$A$における単元かつ$a_1, \dotsc, a_n$が冪零元であることと同値である．
+			\item\label{AM:ex.1.2.2} $f$が冪零元であることと，
+			$a_0, \dotsc, a_n$が冪零元であることは同値である．
+		\end{propenum}
+	\end{proposition}
+	
+	\begin{proof}
+		\quad
+		\begin{enumerate}
+			\item $a_0$が$A[x]$において可逆かつ$a_1, \dotsc, a_n$が冪零元ならば，
+			\cref{AM:ex.1.1}より，
+			$f$は単元である．
+			そこで，
+			逆を$\deg f = n$に関する帰納法で示す．
+			$n = 0$のときは明らか．
+			$n \ne 0$とし，
+			次数が$n$未満の任意の多項式に対して示すべき命題が成り立つと仮定する．
+			$f$が$A[x]$において可逆であるとすると，
+			$f$の逆元$g = \sum_{j=0}^{m} b_j x^j \in A[x]$が存在する．
+			$fg$の定数項は$a_0 b_0 = 1$だから，
+			$a_0$は単元である．
+			
+			ここで，
+			任意の$m$以下の正整数$r$に対して${a_n}^{r+1} b_{m-r} = 0$が成り立つことを，
+			$r$に関する帰納法で示す．
+			$r=0$のとき，
+			$fg$の$m+n$次の係数に注目すれば，
+			$a_n b_m = 0$を得る．
+			さらに，
+			$m-1$以下の任意の正整数$r$に対して${a_n}^{r+1} b_{m-r} = 0$であると仮定すれば，
+			$m+n-(r+1)$次の係数
+			\begin{equation}
+				\sum_{i+j=m+n-(r+1)} a_i b_j
+				= a_n b_{m-(r+1)} + (\text{$b_{m-r}, b_{m-(r-1)}, \ldots, b_0$の1次結合})
+			\end{equation}
+			に${a_n}^{r+1}$を乗じることで${a_n}^{r+2} b_{m-(r+1)} = 0$を得る．
+			
+			特に，
+			${a_n}^{m+1} b_0 = 0$であるから，
+			この式の両辺に$a_0$を乗じて${a_n}^{m+1} = 0$を得る．
+			したがって，
+			$a_n$は冪零元である．
+			$n=1$ならこの時点で証明は完了する．
+			$n>1$のとき，
+			\cref{AM:ex.1.1}から$f - a_n x^n$は単元であり，
+			$\deg(f - a_n x^n) = n-1$であるから，
+			帰納法の仮定により，
+			$a_{n-1}, \dotsc, a_1$は冪零元である．
+			\item $a_i\ (0 \le i \le n)$が冪零ならば，
+			$f$は冪零元の和なので冪零である．
+			逆を$\deg f$に関する帰納法で示すために，
+			$f^s = 0$とする．
+			$\deg f = 0$のときは明らか．
+			そこで，
+			$\deg f > 0$とし，
+			次数が$\deg f$未満であるすべての多項式に対して示すべきことが成り立つと仮定する．
+			$f^s$の$sn$次の係数は${a_n}^{sn} = 0$なので，
+			$a_n$は冪零である．
+			よって，
+			$f - a_n x^n$も冪零なので，
+			帰納法の仮定から$a_0, \dotsc, a_{n-1}$も冪零となる．\qedhere
+		\end{enumerate}
+	\end{proof}
+	
+	\begin{proposition}[p.\,19; 演習問題15]
+		$A$を環，
+		$X$を$A$の素イデアル全体の集合とする．
+		任意の$E \subseteq A$に対して，
+		$V(E) = \{\, \mathfrak{p} \in X \mid E \subseteq \mathfrak{p} \,\}$と置く．
+		このとき，
+		以下を満たす．
+		\begin{propenum}
+			\item\label{AM:ex.1.15.1} 任意の$E \subseteq A$ に対して，
+			$\mathfrak{a} = \GeneratedIdealBy{E}$と置けば，
+			$V(E) = V(\mathfrak{a}) = V(\Radical(\mathfrak{a}))$が成り立つ．
+			つまり，
+			\begin{equation}
+				\{\, V(E) \mid E \subseteq A \,\}
+				= \{\, V(\mathfrak{a}) \mid \text{$\mathfrak{a}$は$A$のイデアル} \,\}
+			\end{equation}
+			が成り立つ．
+			\item\label{AM:ex.1.15.2} $V(0) = X,\ V(\GeneratedIdealBy{1}) = \emptyset$である．
+			\item\label{AM:ex.1.15.3} 任意の$A$のイデアルの族$\{ \mathfrak{a}_i \}_{i \in I}$に対して，
+			\begin{equation}
+				\bigcap_{i \in I} V \left( \mathfrak{a}_i \right)
+				= V \left( \bigcup_{i \in I} \mathfrak{a}_i \right)
+			\end{equation}
+			が成り立つ．
+			\item\label{AM:ex.1.15.4} 任意のイデアル$\mathfrak{a}, \mathfrak{b} \subseteq A$に対して，
+			$V(\mathfrak{a}) \cup V(\mathfrak{b}) = V(\mathfrak{a} \cap \mathfrak{b}) = V(\mathfrak{a}\mathfrak{b})$が成り立つ．
+		\end{propenum}
+	\end{proposition}
+	
+	\begin{proof}
+		\quad
+		\begin{enumerate}
+			\item $E \subseteq \mathfrak{a} \subseteq \Radical(\mathfrak{a})$より，
+			$V(E) \supseteq V(\mathfrak{a}) \supseteq V(\Radical(\mathfrak{a}))$だから，
+			$V(E) \subseteq V(\Radical(\mathfrak{a}))$を示せば十分である．
+			任意に$\mathfrak{p} \in V(E)$を取る．
+			任意の$x \in \Radical(\mathfrak{a})$に対して，
+			$x^n \in \mathfrak{a}$となる正整数$n$が存在する．
+			$\mathfrak{a}$の最小性より$\mathfrak{a} \subseteq \mathfrak{p}$であり，
+			かつ$\mathfrak{p}$は素イデアルなので，
+			$x \in \mathfrak{p}$が分かる．
+			したがって，
+			$\Radical(\mathfrak{a}) \subseteq \mathfrak{p}$であり，
+			つまり$\mathfrak{p} \in V(\Radical(\mathfrak{a}))$である．
+			\item 明らか．
+			\item $\mathfrak{p}$をイデアルとしたとき，
+			任意の$i \in I$に対して$\mathfrak{a}_i \subseteq \mathfrak{p}$であることと，
+			$\bigcup_{i \in I} \mathfrak{a}_i \subseteq \mathfrak{p}$であることは同値である．
+			\item $\mathfrak{p}$を素イデアルとしたとき，
+			$\mathfrak{a} \cap \mathfrak{b} \subseteq \mathfrak{p}$ならば，
+			$\mathfrak{a} \subseteq \mathfrak{p}$または$\mathfrak{b} \subseteq \mathfrak{p}$が成り立つ~\cite[pp.\,11-12; 命題1.11.ii]{atiyah2006}ので，
+			$V(\mathfrak{a}) \cup V(\mathfrak{b}) = V(\mathfrak{a} \cap \mathfrak{b})$が分かる．
+			あとは，
+			$V(\mathfrak{a} \mathfrak{b}) \subseteq V(\mathfrak{a}) \cup V(\mathfrak{b})$を示せばよい．
+			そのために，
+			任意に$\mathfrak{p} \in V(\mathfrak{a} \mathfrak{b})$を取り，
+			$\mathfrak{b} \not\subseteq \mathfrak{p}$であるとする．
+			このとき，
+			$x \in \mathfrak{b} \setminus \mathfrak{p}$が存在する．
+			この$x$と任意の$a \in \mathfrak{a}$に対して$ax \in \mathfrak{a} \mathfrak{b} \subseteq \mathfrak{p}$が成り立つが，
+			$\mathfrak{p}$は素イデアルだから，
+			$a \in \mathfrak{p}$でなければならない．
+			したがって，
+			$\mathfrak{a} \subseteq \mathfrak{p}$を得る．\qedhere
+		\end{enumerate}
+	\end{proof}
+	
+	\bibliographystyle{amsalpha}
+	\nocite{GAPref}
+	\bibliography{myrefs}
+	
+\end{document}

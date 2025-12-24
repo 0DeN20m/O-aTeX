@@ -1,0 +1,146 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle,tikz-cd}
+
+\title{引き戻しについて}
+\author{著者}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+		引き戻しの圏論的な基礎です．
+	\end{abstract}
+
+	\section{引き戻しの定義}
+	
+	集合$X, Y, Z$と写像$f \colon X \rightarrow Z, g \colon Y \rightarrow Z$に対して，集合
+	\begin{equation*}
+		X {}_f\times_g Y = \{\, (x,y) \in X \times Y \mid f(x) = g(y) \,\}
+	\end{equation*}
+	と自然な射影$\pi_f \colon X {}_f\times_g Y \rightarrow X,\ \pi_g \colon X {}_f\times_g Y \rightarrow Y$の組$(X {}_f\times_g Y, \pi_f, \pi_g)$の組を，$f,g$の引き戻しという．
+	このとき，図式
+	\begin{equation*}
+		\begin{tikzcd}
+			X {}_f\times_g Y \arrow[r, "\pi_g"] \arrow[d, "\pi_f"'] & Y \arrow[d, "g"] \\
+			X \arrow[r, "f"']                                       & Z               
+		\end{tikzcd}
+	\end{equation*}
+	が可換になる．
+	
+	引き戻しは，この可換図式によって一般の圏に対して定義される．
+	
+	\begin{definition}
+		$\mathcal{C}$を圏とする．
+		2つの射$f \in \Hom_{\mathcal{C}}(X,Z),\ g \in \Hom_{\mathcal{C}}(Y,Z)$に対して，極限$(L=\Lim(\begin{tikzcd}[cramped, sep=scriptsize]
+			X \arrow[r, "f"] & Z & Y \arrow[l, "g"']
+		\end{tikzcd}), \pi_f, \pi_g)$を$f,g$の$\mathcal{C}$における引き戻しという．
+		つまり，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				L \arrow[r, "\pi_g"] \arrow[d, "\pi_f"'] & Y \arrow[d, "g"] \\
+				X \arrow[r, "f"']                                       & Z               
+			\end{tikzcd}
+		\end{equation*}
+		を可換にし，特に普遍性を持つものを$f,g$の引き戻しという．
+	\end{definition}
+	
+	組$(P, p, q)$が$f,g$の引き戻しであることを，可換図式において
+	\begin{equation*}
+		\begin{tikzcd}
+			P \arrow[r, "q"] \arrow[d, "p"'] \arrow[rd, "\mathrm{PB}", phantom] & Y \arrow[d, "g"] \\
+			X \arrow[r, "f"']                                                   & Z               
+		\end{tikzcd}, \qquad
+		\begin{tikzcd}
+			P \arrow[r, "q"] \arrow[d, "p"'] \arrow[rd, "\square", phantom] & Y \arrow[d, "g"] \\
+			X \arrow[r, "f"']                                               & Z               
+		\end{tikzcd}
+	\end{equation*}
+	などと表す．
+	
+	圏$\mathcal{C}$に直積とイコライザーが存在すれば，引き戻しが構成できる．
+	ここで，$f,g \in \Hom_{\mathcal{C}}(X,Y)$のイコライザー$(E, \pi \colon E \rightarrow X)$とは，$f \pi = g \pi$を満たすもののうち，普遍性を持つもののことをいう．
+	
+	\begin{proposition}
+		$\mathcal{C}$を圏とする．
+		$f \in \Hom_{\mathcal{C}}(X,Z),\ g \in \Hom_{\mathcal{C}}(Y,Z)$に対して，$X,Y$の直積$(X \times Y, p_X, p_Y)$と$\begin{tikzcd}[cramped, sep=scriptsize]
+			X \arrow[r, "fp_X", shift left] \arrow[r, "gp_Y"', shift right] & Z
+		\end{tikzcd}$のイコライザー$(E, \pi)$が存在するとする．
+		このとき，$(E, p_X \pi, p_Y \pi)$は$f,g$の引き戻しである．
+	\end{proposition}
+	
+	\begin{proof}
+		イコライザーの定義より$f (\pi p_X) = g (\pi p_Y)$が成り立つので，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				E \arrow[r, "p_Y \pi"] \arrow[d, "p_X \pi"'] & Y \arrow[d, "g"] \\
+				X \arrow[r, "f"']                            & Z               
+			\end{tikzcd}
+		\end{equation*}
+		は可換になる．
+		よって，$(E, p_X \pi, p_Y \pi)$が普遍性を持つことを示せばよい．
+		
+		任意に対象$D \in \mathcal{C}$と射$\rho_X \in \Hom_{\mathcal{C}}(D, X),\ \rho_Y \in \Hom_{\mathcal{C}}(D, Y)$を取り，$f \rho_X = g \rho_Y$だと仮定する．
+		このとき，直積の普遍性から，ただ一つの$p \in \Hom_{\mathcal{C}}(D, X \times Y)$が存在して，$\rho_X = p_X p,\ \rho_Y = p_Y p$が成り立つ．
+		さらに，$(f p_X) p = f \rho_X = g \rho_Y = (g p_Y) p$が成り立つから，イコライザーの普遍性より，ただ一つの$e \in \Hom_{\mathcal{C}}(D, E)$が存在して，$p = \pi e$が成り立つ．
+		以上より，可換図式
+		\begin{equation*}
+			\begin{tikzcd}
+				D \arrow[rrddd, "\rho_X"', bend right] \arrow[rrrdd, "\rho_Y", bend left] \arrow[rrdd, "p" description, dashed, bend right] \arrow[rd, "e", dashed] &                     &                                               &                  \\
+				& E \arrow[rd, "\pi"] &                                               &                  \\
+				&                     & X \times Y \arrow[d, "p_X"'] \arrow[r, "p_Y"] & Y \arrow[d, "g"] \\
+				&                     & X \arrow[r, "f"']                             & Z               
+			\end{tikzcd}
+		\end{equation*}
+		を得る．
+		したがって，可換図式
+		\begin{equation*}
+			\begin{tikzcd}
+				D \arrow[rdd, "\rho_X"', bend right] \arrow[rrd, "\rho_Y", bend left] \arrow[rd, "e" description, dashed] &                                              &                  \\
+				& E \arrow[r, "p_Y \pi"] \arrow[d, "p_X \pi"'] & Y \arrow[d, "g"] \\
+				& X \arrow[r, "f"']                            & Z               
+			\end{tikzcd}
+		\end{equation*}
+		を得るから，$(E, \pi p_X, \pi p_Y)$は普遍性を持つ．
+	\end{proof}
+	
+	一般論から，引き戻しは存在すれば同型を除いて一意に存在する．
+	
+	\section{引き戻しの例}
+	
+	\begin{example}
+		$\mathcal{C}$を圏，$T \in \mathcal{C}$を終対象とする．
+		任意の対象$C \in \mathcal{C}$に対して，ただ一つ存在する$\mathcal{C}$の射$C \rightarrow T$を$!_C$で表す．
+		このとき，任意の対象$X, Y \in \mathcal{C}$に対して，$!_X, !_Y$の引き戻しは，$X, Y$の直積となる．
+		
+		実際，$(X \times Y, \id_{X \times Y})$は$\begin{tikzcd}[cramped, sep=scriptsize]
+			X \times Y \arrow[r, "!_{X \times Y}", shift left] \arrow[r, "!_{X \times Y}"', shift right] & T
+		\end{tikzcd}$のイコライザーを与えている．
+		よって，$(X \times Y, p_X, p_Y)$は引き戻しである．
+	\end{example}
+	
+	\begin{example}
+		集合の圏$\mathbf{Set}$における引き戻しは，冒頭に述べた$(X {}_f\times_g Y, \pi_F, \pi_g)$である．
+	\end{example}
+	
+	\begin{example}
+		$G$を有限群とする．
+		有限$G$集合の圏において，図式
+		$\begin{tikzcd}[cramped, sep=scriptsize]
+			G/H \arrow[r, "f"] & G/L & G/K \arrow[l, "g"']
+		\end{tikzcd}$
+		の引き戻しは
+		\begin{equation*}
+			\bigsqcup_{HxK \in H \backslash aLb^{-1} / K} G/(H \cap {}^xK), \quad \pi_f \colon yH \cap {}^xK \mapsto yH, \quad \pi_g \colon yH \cap {}^xK \mapsto y x^{-1} K
+		\end{equation*}
+		で与えられる．
+		ただし，$f( H ) = aL,\ g( K ) = bL$である．
+	\end{example}
+	
+	\bibliographystyle{jplain}
+	\bibliography{myrefs-jp}
+	\nocite{Nakaoka:圏論の技法}
+
+\end{document}

@@ -1,0 +1,428 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle,tikz-cd}
+
+\title{$G$集合の制限と誘導について}
+\author{オ}
+\date{\today}
+
+\DeclareMathOperator{\Res}{Res}
+\newcommand{\res}[3]{#1\!\downarrow^{#2}_{#3}}
+\DeclareMathOperator{\Ind}{Ind}
+\newcommand{\ind}[3]{#1\!\uparrow_{#2}^{#3}}
+\DeclareMathOperator{\Id}{Id}
+
+\renewcommand{\emph}[1]{\textbf{#1}}
+
+\begin{document}
+
+	\maketitle
+	
+	\begin{abstract}
+		$G$を有限群，$H$を$G$の部分群とする．
+		$G$集合と$H$集合の間の制限と誘導について紹介し，それらが関手として随伴の関係にあることを述べた．
+		また，随伴関手の基本的な事実を，応用するものに限って簡単に解説した．
+	\end{abstract}
+	
+	\section{制限と誘導の定義}
+
+	$G$を有限群，$H$を$G$の部分群とする．
+	$Y$を有限左$G$集合とし，その作用は$\rho \colon G \to \Aut Y$で与えられているとする．
+	このとき，任意の$g \in G,\ y \in Y$に対して，誤解の恐れがない限り
+	\begin{equation*}
+		\rho(g)(y) = g.y = gy
+	\end{equation*}
+	と書くことがある．
+	また，$X$は作用が$\sigma$である有限左$H$集合だとする．
+	以下，特に断らない限り，作用は左作用のみを考え，単に$G$集合と言ったときには，特に有限なものを指すことにする
+	\footnote{
+		以下の議論は，無限群$G$や無限位数の$G$集合を含めて考えてもよいと思うが，ここでは慣れ親しんだ有限の場合に限定しておく．}
+	．
+	
+	$G$集合は自然な方法で$H$集合と見なせる．
+	つまり，$H$の$Y$への作用を$\rho |_H$で定めることで，$Y$は$H$集合となる．
+	このようにして定まる$H$集合$Y$を
+	\begin{equation*}
+		\Res^G_H Y \quad \text{や} \quad \res{Y}{G}{H}
+	\end{equation*}
+	で表し，$Y$の$G$から$H$への\emph{制限}(\emph{restriction})と呼ぶことにする．
+	また，任意の$G$写像$f \colon Y \rightarrow Y'$は$H$写像$f \colon \res{Y}{G}{H} \to \res{Y'}{G}{H}$でもある．
+	この$f$が$H$写像であることを強調するときには$\res{f}{G}{H}$と書く．
+	
+	逆に，$H$集合を$G$集合に自然に見なす方法を考える．
+	まず，簡単な場合として，$K \le H$に対し，$H/K$を$G$集合に見なすことを考える．
+	この場合，任意の$g \in G,\ hK \in H/K$に対して，作用を自然に
+	\begin{equation*}
+		g.hK := ghK
+	\end{equation*}
+	と定めることができるが，このとき，$H/K$は明らかに推移的$G$集合である．
+	よって，$K$の固定化群を$G_K$とすれば，$G$集合としての同型$H/K \cong G/G_K$が成り立つ．
+	また，
+	\begin{align*}
+		g \in G_K
+			&\iff g.K = K \\
+			&\iff g \in K
+	\end{align*}
+	ゆえ，結局$H/K \cong G/K$である．
+	
+	以上の簡単な場合を踏まえて，一般の$H$集合を$G$集合に見なす方法を述べる．
+	直積$G \times X$に対して，$H$の右からの作用
+	\begin{equation*}
+		(a, x) . h := (ah, h^{-1} . x) \quad ((a, x) \in G \times X,\ h \in H)
+	\end{equation*}
+	を考える．
+	このときの$G \times X$の軌道全体の集合を$G \times_H X$と書き，$(a, x)$の軌道を$(a, x)H$と書く．
+	先ほどの場合において，$ah . h^{-1}K = a . K$が成り立っていたことを踏まえると，このような集合を考えることが自然に思えるかもしれない．
+	さて，$G \times_H X$への$G$の作用を定めるために，次の補題を準備する．
+	
+	\begin{lemma}
+		任意の$(a_1, x_1)H = (a_2, x_2)H \in G \times_H X$と$g \in G$に対して，$(ga_1, x_1)H = (ga_2, x_2)H$が成り立つ．
+	\end{lemma}
+	
+	\begin{proof}
+		ある$h \in H$が存在して，$(a_1, x_1) = (a_2 h, h^{-1} . x_2)$が成り立つ．
+		このとき，
+		\begin{align*}
+			(g a_1, x_1)
+				&= (g a_2 h, h^{-1} . x_2) \\
+				&= (g a_2, x_2) . h
+		\end{align*}
+		だから，$(ga_1, x_1)H = (ga_2, x_2)H$である．
+	\end{proof}
+	
+	補題より，$G$の$G \times_H X$への作用を
+	\begin{equation*}
+		g . (a, x)H := (ga, x)H
+	\end{equation*}
+	で定めることができる．
+	この作用によって得られた$G$集合$G \times_H X$を
+	\begin{equation*}
+		\Ind_H^G X \quad \text{や} \quad \ind{X}{H}{G}
+	\end{equation*}
+	で表し，$X$の$H$から$G$への\emph{誘導}(\emph{induction})と呼ぶ．
+	
+	誘導の簡単な例を一つ挙げる．
+	
+	\begin{proposition}
+		任意の$K \le H$に対して，$\Ind_H^G H/K \cong G/K$である．
+	\end{proposition}
+	
+	\begin{proof}
+		任意の$(a, hK) \in G \times H/K$に対して，
+		\begin{align*}
+			(a, hK)
+				&= (ah, K) . h^{-1}
+		\end{align*}
+		が成り立つから，$G \times_H H/K$の任意の元は$(a, K)H\ (a \in G)$で表せる．
+		さらに，任意の$(a, K)H \in \Ind_H^G H/K$に対して
+		\begin{equation*}
+			(a, K)H = a. (e_G, K)H \quad (\text{$e_G$は$G$の単位元})
+		\end{equation*}
+		だから，$\Ind_H^G H/K$は推移的である．
+		また，任意の$g \in G$に対して
+		\begin{align*}
+			g . (e_G, K)H = (e_G, K)H
+				&\iff \text{ある$h \in H$が存在して$(g, K) . h = (e_G, K)$} \\
+				&\iff \text{ある$h \in H$が存在して$gh = e_G,\ h^{-1}K = K$} \\
+				&\iff \text{$g \in H$かつ$g^{-1} \in K$} \\
+				&\iff g \in H \cap K
+		\end{align*}
+		なので，$(e_G, K)H$の固定化群は$H \cap K = K$である．
+		したがって，$\Ind_H^G H/K \cong G/K$である．
+	\end{proof}
+	
+	また，$G$写像から制限の間の$H$写像が定まったときと同じように，$H$写像$f \colon X \to X'$からも，誘導の間の写像$\Ind_H^G X \to \Ind_H^G X'$が定まる．
+	
+	\begin{lemma}\label{lem: well-def of ind map}
+		任意の$H$写像$f \colon X \to X'$と$(a_1, x_1)H = (a_2, x_2)H \in \Ind_H^G X$に対して，$(a_1, f(x_1))H = (a_2, f(x_2))H$が成り立つ．
+	\end{lemma}
+	
+	\begin{proof}
+		ある$h \in H$が存在して，$(a_1, x_1) = (a_2 h, h^{-1} . x_2)$が成り立つ．
+		このとき，
+		\begin{align*}
+			(a_1, f(x_1))
+				&= (a_2 h, f(h^{-1} x_2)) \\
+				&= (a_2 h, h^{-1} f(x_2)) \\
+				&= (a_2, f(x_2)) . h
+		\end{align*}
+		だから，$(a_1, f(x_1))H = (a_2, f(x_2))H$である．
+	\end{proof}
+	
+	\begin{lemma}
+		$f \colon X \to X'$を$H$写像とする．
+		補題\ref{lem: well-def of ind map}より定まる写像
+		\begin{equation*}
+			\Ind_H^G f \colon \Ind_H^G X \to \Ind_H^G X' \colon (a, x)H \mapsto (a, f(x))H
+		\end{equation*}
+		は$G$写像である．
+	\end{lemma}
+	
+	\begin{proof}
+		任意の$g \in G,\ (a, x)H \in \Ind_H^G X$に対して
+		\begin{align*}
+			\Ind_H^G f(g . (a, x)H)
+				&= (ga, f(x))H \\
+				&= g . (a, f(x))H \\
+				&= g . \Ind_H^G f((a, x)H)
+		\end{align*}
+		が成り立つから，$\Ind_H^G f$は$G$写像である．
+	\end{proof}
+	
+	ここまでで与えた制限と誘導の構成は，実は関手的である．
+	$G\mathchar`-\catset$で$G$集合の圏を表すことにすれば
+	\footnote{
+		$\catset^G$と表すこともある．
+		こう書いたときには，$G$集合を関手$G \to \catset$，$G$写像を自然変換に見なせることを強調していると思う．
+		一般に，圏$\mathcal{C}$から圏$\mathcal{D}$への関手全体の成す圏を$\mathcal{D}^\mathcal{C}$と表す．
+	}
+	，次の命題が成り立つ．
+	
+	\begin{proposition}
+		以下がそれぞれ成り立つ．
+		\begin{enumerate}[label=(\arabic*), ref=(\arabic*)]
+			\item 制限を与える対応$\Res^G_H$は$\catset^G$から$\catset^H$への関手である．
+			\item 誘導を与える対応$\Ind_H^G$は$\catset^H$から$\catset^G$への関手である．\qedhere
+		\end{enumerate}
+	\end{proposition}
+	
+	\begin{proof}
+		写像の合成と恒等写像を保つことを確認すればいいが，これは構成の仕方から明らかである．
+	\end{proof}
+	
+	ここでは，$\Res^G_H$を制限関手，$\Ind_H^G$を誘導関手と呼ぶことにする．
+	
+	\section{随伴関手}
+	
+	誘導関手と制限関手の間には，ある意味で良い対応が存在する．
+	より具体的には，誘導関手は制限関手の左随伴となる．
+	このことを説明するために，随伴関手の基本的な概念について簡単に紹介する．
+	
+	\begin{definition}
+		$F \colon \mathcal{C} \to \mathcal{D},\ G \colon \mathcal{D} \to \mathcal{C}$を関手とする．
+		$C \in \mathcal{C},\ D \in \mathcal{D}$に関して自然な全単射
+		\begin{equation*}
+			\varphi = \varphi_{C,D} \colon \Hom_{\mathcal{D}}(FC, D) \cong \Hom_{\mathcal{C}}(C, GD)
+		\end{equation*}
+		が存在するとき，$F$は$G$の\emph{左随伴}(\emph{left adjoint})，または，$G$は$F$の\emph{右随伴}(\emph{right adjoint})であると言い，$F \dashv G \colon \mathcal{C} \to \mathcal{D}$と表す．
+	\end{definition}
+	
+	$\varphi$の添え字は適宜省略する．
+	ここで，$C \in \mathcal{C},\ D \in \mathcal{D}$に関して自然とは，任意の$f \in \Hom_{\mathcal{C}}(C, C'),\ g \in \Hom_{\mathcal{D}}(D, D')$に対して，図式
+	\begin{equation*}
+		\begin{tikzcd}
+			{\Hom_\mathcal{D} (FC, D)} \arrow[r, "{\varphi_{C, D}}"]                           & {\Hom_\mathcal{C} (C, GD)}                       \\
+			{\Hom_\mathcal{D} (FC', D)} \arrow[u, "(Ff)^\ast"] \arrow[r, "{\varphi_{C', D}}"'] & {\Hom_\mathcal{C} (C', GD)} \arrow[u, "f^\ast"']
+		\end{tikzcd},
+		\quad
+		\begin{tikzcd}
+			{\Hom_\mathcal{D} (FC, D)} \arrow[r, "{\varphi_{C, D}}"] \arrow[d, "g_\ast"'] & {\Hom_\mathcal{C} (C, GD)} \arrow[d, "(Gg)_\ast"] \\
+			{\Hom_\mathcal{D} (FC, D')} \arrow[r, "{\varphi_{C, D'}}"']                   & {\Hom_\mathcal{C} (C, GD')}                    
+		\end{tikzcd}
+	\end{equation*}
+	が可換になることを言う．
+	ここで，$f^\ast \colon h \mapsto h \circ f,\ g_\ast \colon h \mapsto g \circ h$である．
+	可換図式から，任意の$h \in \Hom_{\mathcal{D}}(FC, D)$と$h' \in \Hom_{\mathcal{D}}(FC', D)$に対して
+	\begin{equation} \label{eq: adj}
+		Gg \circ \varphi(h) = \varphi(g \circ h), \quad \varphi(h') \circ f = \varphi(h' \circ Ff)
+	\end{equation}
+	が成り立っている．
+	
+	\begin{lemma}\label{lem: unit and counit}
+		$F \dashv G \colon \mathcal{C} \to \mathcal{D}$とし，$\varphi \colon \Hom_{\mathcal{D}}(FC, D) \cong \Hom_{\mathcal{C}}(C, GD)$とする．
+		\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+			\item \label{lem: unit} 任意の$C \in \mathcal{C}$に対して
+			\begin{equation*}
+				\eta_C := \varphi(1_{FC})
+			\end{equation*}
+			とおく．
+			このとき，$\eta := \{\eta_C\}_C$は恒等関手$1_{\mathcal{C}}$から$GF$への自然変換である．
+			\item \label{lem: counit} 任意の$D \in \mathcal{D}$に対して
+			\begin{equation*}
+				\varepsilon_D := \varphi^{-1}(1_{GD})
+			\end{equation*}
+			とおく．
+			このとき，$\varepsilon := \{\varepsilon_D\}_D$は$FG$から$1_{\mathcal{D}}$への自然変換である．\qedhere
+		\end{enumerate}
+	\end{lemma}
+	
+	\begin{proof}
+		\ref{lem: counit}は\ref{lem: unit}の双対命題なので，\ref{lem: unit}を示せば十分である．
+		
+		任意の$f \in \Hom_{\mathcal{C}}(C, C')$に対して，図式
+		\begin{equation*}
+			\begin{tikzcd}
+				C \arrow[r, "\eta_C"] \arrow[d, "f"'] & GFC \arrow[d, "GFf"] \\
+				C' \arrow[r, "\eta_{C'}"']            & GFC                 
+			\end{tikzcd}
+		\end{equation*}
+		の可換性を示せばよい．
+		これは，
+		\begin{align*}
+			GFf \circ \eta_C
+				&= GFf \circ \varphi(1_{FC}) \\
+				&= \varphi(Ff) \\
+				&= \varphi(1_{FC'}) \circ f \\
+				&= \eta_{C'} \circ f
+		\end{align*}
+		から分かる．
+	\end{proof}
+	
+	\begin{definition}
+		補題\ref{lem: unit and counit}で定まる自然変換$\eta, \varepsilon$を，それぞれ随伴$F \dashv G$の\emph{単位}(\emph{unit})，\emph{余単位}(\emph{counit})と呼ぶ．
+	\end{definition}
+	
+	式\eqref{eq: adj}より，任意の$g \in \Hom_{\mathcal{D}}(FC, D)$に対して
+	\begin{equation*}
+		\varphi(g) = Gg \circ \eta_{C}, \quad 
+	\end{equation*}
+	が成り立つ．
+	また，双対性より，任意の$f \in \Hom_{\mathcal{C}}(C, GD)$に対しては
+	\begin{equation*}
+		\varphi^{-1}(f) = \varepsilon_{D} \circ Ff
+	\end{equation*}
+	が成り立つ．
+	したがって，随伴を与える自然な全単射$\varphi$は，単位と余単位によって具体的に表示できる．
+	
+	逆に，関手の組$(F, G)$に対して適切な自然変換の組$(\eta, \varepsilon)$を定めることができれば，$F \dashv G$が成り立つことを確認できる．
+	このことを述べたのが次の定理である．
+	
+	\begin{theorem}\label{thm: adj}
+		$F \colon \mathcal{C} \to \mathcal{D},\ G \colon \mathcal{D} \to \mathcal{C}$を関手とする．
+		$F \dashv G$であるための必要十分条件は，ある自然変換$\eta \colon 1_{\mathcal{C}} \to GF,\ \varepsilon \colon FG \to 1_\mathcal{D}$が存在して，
+		\begin{equation}\label{eq: unit and counit in nat}
+			\varepsilon F \cdot F \eta = 1_F, \quad G \varepsilon \cdot \eta G = 1_G
+		\end{equation}
+		を満たすことである．
+	\end{theorem}
+
+	証明の前に，自然変換の垂直合成，水平合成について述べておく．
+	
+	図式
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathcal{C} \arrow[rr, "R", bend left=49, ""{name=R,below}] \arrow[rr, "S" description, ""{name=Sa, above}, ""{name=Sb, below}] \arrow[rr, "T"', bend right=49, ""{name=T,above}] &  & \mathcal{D}
+			\arrow[Rightarrow, from=R, to=Sa, "\sigma"]
+			\arrow[Rightarrow, from=Sb, to=T, "\tau"]
+		\end{tikzcd}
+	\end{equation*}
+	を考える．
+	このとき，新たな自然変換$\tau \cdot \sigma \colon R \Rightarrow T$が
+	\begin{equation*}
+		(\tau \cdot \sigma)_C := \tau_C \circ \sigma_C
+	\end{equation*}
+	によって定まる．
+	この自然変換$\tau \cdot \sigma$を$\sigma$と$\tau$の\emph{垂直合成}(\emph{vertical composite})と呼ぶ．
+	
+	つづいて，図式
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathcal{B} \arrow[r, "F"]& \mathcal{C} \ar[r, bend left=50, "R", ""{name=F, below}] \ar[r, bend right=50, "S"{below}, ""{name=G}] & \mathcal{D} \arrow[r, "G"] & \mathcal{E}
+			\ar["\sigma", Rightarrow, from=F, to=G]
+		\end{tikzcd}
+	\end{equation*}
+	を考える．
+	このとき，新たな自然変換$\sigma F \colon RF \Rightarrow SF,\ G \sigma \colon GR \Rightarrow GS$が
+	\begin{gather*}
+		(\sigma F)_B := \sigma_{FB}, \quad (G \sigma)_C := G(\sigma_C)
+	\end{gather*}
+	で定まる．
+	これらの自然変換$\sigma F, G \sigma$を，それぞれ$F$と$\sigma$，$\sigma$と$G$の\emph{水平合成}(\emph{horizontal conmosite})と呼ぶ．
+	
+	\begin{proof}
+		$F \dashv G$だとし，$\eta, \varepsilon$をそれぞれ単位，余単位とする．このとき，任意の$f \in \Hom_{\mathcal{C}}(C, C'),\ g \in \Hom_{\mathcal{D}}(D, D')$に対して
+		\begin{gather*}
+			\begin{aligned}
+				(\varepsilon F \cdot F \eta)_C
+					&= \varepsilon_{FC} \circ F \eta_C \\
+					&= \varphi^{-1} (\eta_C) \\
+					&= 1_{FC},
+			\end{aligned} \\
+			\begin{aligned}
+				((G \varepsilon) \cdot (\eta G))_D
+					&= G \varepsilon_D \circ \eta_{GD} \\
+					&= \varphi(\varepsilon_{D}) \\
+					&= 1_{GD}
+			\end{aligned} 
+		\end{gather*}
+		だから，等式\eqref{eq: unit and counit in nat}が成り立つ．
+		
+		逆に，自然変換$\eta, \varepsilon$が等式\eqref{eq: unit and counit in nat}を満たすとする．
+		このとき，任意の$C \in \mathcal{C},\ D \in \mathcal{D}$に対して，写像$\varphi_{C,D} \colon \Hom_{\mathcal{D}}(FC, D) \to \Hom_{\mathcal{C}}(C, GD),\ \theta_{C,D} \colon \Hom_{\mathcal{C}}(C, GD) \to \Hom_{\mathcal{D}}(FC, D)$をそれぞれ
+		\begin{gather*}
+			\varphi_{C,D}(g) := Gg \circ \eta_C \quad (g \in \Hom_{\mathcal{D}}(FC, D)) \\
+			\theta_{C,D}(f) := \varepsilon_{D} \circ Ff \quad (f \in \Hom_{\mathcal{C}}(C, GD))
+		\end{gather*}
+		で定める．
+		このとき，任意の$f \in \Hom_{\mathcal{C}}(C, GD)$に対して
+		\begin{align*}
+			\varphi_{C, D} \circ \theta_{C, D}(f)
+				&= G(\varepsilon_D \circ Ff) \circ \eta_C \\
+				&= G \varepsilon_D \circ GFf \circ \eta_C \\
+				&= G \varepsilon_D \circ \eta_{GD} \circ f \\
+				&= f,
+		\end{align*}
+		が成り立つ．
+		また，同様にして，任意の$g \in \Hom_{\mathcal{D}}(FC, D)$に対して$\theta_{C, D} \varphi_{C, D}(g) = g$が成り立つので，$\varphi_{C,D}$は全単射であり，$\theta_{C,D} = \varphi_{C,D}^{-1}$である．
+		
+		後は，$\varphi = \{\varphi_{C,D}\}$が$C \in \mathcal{C},\ D \in \mathcal{D}$について自然であることを確かめればよい．
+		任意の$g \in \Hom_{\mathcal{D}}(D, D'),\ h \in \Hom_{\mathcal{D}}(FC, D)$に対して
+		\begin{equation*}
+			(Gg)_{\ast} \circ \varphi_{C, D}(h) = Gg \circ Gh \circ \eta_C = G(gh) \circ \eta_C = \varphi_{C, D'} \circ g_\ast(h)
+		\end{equation*}
+		が成り立つから，$\varphi$は$D$について自然である．
+		$C$について自然であることも同様にして分かる．
+		
+		以上より，$\varphi$が随伴$F \dashv G$を与えていて，単位，余単位はそれぞれ$\eta, \varepsilon$である．
+	\end{proof}
+	
+	\section{制限関手と誘導関手の随伴性}
+	
+	最後に，誘導関手が制限関手の左随伴であることを確かめる．
+	
+	\begin{theorem}
+		任意の有限群$G$と部分群$H \le G$に対して，$\Ind_H^G \dashv \Res_H^G$である．
+	\end{theorem}
+	
+	\begin{proof}
+		$H$集合$X$，$G$集合$Y$に対して，写像$\eta_X \colon X \to \Res_H^G \Ind^G_H X,\ \varepsilon_Y \colon \Ind_H^G \Res_H^G Y \to Y$を
+		\begin{gather*}
+			\eta_X(x) := (e_G, x)H \quad (x \in X), \\
+			\varepsilon_Y((g, y)H) := g . y \quad ((g, y)H \in \Ind_H^G \Res_H^G Y)
+		\end{gather*}
+		で定めると，自然変換$\eta \colon 1_{H\mathchar`-\catset} \Rightarrow \Res_H^G \Ind^G_H,\ \varepsilon \colon \Ind_H^G \Res_H^G \Rightarrow 1_{G\mathchar`-\catset}$が得られる．
+		これらが等式\eqref{eq: unit and counit in nat}を満たすことを確認すればよい．
+		
+		任意の$H$集合$X$と$(g, x)H  \in \Ind_H^G X$に対して，
+		\begin{align*}
+			(\varepsilon \Ind_H^G \cdot \Ind_H^G \eta)_X((g, x)H)
+				&= \varepsilon_{\Ind_H^G X} \circ \Ind_H^G \eta_X((g, x)H) \\
+				&= \varepsilon_{\Ind_H^G X} ((g, (e_G, x)H)H) \\
+				&= g . (e_G, x)H \\
+				&= (g, x)H
+		\end{align*}
+		なので，$\varepsilon \Ind_H^G \cdot \Ind_H^G \eta = 1_{\Ind_H^G}$である．
+		また，任意の$G$集合$Y$と$y \in \Res^G_H Y$に対して，
+		\begin{align*}
+			(\Res^G_H \varepsilon \cdot \eta \Res^G_H)_Y(y)
+				&= \Res^G_H \varepsilon_Y \circ \eta_{\Res^G_H Y}(y) \\
+				&= \Res^G_H \varepsilon_Y((e_G, y)H) \\
+				&= e_G . y \\
+				&= y
+		\end{align*}
+		なので，$\Res^G_H \varepsilon \cdot \eta \Res^G_H = 1_{\Res^G_H}$である．
+		
+		したがって，定理\ref{thm: adj}より$\Ind_H^G \dashv \Res_H^G$を得る．
+	\end{proof}
+	
+	制限関手と誘導関手は，Mackey関手の圏の間の制限関手$\Res^G_H$と誘導関手$\Ind_H^G$を導く．
+	このとき，実は$\Ind_H^G \dashv \Res^G_H \dashv \Ind_H^G$が成り立っている(Th\'{e}venaz, Webb~\cite[命題4.2]{Thevenaz:Simple_MF})．
+	左随伴関手は余極限を保ち，右随伴関手は極限を保つから，Mackey関手の間の引き戻しや直和は，制限や誘導によって本質的には変化しないことが分かる．
+	
+	\bibliographystyle{jplain}
+	\bibliography{myrefs-jp,myrefs-en}
+	\nocite{Bouc:BR}
+	\nocite{MacLane:CWM}
+	\nocite{Nakaoka:圏論の技法}
+	
+\end{document}

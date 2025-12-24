@@ -1,0 +1,77 @@
+\documentclass{jlreq}
+
+\usepackage{mystyle,bm}
+
+\title{特性方程式について}
+\author{著者}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+		漸化式の特性方程式について書きました．
+	\end{abstract}
+
+	\section{特性方程式について}
+	
+	$N \ge 1$に対して，$N+1$項間斉次漸化式
+	\begin{equation}	\label{eq:recurrence_formula}
+		a_{n+N} = \sum_{k=0}^{N-1} p_{k} a_{n+k} \quad (n \ge 0)
+	\end{equation}
+	を考える．
+	\begin{equation*}
+		\bm{a}_n = \begin{pmatrix}
+			a_{n+N-1} \\
+			a_{n+N-2} \\
+			\vdots \\
+			a_n
+		\end{pmatrix}, \quad A = \begin{pmatrix}
+		p_{N-1} & \ldots & p_1 & p_0 \\
+		1 &  &  & 0 \\
+		& \ddots &  & \vdots \\
+		&  & 1 & 0
+		\end{pmatrix}
+	\end{equation*}
+	とおけば，漸化式\eqref{eq:recurrence_formula}は
+	\begin{equation*}
+		\bm{a}_{n+1} = A \bm{a}_n \quad (n \ge 0)
+	\end{equation*}
+	と表される．
+	したがって，
+	\begin{equation*}
+		\bm{a}_n = A^n \bm{a}_0
+	\end{equation*}
+	が成り立つから，$A^n$が分かれば$a_n$も分かることになる．
+	
+	行列の冪を求める方法の一つに固有多項式の利用がある．
+	$A$の固有多項式は
+	\begin{equation*}
+		t^N - \sum_{k=0}^{N-1} p_k t^k
+	\end{equation*}
+	であり，あたかも\eqref{eq:recurrence_formula}の数列部分を$t$に置き換えたような形をしている．
+	これを漸化式\eqref{eq:recurrence_formula}の特性多項式という．
+	特性多項式を$\Phi(t)$としたとき，方程式$\Phi(t) = 0$を特性方程式という．
+	
+	\section{2項間漸化式の固有多項式}
+	
+	\eqref{eq:recurrence_formula}において，$N=1$とした場合を考える．
+	このときの特性方程式は
+	\begin{equation*}
+		t-p_0 = 0
+	\end{equation*}
+	である．
+	
+	対して，定数項として$q$を加えた漸化式
+	\begin{equation*}
+		a_{n+1} = p_0 a_n + q
+	\end{equation*}
+	について，その特性方程式が
+	\begin{equation}\label{eq:fake_char_poly}
+		t = p_0 t + q
+	\end{equation}
+	であると学んだ人も多いと思う．
+	すでに見た通り，特性方程式とは，そもそも斉次線形漸化式に対して定義されるものである．
+	したがって，方程式\eqref{eq:fake_char_poly}を特性多項式と呼ぶのは適切ではない．
+\end{document}

@@ -1,0 +1,191 @@
+\documentclass[a4j]{jsarticle}
+
+\usepackage{ascmac, amsthm, amsmath,url,graphics}
+
+\title{いろいろ}
+
+\renewcommand\proofname{\bf 証明}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{補題}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+
+\section{1/6公式の一般化}
+
+次の等式は, いわゆる1/6公式や1/12公式の一般化にあたる. 証明は部分積分法を繰り返し用いればよい.
+\begin{screen}
+	\begin{theorem}
+	任意の0以上の整数$m$, $n$と任意の実数$\alpha$, $\beta$に対して,
+	\[
+	\int _\alpha ^\beta (x-\alpha)^m(\beta-x)^n\ dx=\frac{m!n!}{(m+n+1)!}(\beta -\alpha)^{m+n+1}.
+	\]
+	\end{theorem}
+\end{screen}
+例えば, 式において$m=n=1$とすれば
+\[
+\int _\alpha ^\beta (x-\alpha)(\beta-x)\ dx=\frac16(\beta -\alpha)^3
+\]
+となり, 1/6公式を得る. 
+
+上の定理において, $\alpha =0$, $\beta =1$とおけば
+\[
+\int _0 ^1 x^m(1-x)^n\ dx=\frac{m!n!}{(m+n+1)!}
+\]
+を得るが, これはBeta関数(第一種Euler積分)の特別な場合である. ここで, 実数$x$, $y$に対して, Beta関数$B(x,y)$は次のように定義される:
+\[
+B(x,y)=\int _0 ^1 t^{x-1}(1-t)^{y-1}\ dt.
+\]
+
+\section{2次のEuler積}
+
+この節において, $p$は素数を表すことにする. 普通の意味でのEuler積とは, 等式
+\[
+\sum _{n=1} ^\infty \frac1{n^s}=\prod _p \frac1{1-p^{-s}}
+\]
+のことをいう. 対して, 
+\begin{equation} \label{eq:euler product}
+\sum _{n=1} ^\infty \frac{\tau (n)}{n^s}=\prod _p \frac1{1-\tau(p)p^{-s}+p^{11}p^{-2s}}
+\end{equation}
+を2次のEuler積という. ここで, $\tau (n)$をRamanujanの$\tau $関数といい, 左辺の無限級数をRamanujanのL関数という. この節では, この等式の導出について簡単にまとめておく\footnote{参考: \url{https://tsujimotter.hatenablog.com/entry/ramanujan-tau-function-and-euler-product}}.
+
+自然数$n$に対して, Ramanujanの$\tau $関数$\tau (n)$は
+\[
+q\prod _{k=1} ^\infty (1-q^k)^{24}
+\]
+の展開式における$q^n$の係数で定義される. この関数について, (\ref{eq:euler product})を示すため必要となる次の2つの性質を認める. 実際に計算して確かめてみるとよい.
+\begin{screen}
+	\begin{enumerate}
+	\item 互いに素な自然数$m$, $n$に対して, $\tau (mn)=\tau (m)\tau (n)$. \label{enum:tau function 1}
+	\item 任意の素数$p$と2以上の自然数$k$に対して, $\tau (p^k)=\tau (p)\tau (p^{k-1})-p^{11} \tau (p^{k-2})$. \label{enum:tau function 2}
+	\end{enumerate}
+\end{screen}
+証明は大変難しいらしく, 私が理解できないため割愛する. 保型形式なる概念を用いるらしいが, そもそも私は保型形式を知らない. 
+
+上の2つの性質を用いて, 表題の(\ref{eq:euler product})を示す. 性質\ref{enum:tau function 1}より, RamanujanのL関数は
+\[
+\sum _{n=1} ^\infty \frac{\tau (n)}{n^s}=\prod _p \left(\sum _{k=0} ^\infty \frac {\tau (p^k)}{p^{ks}}\right)=\left(1+\frac{\tau (2)}{2^s} +\frac{\tau (2^2)}{2^{2s}} +\cdots \right)\left(1+\frac{\tau (3)}{3^s} +\frac{\tau (3^2)}{3^{2s}} +\cdots \right)\cdots
+\]
+と変形できる. ここで, 
+\[
+S=\sum _{k=0} ^\infty \frac {\tau (p^k)}{p^{ks}}
+\]
+とおく. 性質\ref{enum:tau function 2}から
+\begin{align*}
+S&=1+\frac{\tau (p)}{p^s}+\sum _{k=2} ^\infty \frac {\tau (p^k)}{p^{ks}} \\
+&=1+\frac{\tau (p)}{p^s}+\sum _{k=2} ^\infty \frac {\tau (p)\tau (p^{k-1})-p^{11} \tau (p^{k-2})}{p^{ks}} \\
+&=1+\frac{\tau (p)}{p^s}+\frac{\tau (p)}{p^s} \sum _{k=2} ^\infty \frac {\tau (p^{k-1})}{p^{(k-1)s}}+\frac {p^{11}}{p^{2s}} \sum _{k=2} ^\infty \frac {\tau (p^{k-2})}{p^{(k-2)s}} \\
+&=1+\frac{\tau (p)}{p^s}+\frac{\tau (p)}{p^s} (S-1)+\frac {p^{11}}{p^{2s}} S. \\
+\end{align*}
+よって, 整理して
+\[
+S=\frac1{1-\tau(p)p^{-s}+p^{11}p^{-2s}}
+\]
+を得る. 従って,
+\[
+\sum _{n=1} ^\infty \frac{\tau (n)}{n^s}=\prod _p S=\prod _p \frac1{1-\tau(p)p^{-s}+p^{11}p^{-2s}}.
+\]
+
+\section{Pickの定理}
+
+平面上に等間隔に並べられた無数の平行線の集合を$L$とする. $L$を$90^\circ$回転したものもまた平行線の集合であり, これを$\rotatebox{90}{L}$とおく. $L$と$\rotatebox{90}{L}$を重ねたとき, 平行線は互いに直交する. このとき生じる交点を格子点といい, 2つの格子点を結んだ線分の長さの最小値を1とする. また, すべての頂点が格子点上にあるような多角形を格子多角形という. ただし, 格子長方形と格子直角三角形は, 証明のため, 各辺のうち少なくとも2辺が$L$または$\rotatebox{90}{L}$上にあるもののみを指す.
+
+格子多角形について, 次の定理が成り立つ.
+\begin{screen}
+	\begin{theorem}[Pickの定理] \label{thm:pick theorem}
+	平面上の穴のない格子多角形$P$の面積を$S$とする. 多角形の内部にある格子点の数を$f$, 辺上にある格子点の数を$e$とおくと,
+	\begin{equation} \label{eq:pick theorem}
+	S=f+\frac12 e-1.
+	\end{equation}
+	\end{theorem}
+\end{screen}
+ここで, 格子多角形における穴とは, \noindent この節では, この定理の証明を行う. また, この定理の類似(森原の定理, 額賀の定理)や拡張についても紹介する.
+
+証明の見通しをよくするために, 格子多角形$X$の面積を$S_X$, 内部にある格子点の数を$f_X$, 辺上にある格子点の数を$e_X$で表す. また,
+\[
+P(X)=f_X+\frac12 e_X-1
+\]
+とおく. このとき, 定理 \ref{thm:pick theorem}を示すことは$S_P=P(P)$を示すことに他ならない. 
+
+\begin{screen}
+	\begin{lemma}\label{lem:pick polynomial linearity}
+	格子多角形$P$を辺上の相異なる2つの格子点を結んだ直線によって切断する. このときできた格子多角形を$Q$, $R$とおくと, $P(P)=P(Q)+P(R)$.
+	\end{lemma}
+\end{screen}
+\begin{proof}
+直線上の格子点の数を$p$とおく. このとき, 
+\[
+f_P=f_Q+f_R+p-2,\quad e_P=e_Q+e_R-2p+2
+\]
+であることから明らか.
+\end{proof}
+\begin{screen}
+	\begin{lemma}\label{lem:pick square}
+	格子長方形$P$に対して, $S_P=P(P)$.
+	\end{lemma}
+\end{screen}
+\begin{proof}
+長方形の平行でない各辺上の格子点の数を$e_1$, $e_2$とおけば,
+\[
+f_P=(e_1-2)(e_2-2),\quad e_P=2(e_1+e_2-2)
+\]
+となる. よって,
+\[
+S_P=(e_1-1)(e_2-1)=(e_1-2)(e_2-2)+(e_1+e_2-2)-1=f_P+\frac12 e_P-1.
+\]
+\end{proof}
+\begin{screen}
+	\begin{lemma}
+	格子直角三角形$P$に対して, $S_P=P(P)$.
+	\end{lemma}
+\end{screen}
+\begin{proof}
+任意の格子直角三角形$P$は, ある格子長方形$Q$の対角線による切断によって作ることができる. このとき, 補題\ref{lem:pick polynomial linearity}と補題\ref{lem:pick square}より
+\[
+2S_P=S_Q=P(Q)=2P(P).
+\]
+よって, $S_P=P(P)$.
+\end{proof}
+\begin{screen}
+	\begin{lemma}
+	任意の格子三角形$T$について, $S_T=P(T)$.
+	\end{lemma}
+\end{screen}
+\begin{proof}
+任意の格子三角形は, いくつかの適当な格子長方形
+\end{proof}
+
+\section{いろいろ}
+
+\[
+\int _0 ^{\frac \pi 2}\sqrt{\sin x-\sin ^2 x}\ dx=\int _0 ^{\frac \pi 2}\sqrt{\cos x-\cos ^2 x}\ dx.
+\]
+ここで, $1-\cos x=2\sin ^2 (x/2)$であり, 区間$[0,\pi /2]$において$\sin (x/2)\ge 0$であるから,
+\[
+\int _0 ^{\frac \pi 2}\sqrt{\cos x-\cos ^2 x}\ dx=\int _0 ^{\frac \pi 2}\sqrt{2\cos x}\sin \frac x 2\ dx.
+\]
+部分積分法により,
+\[
+\int _0 ^{\frac \pi 2}\sqrt{2\cos x}\sin \frac x 2\ dx=\left[\sqrt{2\cos x}\left(-2\cos \frac x2\right)\right]_0 ^{\frac \pi 2}+\int _0 ^{\frac \pi 2} \sqrt 2 \cos \frac x2 \frac1{\sqrt{\cos x}}(\cos x)^\prime \ dx.
+\]
+右辺の第1項目は$2\sqrt2$となる. 第2項目について, 被積分関数は$x=\pi /2$において定義されていないため, 広義積分となる. また, $1+\cos x=2\cos ^2 (x/2)$であり, 区間$[0,\pi /2)$において$\cos (x/2)> 0$であることから,
+\begin{align*}
+\int _0 ^{\frac \pi 2} \sqrt 2 \cos \frac x2 \frac1{\sqrt{\cos x}}(\cos x)^\prime \ dx&=\lim _{\theta \rightarrow \frac \pi 2-0} \int _0 ^\theta \sqrt 2 \cos \frac x2 \frac1{\sqrt{\cos x}}(\cos x)^\prime \ dx \\
+&=\lim _{\theta \rightarrow \frac \pi 2-0} \int _0 ^\theta \sqrt{1+\frac 1{\cos x}}(\cos x)^\prime \ dx.
+\end{align*}
+$\sqrt{1+1/\cos x}=t$と置換すれば, 
+\begin{align*}
+\lim _{\theta \rightarrow \frac \pi 2-0} \int _0 ^\theta \sqrt{1+\frac 1{\cos x}}(\cos x)^\prime \ dx&=\lim _{R \rightarrow +\infty} \left(-\int _{\sqrt 2} ^R \frac {2t^2}{(1-t^2)^2}\ dx\right) \\
+&=-\lim _{R \rightarrow +\infty} \frac 12 \left\{ \left( \ln \frac {R-1}{R+1} -\frac {2R}{R^2-1} \right)-\left( \ln \frac {\sqrt 2-1}{\sqrt 2+1} -\frac {2\sqrt 2}{2-1} \right) \right\}\\
+&=\ln (\sqrt 2-1)-\sqrt 2.
+\end{align*}
+従って,
+\[
+\int _0 ^{\frac \pi 2}\sqrt{\sin x-\sin ^2 x}\ dx=2\sqrt 2+\ln (\sqrt 2-1)-\sqrt 2=\sqrt 2+\ln (\sqrt 2-1).
+\]
+\end{document}
