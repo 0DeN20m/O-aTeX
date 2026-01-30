@@ -1,11 +1,8 @@
-\ProvidesPackage{common}[2025/12/20]
+\ProvidesPackage{my-env}[2026/01/29]
 
 % Packages --------------------------------------
 
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
 \RequirePackage{amsthm}
-\RequirePackage{makeidx}
 
 % Environments ----------------------------------
 
@@ -30,21 +27,3 @@
 \newtheorem*{question*}{問題}
 \newtheorem{answer}{解答例}[section]
 \newtheorem*{answer*}{解答例}
-
-% Makeindex -------------------------------------
-
-% \Term
-% 用語定義を行う．
-% 別名も\index{#3|seealso{#1}}で登録できるようにしたい！
-% 
-% 第1引数：読み（オプション）
-% 第2引数：用語（必須）
-% 第3引数：別名（オプション）
-% 
-% 使用例：\Term[へんびぶんほうていしき]{偏微分方程式}[Partial Differential Equation; PDE]
-%   -> 偏微分方程式（Partial Differential Equation; PDE）
-\NewDocumentCommand\Term{o m o}{%
-  \emph{#2}%
-  \IfValueTF{#1}{\index{#1@#2}}{\index{#2}}%
-  \IfValueT{#3}{（#3）}%
-}

@@ -1,0 +1,33 @@
+\ProvidesPackage{my-common}[2025/12/20]
+
+% Packages --------------------------------------
+
+\RequirePackage{luatexja}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage[unicode=true]{hyperref}
+
+% functions -------------------------------------
+
+% 関数記号の定義を簡略化するマクロ
+% 
+% * : 添え字位置を指定（*ありで上下，無しで右上右下）
+% m : 関数名
+% o : 添え字（オプション）
+\NewDocumentCommand\GenericMathOperator{s m o}{%
+  \mathop{\mathrm{#2}}
+  \IfBooleanTF{#1}{\limits}{\nolimits}%
+  \IfValueT{#3}{_{#3}}%
+}
+
+% Symbols ---------------------------------------
+
+\NewDocumentCommand\N{}{\mathord{\mathbb{N}}}
+\NewDocumentCommand\Z{}{\mathord{\mathbb{Z}}}
+\NewDocumentCommand\Q{}{\mathord{\mathbb{Q}}}
+\NewDocumentCommand\R{}{\mathord{\mathbb{R}}}
+\NewDocumentCommand\C{}{\mathord{\mathbb{C}}}
+
+\NewDocumentCommand\Aut{o}{%
+  \IfValueTF{#1}{\GenericMathOperator{Aut}[#1]}{\GenericMathOperator{Aut}}%
+}
