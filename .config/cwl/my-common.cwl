@@ -2,3 +2,5 @@
 #include:amsmath
 #include:amssymb
 #include:hyperref
+
+\GenericMathOperator{}

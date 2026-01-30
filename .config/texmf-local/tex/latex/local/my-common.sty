@@ -13,21 +13,42 @@
 % 
 % * : 添え字位置を指定（*ありで上下，無しで右上右下）
 % m : 関数名
-% o : 添え字（オプション）
-\NewDocumentCommand\GenericMathOperator{s m o}{%
-  \mathop{\mathrm{#2}}
+% o : 上付き添え字（オプション）
+% o : 下付き添え字（オプション）
+\NewDocumentCommand\GenericMathOperator{s m o o}{%
+  \mathop{\mathrm{#2}}%
   \IfBooleanTF{#1}{\limits}{\nolimits}%
   \IfValueT{#3}{_{#3}}%
+  \IfValueT{#4}{^{#4}}%
 }
+
+\NewDocumentCommand
 
 % Symbols ---------------------------------------
 
+% 自然数の集合
 \NewDocumentCommand\N{}{\mathord{\mathbb{N}}}
+% 整数の集合
 \NewDocumentCommand\Z{}{\mathord{\mathbb{Z}}}
+% 有理数の集合
 \NewDocumentCommand\Q{}{\mathord{\mathbb{Q}}}
+% 実数の集合
 \NewDocumentCommand\R{}{\mathord{\mathbb{R}}}
+% 複素数の集合
 \NewDocumentCommand\C{}{\mathord{\mathbb{C}}}
 
+% 恒等射
+\NewDocumentCommand\id{}{\GenericMathOperator{id}}
+
+% 自己同型
 \NewDocumentCommand\Aut{o}{%
   \IfValueTF{#1}{\GenericMathOperator{Aut}[#1]}{\GenericMathOperator{Aut}}%
+}
+% 自己準同型
+\NewDocumentCommand\End{o}{%
+  \IfValueTF{#1}{\GenericMathOperator{End}[#1]}{\GenericMathOperator{End}}%
+}
+% Hom集合
+\NewDocumentCommand\Hom{o}{%
+  \IfValueTF{#1}{\GenericMathOperator{Hom}[#1]}{\GenericMathOperator{Hom}}%
 }
