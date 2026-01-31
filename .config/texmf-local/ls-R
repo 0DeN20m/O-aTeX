@@ -1,6 +1,6 @@
 % ls-R -- filename database for kpathsea; do not change this line.
-
 ./:
+.:
 bibtex
 doc
 dvips
@@ -65,6 +65,7 @@ local
 
 ./fonts/vf/local:
 
+
 ./metapost:
 local
 
@@ -78,6 +79,15 @@ plain
 local
 
 ./tex/latex/local:
+README.md
+grouptheory.sty
+my-common.sty
+my-env.sty
+my-makeidx.sty
+my-symbol.sty
+old
+
+./tex/latex/local/old:
 myquestion.sty
 mystyle.sty
 mystyle_old.sty
