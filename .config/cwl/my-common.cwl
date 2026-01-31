@@ -1,16 +1,23 @@
-#include:luatexja
-#include:amsmath
-#include:amssymb
-#include:hyperref
+# my-common.cwl
+# Autocompletion for my-common package
 
-\GenericMathOperator{symbol}[][]#M
-\GenericMathOperator*{}[][]#M
-\N#M
-\Z#M
-\Q#M
-\R#M
-\C#M
-\id#M
-\Aut[]#M
-\End[]#M
-\Hom[]#M
+\GenericMathOperator{symbol}#*
+\GenericMathOperator*{symbol}#*
+\GenericMathOperator{symbol}[subscript]#*
+\GenericMathOperator*{symbol}[subscript]#*
+\GenericMathOperator{symbol}[subscript][superscript]#*
+\GenericMathOperator*{symbol}[subscript][superscript]#*
+
+\N#m
+\Z#m
+\Q#m
+\R#m
+\C#m
+
+\id#m
+\Aut#m
+\Aut[of]#m
+\End#m
+\End[of]#m
+\Hom#m
+\Hom[of]#m
