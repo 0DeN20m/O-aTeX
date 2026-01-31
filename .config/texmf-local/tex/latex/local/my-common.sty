@@ -13,8 +13,8 @@
 % 
 % * : 添え字位置を指定（*ありで上下，無しで右上右下）
 % m : 関数名
-% o : 上付き添え字（オプション）
 % o : 下付き添え字（オプション）
+% o : 上付き添え字（オプション）
 \NewDocumentCommand\GenericMathOperator{s m o o}{%
   \mathop{\mathrm{#2}}%
   \IfBooleanTF{#1}{\limits}{\nolimits}%
