@@ -1,87 +1,87 @@
 %\documentclass{jlreq}
 
 \usepackage{
-	amsmath,
-	amssymb,
-	amsthm,		%thmtoolsが依存
-	thmtools,
-	enumitem,	%箇条書き
-	mathtools
+  amsmath,
+  amssymb,
+  amsthm,		%thmtoolsが依存
+  thmtools,
+  enumitem,	%箇条書き
+  mathtools
 }
 \usepackage[unicode=true]{hyperref}	%hyperref in LuaLaTeX-ja
 
 %%%%%%%%%%%%%%%　thmtools　%%%%%%%%%%%%%%%
 
 \declaretheoremstyle[	%定理スタイル
-	spaceabove=		\baselineskip,
-	headfont=		\bfseries,
-%	notefont=		\bfseries,
-	numberwithin=	section,
-	headpunct=		\relax,
-	postheadspace=	\zw,
-	spacebelow=		\baselineskip
+  spaceabove=		\baselineskip,
+  headfont=		\bfseries,
+  %	notefont=		\bfseries,
+  numberwithin=	section,
+  headpunct=		\relax,
+  postheadspace=	\zw,
+  spacebelow=		\baselineskip
 ]{thmsty}
 \declaretheorem[	%定理
-	style=	thmsty,
-	title=	定理,
-%	qed=	$\square$
+  style=	thmsty,
+  title=	定理,
+  %	qed=	$\square$
 ]{theorem}
 \declaretheorem[	%定義
-	style=	thmsty,
-	title=	定義,
-	sibling=theorem,
-	%	qed=	$\square$
+  style=	thmsty,
+  title=	定義,
+  sibling=theorem,
+  %	qed=	$\square$
 ]{definition}
 \declaretheorem[	%定義
-style=	thmsty,
-title=	定義,
-sibling=theorem,
-%	qed=	$\square$
-numbered=no
+  style=	thmsty,
+  title=	定義,
+  sibling=theorem,
+  %	qed=	$\square$
+  numbered=no
 ]{definition*}
 \declaretheorem[	%定理(番号なし)
-	style=	thmsty,
-	title=	定理,
-%	qed=	$\square$,
-	numbered=no
+  style=	thmsty,
+  title=	定理,
+  %	qed=	$\square$,
+  numbered=no
 ]{theorem*}
 \declaretheorem[	%命題
-	style=	thmsty,
-	title=	命題,
-	sibling=theorem,
-%	qed=	$\square$
+  style=	thmsty,
+  title=	命題,
+  sibling=theorem,
+  %	qed=	$\square$
 ]{proposition}
 \declaretheorem[	%補題
-	style=	thmsty,
-	title=	補題,
-	sibling=theorem,
-%	qed=	$\square$
+  style=	thmsty,
+  title=	補題,
+  sibling=theorem,
+  %	qed=	$\square$
 ]{lemma}
 \declaretheorem[	%系
-	style=thmsty,
-	title=系,
-	sibling=theorem,
-%	qed=	$\square$
+  style=thmsty,
+  title=系,
+  sibling=theorem,
+  %	qed=	$\square$
 ]{corollary}
 \declaretheorem[	%例
-	style=thmsty,
-	title=例,
-	sibling=theorem,
+  style=thmsty,
+  title=例,
+  sibling=theorem,
 ]{example}
 \declaretheorem[	%証明
-	style=thmsty,
-	title=証明,
-	numbered=no,
-	qed=\qedsymbol
+  style=thmsty,
+  title=証明,
+  numbered=no,
+  qed=\qedsymbol
 ]{myproof}
 \declaretheorem[	%問題
-style=thmsty,
-title=問題,
-numbered=no,
+  style=thmsty,
+  title=問題,
+  numbered=no,
 ]{question}
 \declaretheorem[
-	style=thmsty,
-	title=予想
+  style=thmsty,
+  title=予想
 ]{conjecture}
 \renewenvironment{proof}{\begin{myproof}}{\end{myproof}}
 \renewcommand{\qedsymbol}{$\blacksquare$} %墓石記号
@@ -89,20 +89,21 @@ numbered=no,
 %%%%%%%%%%%%%%%　enumitem　%%%%%%%%%%%%%%%
 
 \setlist{
-	noitemsep,					%kills the space btwn items and pars.
-	topsep=	.2\baselineskip,	
-%	left=	2\parindent,
-	labelindent=\parindent,
-	leftmargin=*,
-	align=left
-%	align=right
+  noitemsep,					%kills the space btwn items and pars.
+  topsep=	.2\baselineskip,	
+  %	left=	2\parindent,
+  labelindent=\parindent,
+  leftmargin=*,
+  align=left
+  %	align=right
 }
 
 %%%%%%%%%%%%%%%　マクロ　%%%%%%%%%%%%%%%
+% *付は移行済み
 
-\newcommand{\Aut}{\mathop{\mathrm{Aut}}\nolimits}	%自己同型群
+\newcommand{\Aut}{\mathop{\mathrm{Aut}}\nolimits}	%自己同型群*
 \newcommand{\BurnsideRing}{\Omega}	%Burnside環
-\newcommand{\C}{\mathbb{C}}	%複素数
+\newcommand{\C}{\mathbb{C}}	%複素数*
 \DeclarePairedDelimiterX{\SetComprehension}[2]{\{}{\}}{\, #1 \mathopen{}\,\delimsize|\,\mathopen{} #2 \,}
 \DeclarePairedDelimiterX{\Tuple}[1]{\langle}{\rangle}{#1}
 \DeclarePairedDelimiterX{\Card}[1]{|}{|}{#1}
@@ -111,26 +112,26 @@ numbered=no,
 \newcommand{\CatSets}{\mathbf{Set}}	%集合の圏
 \newcommand{\CatSheaves}{\mathbf{Sheaf}}	%層の圏
 \newcommand{\Colim}{\mathop{\mathrm{Colim}}}	%帰納極限
-\newcommand{\End}{\mathop{\mathrm{End}}\nolimits}	%自己準同型
+\newcommand{\End}{\mathop{\mathrm{End}}\nolimits}	%自己準同型*
 \newcommand{\FixedPtMap}[1][\relax]{\Phi_{#1}}	%マーク準同型写像
 \newcommand{\FunctCat}[2]{{#2}^{#1}}	%関手圏
-\newcommand{\Hom}[1][\relax]{\mathop{\mathrm{Hom}}\nolimits_{#1}}	%Hom
-\newcommand{\id}{{\mathrm{id}}}	%恒等射
+\newcommand{\Hom}[1][\relax]{\mathop{\mathrm{Hom}}\nolimits_{#1}}	%Hom*
+\newcommand{\id}{{\mathrm{id}}}	%恒等射*
 \renewcommand{\Im}{\mathop{\mathrm{Im}}\nolimits}	%像
 \DeclareMathOperator{\Ker}{Ker}	%核
 \DeclareMathOperator*{\Lim}{Lim}	%射影極限
 \newcommand{\MarkHom}{\FixedPtMap}	%マーク準同型
 \newcommand{\Maps}[2]{{#2}^{#1}}	%写像全体
-\newcommand{\N}{\mathbb{N}} %自然数
+\newcommand{\N}{\mathbb{N}} %自然数*
 \newcommand{\Normalizer}[1][\relax]{\mathrm{N}_{#1}}	%正規化群
 \newcommand{\Op}[1]{{#1}^\mathrm{op}}	%opposite (肩)
 \newcommand{\OpOperator}[1]{{#1}_\mathrm{op}}	%opposite (下付き)
 \newcommand{\OrderGrp}[1]{\Card{#1}}	%群の位数
 \DeclareMathOperator{\Power}{\mathcal{P}}	%べき集合
-\newcommand{\Q}{\mathbb{Q}} %有理数
-\newcommand{\R}{\mathbb{R}} %実数
+\newcommand{\Q}{\mathbb{Q}} %有理数*
+\newcommand{\R}{\mathbb{R}} %実数*
 %\newcommand{\Tuple}[1]{\left\langle #1 \right\rangle}	%組
-\newcommand{\Z}{\mathbb{Z}} %整数
+\newcommand{\Z}{\mathbb{Z}} %整数*
 
 %%%%%%%%%%%%%%%　その他　%%%%%%%%%%%%%%%
 
