@@ -1,18 +1,17 @@
 # LaTeX
 
 ## What is it?
-オのLaTeX環境と作ったものまとめです．
-オが使っている環境を再現するための構成ファイルも.devcontainerと.configに含まれています．
+オのLaTeXあれこれ。
 
 ## .config
 
-LaTeX周りの設定ファイルを配置しています．
-ここを見ても数学は無いです．
+LaTeXの設定や拡張機能、VSCode内でインテリセンスを使用するためのファイルが入っています。
 
 ## .devcontainer
 
-Dev Containerの構成ファイルです．
+Dev ContainerでDockerコンテナをビルドするときに使用するフォルダです。
 
 ## 数学
 
-数学が入っています．
+数学が入っています。
+みなさんはここを見ればおｋです。
