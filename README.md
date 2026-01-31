@@ -3,15 +3,21 @@
 ## What is it?
 オのLaTeXあれこれ。
 
-## .config
+## 各ディレクトリについて
+
+### .config
 
 LaTeXの設定や拡張機能、VSCode内でインテリセンスを使用するためのファイルが入っています。
 
-## .devcontainer
+### .devcontainer
 
 Dev ContainerでDockerコンテナをビルドするときに使用するフォルダです。
 
-## 数学
+### .gitconfig
+
+GitHub Copilot Chat用のプロンプト等が入っています。
+
+### 数学
 
 数学が入っています。
 みなさんはここを見ればおｋです。
