@@ -1,0 +1,117 @@
+{
+  "deps": [
+    {
+      "name": "luatexja"
+    },
+    {
+      "name": "amsmath"
+    },
+    {
+      "name": "amssymb"
+    },
+    {
+      "name": "hyperref"
+    }
+  ],
+  "macros": [
+    {
+      "name": "GenericMathOperator",
+      "unusual": true,
+      "arg": {
+        "format": "{}",
+        "snippet": "GenericMathOperator{${1:symbol}}"
+      }
+    },
+    {
+      "name": "GenericMathOperator*",
+      "unusual": true,
+      "arg": {
+        "format": "{}",
+        "snippet": "GenericMathOperator*{${1:symbol}}"
+      }
+    },
+    {
+      "name": "GenericMathOperator",
+      "unusual": true,
+      "arg": {
+        "format": "{}[]",
+        "snippet": "GenericMathOperator{${1:symbol}}[${2:subscript}]"
+      }
+    },
+    {
+      "name": "GenericMathOperator*",
+      "unusual": true,
+      "arg": {
+        "format": "{}[]",
+        "snippet": "GenericMathOperator*{${1:symbol}}[${2:subscript}]"
+      }
+    },
+    {
+      "name": "GenericMathOperator",
+      "unusual": true,
+      "arg": {
+        "format": "{}[][]",
+        "snippet": "GenericMathOperator{${1:symbol}}[${2:subscript}][${3:superscript}]"
+      }
+    },
+    {
+      "name": "GenericMathOperator*",
+      "unusual": true,
+      "arg": {
+        "format": "{}[][]",
+        "snippet": "GenericMathOperator*{${1:symbol}}[${2:subscript}][${3:superscript}]"
+      }
+    },
+    {
+      "name": "N"
+    },
+    {
+      "name": "Z"
+    },
+    {
+      "name": "Q"
+    },
+    {
+      "name": "R"
+    },
+    {
+      "name": "C"
+    },
+    {
+      "name": "id"
+    },
+    {
+      "name": "Aut"
+    },
+    {
+      "name": "Aut",
+      "arg": {
+        "format": "[]",
+        "snippet": "Aut[${1:of}]"
+      }
+    },
+    {
+      "name": "End"
+    },
+    {
+      "name": "End",
+      "arg": {
+        "format": "[]",
+        "snippet": "End[${1:of}]"
+      }
+    },
+    {
+      "name": "Hom"
+    },
+    {
+      "name": "Hom",
+      "arg": {
+        "format": "[]",
+        "snippet": "Hom[${1:of}]"
+      }
+    }
+  ],
+  "envs": [],
+  "keys": {},
+  "args": []
+}
