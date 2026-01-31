@@ -61,4 +61,4 @@
 \end{answer}#n
 \begin{answer*}#n
 \begin{answer*}[heading]#n
-\end{answer*}
+\end{answer*}#n
