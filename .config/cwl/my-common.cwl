@@ -1,5 +1,7 @@
-# my-common.cwl
-# Autocompletion for my-common package
+#include:luatexja
+#include:amsmath
+#include:amssymb
+#include:hyperref
 
 \GenericMathOperator{symbol}#*
 \GenericMathOperator*{symbol}#*
