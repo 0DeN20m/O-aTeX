@@ -5,6 +5,7 @@ applyTo: '*/*.sty, **/*.cls'
 ---
 
 # LaTeX for package and class authors
+
 **Current version**
 
 **Copyright 2023-2025, LaTeX Project Team.**
@@ -102,13 +103,15 @@ This does not mean that we do not agree that there are many deficiencies in the 
 
 ### 2.4 Command names
 
-Prior to the introduction of the L3 programming layer described in the next section, LaTeX had three types of command.
+Prior to the introduction of the L3 programming layer described in the next section, LaTeX had three types of command:
 
 * There are the author commands, such as `\section`, `\emph` and `\times`: most of these have short names, all in lower case.
-* There are also the class and package writer commands: most of these have long mixed-case names such as the following.
-    ```latex
-    \InputIfFileExists \RequirePackage \PassOptionsToClass
-    ```
+* There are also the class and package writer commands: most of these have long mixed-case names such as the following:
+
+```latex
+\InputIfFileExists \RequirePackage \PassOptionsToClass
+```
+
 * Finally, there are the internal commands used in the LaTeX implementation, such as `\@tempcnta`, `\@ifnextchar` and `\@eha`: most of these commands contain `@` in their name, which means they cannot be used in documents, only in class and package files.
 
 Unfortunately, for historical reasons the distinction between these commands is often blurred. For example, `\hbox` is an internal command which should only be used in the LaTeX kernel, whereas `\m@ne` is the constant -1 and could have been `\MinusOne`.
@@ -144,12 +147,14 @@ LaTeX provides many commands designed to help you produce well-structured class 
 #### 2.7.1 Loading other files
 
 LaTeX provides these commands:
+
 ```latex
 \LoadClass
 \LoadClassWithOptions
 \RequirePackage
 \RequirePackageWithOptions
 ```
+
 for using classes or packages inside other classes or packages. We recommend strongly that you use them, rather than the primitive `\input` command, for a number of reasons.
 
 * Files loaded with `\input <filename>` will not be listed in the `\listfiles` list.
@@ -157,16 +162,20 @@ for using classes or packages inside other classes or packages. We recommend str
 * If a package provides option-processing then, again, strange results are possible if the package is `\input` rather than loaded by means of `\usepackage` or `\RequirePackage...`.
 
 If the package `foo.sty` loads the package `baz.sty` by use of `\input baz.sty` then the user will get a warning:
+
 ```text
 LaTeX Warning: You have requested package 'foo',
                but the package provides 'baz'.
 ```
+
 Thus, for several reasons, using `\input` to load packages is not a good idea. For example, `article.sty` contains just the following lines:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \@obsoletefile{article.cls}{article.sty}
 \LoadClass{article}
 ```
+
 You may wish to do the same or, if you think that it is safe to do so, you may decide to just remove `myclass.sty`.
 
 #### 2.7.2 Make it robust
@@ -188,6 +197,7 @@ It is also sensible to make your files are as portable as possible. To ensure th
 It is also useful if local classes or packages have a common prefix, for example the University of Nowhere classes might begin with `unw`. This helps to avoid every University having its own thesis class, all called `thesis.cls`.
 
 If you rely on some features of the LaTeX kernel, or on a package, please specify the release-date you need. For example, the keyval options (see Section 4.4) were introduced in the June 2022 release so, if you use them then you should put:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 ```
@@ -208,31 +218,41 @@ The outline of a class or package file is:
 ### 3.1 Identification
 
 The first thing a class or package file does is identify itself. Package files do this as follows:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{<package>}[<date> <other information>]
 ```
+
 For example:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{latexsym}[1998-08-17 Standard LaTeX package]
 ```
+
 Class files do this as follows:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{<class-name>}[<date> <other information>]
 ```
+
 For example:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{article}[2022-06-01 Standard LaTeX class]
 ```
+
 The `<date>` should be given in the form 'YYYY-MM-DD' or 'YYYY/MM/DD' and must be present if the optional argument is used. Exactly four digits are required for the year and two each for the month and day. Where necessary, zeros should be added to pad the month and day appropriately. If digits or separators are missing, the date will likely be misinterpreted: the commands expect a valid syntax to speed up the routine usage of the package or class and make no provision for the case there is an error in the date specification.
 
 This date is checked whenever a user specifies a date in their `\documentclass` or `\usepackage` command. For example, if you wrote:
+
 ```latex
 \documentclass{article}[2022-06-01]
 ```
+
 then users at a different location would get a warning that their copy of `article` was out of date.
 
 The description of a class is displayed when the class is used. The description of a package is put into the log file. These descriptions are also displayed by the `\listfiles` command. The phrase "Standard LaTeX" must not be used in the identification banner of any file other than those in the standard LaTeX distribution.
@@ -240,31 +260,42 @@ The description of a class is displayed when the class is used. The description 
 ### 3.2 Using classes and packages
 
 A LaTeX package or class can load a package as follows:
+
 ```latex
 \RequirePackage[<options>]{<package>}[<date>]
 ```
+
 For example:
+
 ```latex
 \RequirePackage{ifthen}[2022-06-01]
 ```
+
 This command has the same syntax as the author command `\usepackage`. It allows packages or classes to use features provided by other packages. For example, by loading the `ifthen` package, a package writer can use the 'if... then... else...' commands provided by that package.
 
 A LaTeX class can load one other class as follows:
+
 ```latex
 \LoadClass[<options>]{<class-name>}[<date>]
 ```
+
 For example:
+
 ```latex
 \LoadClass[twocolumn]{article}
 ```
+
 This command has the same syntax as the author command `\documentclass`. It allows classes to be based on the syntax and appearance of another class. For example, by loading the `article` class, a class writer only has to change the bits of `article` they don't like, rather than writing a new class from scratch.
 
 The following commands can be used in the common case that you want to simply load a class or package file with exactly those options that are being used by the current class.
+
 ```latex
 \LoadClassWithOptions{<class-name>}[<date>]
 \RequirePackageWithOptions{<package>}[<date>]
 ```
+
 For example:
+
 ```latex
 \LoadClassWithOptions{article}
 \RequirePackageWithOptions{graphics}[1995/12/01]
@@ -277,58 +308,77 @@ Packages and classes can declare options and these can be specified by authors; 
 LaTeX supports two methods for creating options: a key-value system and a 'simple text' approach. The key-value system is recommended for new classes and packages, and is more flexible in handling of option classes than the simple text approach. Both option methods use the same basic structure within the LaTeX source: declaration of options first then processing options in a second step. Both also allow options to be passed on to other packages or an underlying class. As the 'classical' simple text approach is conceptually more straightforward to illustrate, it is used here to show the general structure: see Section 4.4 for full details of the key-value approach.
 
 An option is declared as follows:
+
 ```latex
 \DeclareOption{<option>}{<code>}
 ```
+
 For example, the `dvips` option (slightly simplified) to the `graphics` package is implemented as:
+
 ```latex
 \DeclareOption{dvips}{\input{dvips.def}}
 ```
+
 This means that when an author writes `\usepackage[dvips]{graphics}`, the file `dvips.def` is loaded. As another example, the `a4paper` option is declared in the `article` class to set the `\paperheight` and `\paperwidth` lengths:
+
 ```latex
 \DeclareOption{a4paper}{%
   \setlength{\paperheight}{297mm}%
   \setlength{\paperwidth}{210mm}%
 }
 ```
+
 Sometimes a user will request an option which the class or package has not explicitly declared. By default this will produce a warning (for classes) or error (for packages); this behavior can be altered as follows:
+
 ```latex
 \DeclareOption*{<code>}
 ```
+
 For example, to make the package `fred` produce a warning rather than an error for unknown options, you could specify:
+
 ```latex
 \DeclareOption*{%
   \PackageWarning{fred}{Unknown option '\CurrentOption'}%
 }
 ```
+
 Then, if an author writes `\usepackage[foo]{fred}`, they will get a warning `Package fred Warning: Unknown option 'foo'`. As another example, the `fontenc` package tries to load a file `<ENC>enc.def` whenever the `<ENC>` option is used. This can be done by writing:
+
 ```latex
 \DeclareOption*{%
   \input{\CurrentOption enc.def}%
 }
 ```
+
 It is possible to pass options on to another package or class, using the command `\PassOptionsToPackage` or `\PassOptionsToClass` (note that this is a specialised operation that works only for option names): see Section 4.5. For example, to pass every unknown option on to the `article` class, you can use:
+
 ```latex
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{article}%
 }
 ```
+
 If you do this then you should make sure you load the class at some later point, otherwise the options will never be processed! So far, we have explained only how to declare options, not how to execute them. To process the options with which the file was called, you should use:
+
 ```latex
 \ProcessOptions\relax
 ```
+
 This executes the `<code>` for each option that was both specified and declared (see Section 7.4 for details of how this is done). For example, if the `jane` package file contains:
+
 ```latex
 \DeclareOption{foo}{\typeout{Saw foo.}}
 \DeclareOption{baz}{\typeout{Saw baz.}}
 \DeclareOption*{\typeout{What's \CurrentOption?}}
 \ProcessOptions\relax
 ```
+
 and an author writes `\usepackage[foo,bar]{jane}`, then they will see the messages `Saw foo.` and `What's bar?`.
 
 ### 3.4 A minimal class file
 
 Most of the work of a class or package is in defining new commands, or changing the appearance of documents. This is done in the body of the package, using commands such as `\newcommand` or `\setlength`. There are four things that every class file must contain: these are a definition of `\normalsize`, values for `\textwidth` and `\textheight` and a specification for page-numbering. So a minimal document class file looks like this:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{minimal}[2022-06-01 Standard LaTeX minimal class]
@@ -339,6 +389,7 @@ Most of the work of a class or package is in defining new commands, or changing 
 \pagenumbering{arabic}
 % needed even though this class will not show page numbers
 ```
+
 However, this class file will not support footnotes, marginals, floats, etc., nor will it provide any of the 2-letter font commands such as `\rm`; thus most classes will contain more than this minimum!
 
 This class is now in the standard distribution, as `minimal.cls`.
@@ -346,49 +397,64 @@ This class is now in the standard distribution, as `minimal.cls`.
 ### 3.5 Example: a local letter class
 
 A company may have its own letter class, for setting letters in the company style. This section shows a simple implementation of such a class, although a real class would need more structure. The class begins by announcing itself as `neplet.cls`.
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{neplet}[2022-06-01 NonExistent Press letter class]
 ```
+
 Then this next bit passes any options on to the `letter` class, which is loaded with the `a4paper` option.
+
 ```latex
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 \ProcessOptions\relax
 \LoadClass[a4paper]{letter}
 ```
+
 In order to use the company letter head, it redefines the `firstpage` page style: this is the page style that is used on the first page of letters.
+
 ```latex
 \renewcommand{\ps@firstpage}{%
   \renewcommand{\@oddhead}{<letterhead goes here>}%
   \renewcommand{\@oddfoot}{<letterfoot goes here>}%
 }
 ```
+
 And that's it!
 
 ### 3.6 Example: a newsletter class
 
 A simple newsletter can be typeset with LaTeX, using a variant of the `article` class. The class begins by announcing itself as `smplnews.cls`.
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{smplnews}[2022-06-01 The Simple News newsletter class]
 \newcommand{\headlinecolor}{\normalcolor}
 ```
+
 It passes most specified options on to the `article` class: apart from the `onecolumn` option, which is switched off, and the `green` option, which sets the headline in green.
+
 ```latex
 \DeclareOption{onecolumn}{\OptionNotUsed}
 \DeclareOption{green}{\renewcommand{\headlinecolor}{\color{green}}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 ```
+
 It then loads the class `article` with the option `twocolumn`.
+
 ```latex
 \LoadClass[twocolumn]{article}
 ```
+
 Since the newsletter is to be printed in colour, it now loads the `color` package. The class does not specify a device driver option since this should be specified by the user of the `smplnews` class.
+
 ```latex
 \RequirePackage{color}
 ```
+
 The class then redefines `\maketitle` to produce the title in 72 pt Helvetica bold oblique, in the appropriate colour.
+
 ```latex
 \renewcommand{\maketitle}{%
   \twocolumn[%
@@ -398,7 +464,9 @@ The class then redefines `\maketitle` to produce the title in 72 pt Helvetica bo
   ]%
 }
 ```
+
 It redefines `\section` and switches off section numbering.
+
 ```latex
 \renewcommand{\section}{%
   \@startsection
@@ -407,12 +475,15 @@ It redefines `\section` and switches off section numbering.
 }
 \setcounter{secnumdepth}{0}
 ```
+
 It also sets the three essential things.
+
 ```latex
 \renewcommand{\normalsize}{\fontsize{9}{10}\selectfont}
 \setlength{\textwidth}{17.5cm}
 \setlength{\textheight}{25cm}
 ```
+
 In practice, a class would need more than this: it would provide commands for issue numbers, authors of articles, page styles and so on; but this skeleton gives a start. The `ltnews` class file is not much more complex than this one.
 
 ## 4 Commands for class and package writers
@@ -426,9 +497,11 @@ The first group of commands discussed here are those used to identify your class
 `\NeedsTeXFormat{<format-name>}[<release-date>]`
 
 This command tells TeX that this file should be processed using a format with name `<format-name>`. You can use the optional argument `<release-date>` to further specify the earliest release date of the format that is needed. When the release date of the format is older than the one specified a warning will be generated. The standard `<format-name>` is `LaTeX2e`. The `<release-date>`, if present, must be in the form 'YYYY-MM-DD' or 'YYYY/MM/DD'. Example:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}[2022-06-01]
 ```
+
 People often don't know what date to put here. For the kernel, you can find out the right one by consulting `changes.txt` and select the release date of a new feature you are interested in. This is slightly different for packages as they are released throughout the year: you will need to consult their change history.
 
 ```latex
@@ -442,7 +515,9 @@ This declares that the current file contains the definitions for the document cl
 * optionally followed by a space and a short description, possibly including a version number.
 
 The above syntax must be followed exactly so that this information can be used by `\LoadClass` or `\documentclass` (for classes) or `\RequirePackage` or `\usepackage` (for packages) to test that the release is not too old. The whole of this `<release-info>` information is displayed by `\listfiles` and should therefore not be too long.
+
 Example:
+
 ```latex
 \ProvidesClass{article}[2022-06-01 v1.0 Standard LaTeX class]
 \ProvidesPackage{ifthen}[2022-06-01 v1.0 Standard LaTeX package]
@@ -451,10 +526,13 @@ Example:
 `\ProvidesFile{<file-name>}[<release-info>]`
 
 This is similar to the two previous commands except that here the full filename, including the extension, must be given. It is used for declaring any files other than main class and package files.
+
 Example:
+
 ```latex
 \ProvidesFile{T1enc.def}[2022-06-01 v1.0 Standard LaTeX file]
 ```
+
 Note that the phrase "Standard LaTeX" must not be used in the identification banner of any file other than those in the standard LaTeX distribution.
 
 ### 4.2 Loading files
@@ -466,7 +544,10 @@ This group of commands can be used to create your own document class or package 
 \RequirePackageWithOptions{<package-name>}[<release-info>]
 ```
 
-Packages and classes should use these commands to load other packages. The use of `\RequirePackage` is the same as the author command `\usepackage`. Examples:
+Packages and classes should use these commands to load other packages. The use of `\RequirePackage` is the same as the author command `\usepackage`.
+
+Examples:
+
 ```latex
 \RequirePackage{ifthen}[2022-06-01]
 \RequirePackageWithOptions{graphics}[2022-06-01]
@@ -478,10 +559,12 @@ Packages and classes should use these commands to load other packages. The use o
 ```
 
 These commands are for use only in class files, they cannot be used in packages files; they can be used at most once within a class file. The use of `\LoadClass` is the same as the use of `\documentclass` to load a class file. Examples:
+
 ```latex
 \LoadClass{article}[2022-06-01]
 \LoadClassWithOptions{article}[2022-06-01]
 ```
+
 The two `WithOptions` versions simply load the class (or package) file with exactly those options that are being used by the current file (class or package). See below, in 4.5, for further discussion of their use.
 
 ### 4.3 Delaying code
@@ -522,6 +605,7 @@ The basic properties provided here are:
 * `.usage`: defines whether the option can be given only when loading (`load`), in the preamble (`preamble`) or has no limitation on scope (`general`)
 
 The part of the `<key>` before the `<property>` is the `<name>`, with the `<value>` working with the `<property>` to define the behavior of the option. For example, with
+
 ```latex
 \DeclareKeys[mypkg]
   {
@@ -532,11 +616,13 @@ The part of the `<key>` before the `<property>` is the `<name>`, with the `<valu
     second-name.store  = \@mypkg@other@name
   }
 ```
+
 three options would be created. The option `draft` can be given anywhere in the preamble, and will set a switch called `\if@mypkg@draft`. The option `name` can only be given during package loading, and will save whatever value it is given in `\@mypkg@name`. Finally, the option `second-name` can be given anywhere, and will save its value in `\@mypkg@other@name`. Keys created before the use of `\ProcessKeyOptions` act as package options.
 
 `\DeclareUnknownKeyHandler[<family>]{<code>}`
 
 The command `\DeclareUnknownKeyHandler` may be used to define the behavior when an undefined key is encountered. The `<code>` will receive the unknown key name as `#1` and the value as `#2`. These can then be processed as appropriate, e.g. by forwarding to another package. The entire option is available as `\CurrentOption`, should it be necessary to pass on options which may or may not contain an `=` sign. For example, this may be used to pass an unknown option on to a non-keyval class such as `article`:
+
 ```latex
 \DeclareUnknownKeyHandler{%
   \PassOptionsToClass{\CurrentOption}{article}%
@@ -552,6 +638,7 @@ The `\ProcessKeyOptions` function is used to check the current option list again
 Sets (applies) the explicit list of `<keyvals>` for the `<family>`: if the latter is not given, the value of `\@currname` is used. This command may be used within a package to set options before or after using `\ProcessKeyOptions`.
 
 Here is the example from 3.6, using the key-value approach:
+
 ```latex
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{smplnews}[2022-06-01 The Simple News newsletter class]
@@ -579,46 +666,61 @@ These two commands are also very useful within the `<code>` argument of options.
 The command `\PassOptionsToPackage` passes the option names in `<options-list>` to package `<package-name>`. This means that it adds the `<option-list>` to the list of options used by any future `\RequirePackage` or `\usepackage` command for package `<package-name>`.
 
 Example:
+
 ```latex
 \PassOptionsToPackage{foo,bar}{fred}
 \RequirePackage[baz]{fred}
 ```
+
 is the same as:
+
 ```latex
 \RequirePackage[foo,bar,baz]{fred}
 ```
+
 Similarly, `\PassOptionsToClass` may be used in a class file to pass options to another class to be loaded with `\LoadClass`.
 
 The effects and use of these two commands should be contrasted with those of the following two (documented above, in 4.2):
+
 ```latex
 \LoadClassWithOptions
 \RequirePackageWithOptions
 ```
+
 The command `\RequirePackageWithOptions` is similar to `\RequirePackage`, but it always loads the required package with exactly the same option list as that being used by the current class or package, rather than with any option explicitly supplied or passed on by `\PassOptionsToPackage`. The main purpose of `\LoadClassWithOptions` is to allow one class to simply build on another, for example:
+
 ```latex
 \LoadClassWithOptions{article}
 ```
+
 This should be compared with the slightly different construction
+
 ```latex
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass{article}
 ```
+
 or
+
 ```latex
 \DeclareUnknownKeyHandler{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessKeyOptions
 \LoadClass{article}
 ```
+
 As used above, the effects are more or less the same, but the first is a lot less to type; also the `\LoadClassWithOptions` method runs slightly quicker.
 
 If, however, the class declares options of its own then the two constructions are different. Compare, for example:
+
 ```latex
 \DeclareOption{landscape}{\@landscapetrue}
 \ProcessOptions\relax
 \LoadClassWithOptions{article}
 ```
+
 or
+
 ```latex
 \DeclareKeys[mypkg]
   {
@@ -628,14 +730,18 @@ or
 \ProcessKeyOptions
 \LoadClassWithOptions{article}
 ```
+
 with:
+
 ```latex
 \DeclareOption{landscape}{\@landscapetrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass{article}
 ```
+
 or
+
 ```latex
 \DeclareKeys[mypkg]
   {
@@ -646,6 +752,7 @@ or
 \ProcessKeyOptions
 \LoadClass{article}
 ```
+
 In the first two, the `article` class will be loaded with option `landscape` precisely when the current class is called with this option. By contrast, in the second two it will never be called with option `landscape` as in that case `article` is passed options only by the default option handler, but this handler is not used for `landscape` because that option is explicitly declared.
 
 ### 4.6 Useful status tests
@@ -707,6 +814,7 @@ These commands should be used by third party classes and packages to report erro
 These produce an error message. The `<error-text>` is displayed and the `?` error prompt is shown. If the user types `h`, they will be shown the `<help-text>`. Within the `<error-text>` and `<help-text>`: `\protect` can be used to stop a command from expanding; `\MessageBreak` causes a line-break; and `\space` prints a space.
 
 Note that the `<error-text>` will have a full stop added to it, so do not put one into the argument. For example:
+
 ```latex
 \newcommand{\foo}{FOO}
 \PackageError{ethel}{%
@@ -718,19 +826,22 @@ Note that the `<error-text>` will have a full stop added to it, so do not put on
   \space to proceed, ignoring \protect\foo.
 }
 ```
+
 produces this display:
+
 ```text
 ! Package ethel Error: Your hovercraft is full of eels,
 (ethel)                and \foo is FOO.
 
 See the ethel package documentation for explanation.
 ```
- If the user types `h`, this will be shown:
+
+If the user types `h`, this will be shown:
+
 ```text
 Oh dear! Something's gone wrong.
   Try typing <return> to proceed, ignoring \foo.
 ```
-
 
 ```latex
 \ClassWarning{<class-name>}{<warning-text>}
@@ -775,6 +886,7 @@ As described in `usrguide`, case changing for text should be carried out using t
 `\ignorespacesafterend`
 
 Suppose that you want to define an environment for displaying text that is numbered as an equation. A straightforward way to do this is as follows:
+
 ```latex
 \newenvironment{texteqn}{%
   \begin{equation}%
@@ -784,7 +896,9 @@ Suppose that you want to define an environment for displaying text that is numbe
   \end{equation}%
 }
 ```
+
 However, if you have tried this then you will probably have noticed that it does not work perfectly when used in the middle of a paragraph because an inter-word space appears at the beginning of the first line after the environment. You can avoid this problem using `\ignorespacesafterend`; it should be inserted as shown here:
+
 ```latex
 \newenvironment{texteqn}{%
   \begin{equation}%
@@ -795,6 +909,7 @@ However, if you have tried this then you will probably have noticed that it does
   \ignorespacesafterend
 }
 ```
+
 This command may also have other uses.
 
 ### 5.4 Normalising spacing
@@ -811,7 +926,7 @@ Localisation information is needed to customise a range of outputs. The LaTeX ke
 
 The supported arguments are the BCP-47 tag breakdowns:
 
-* `tag`: The full BCP-47 tag (e.g. `en-US`)
+* `tag`: The full BCP-47 tag (e.g., `en-US`)
 * `language`: (e.g., `de`)
 * `region`: (e.g., `AT`)
 * `script`: (e.g., `Latn`)
@@ -820,14 +935,16 @@ The supported arguments are the BCP-47 tag breakdowns:
 * `extension.u`: (additional locale information, e.g., `ar-u-nu-latn`)
 * `extension.x`: (private use area, e.g., `la-x-classic`)
 
-The information for the main language for a document is be provided if these are prefixed by `main.`, e.g. `main.language` will expand to the main language even if another language is currently active. In addition to the tag breakdown, the following semantic arguments are supported:
+The information for the main language for a document is be provided if these are prefixed by `main.`, e.g., `main.language` will expand to the main language even if another language is currently active. In addition to the tag breakdown, the following semantic arguments are supported:
 
-* `casing`: The tag for case changing, e.g. `el-x-iota` could be selected rather than `el` to select a capital adscript iota on uppercasing an ypogegrammeni
+* `casing`: The tag for case changing, e.g., `el-x-iota` could be selected rather than `el` to select a capital adscript iota on uppercasing an ypogegrammeni
 
 For example, the case changing command `\MakeUppercase` is (conceptually) defined as
+
 ```latex
 \ExpandArgs{e}\MakeUppercaseAux{\BCPdata{casing}}{#1}
 ```
+
 where `#1` is the user input and the first argument to `\MakeUppercaseAux` takes two arguments, the locale and input text.
 
 ### 5.6 Extended and expandable references of properties
@@ -837,6 +954,7 @@ A property is something that LaTeX can track while processing the document, such
 `\RecordProperties{<label>}{<list of properties>}`
 
 This command writes the value(s) of the `<list of properties>` to the aux-file labeled by `<label>`. Recorded are either the values current when `\RecordProperties` is called or the value current when the next shipout happens which depends on the declaration for each property. The arguments `<label>` and `<list of properties>` can contain commands that are expanded. `<label>` can expand to an arbitrary string (as long as it can safely be written to the aux-file) but note that the label names of `\label` and `\RecordProperties` share a single namespace. This means that you get a `Label 'A' multiply defined` warning with the following code:
+
 ```latex
 \label{A}\RecordProperties{A}{abspage}
 ```
@@ -853,25 +971,28 @@ This command allows to reference the value of the property `<property>` recorded
 ```
 
 As `\RefProperty` is expandable it can not issue a rerun warning if a label is not found. If needed such a warning can be forced by the following command:
+
 ```latex
 \RefUndefinedWarn{<label>}{<property>}
 ```
+
 LaTeX predefines a set of properties, this set contains also the properties stored by the standard `\label` command. In the list below "default" indicates the value returned when the value is not yet known (i.e., if it wasn't recorded in the previous run and "at shipout" means that this property is not recorded immediately when `\RecordProperties` is used but during the next `\shipout`.
 
 * `abspage` (default: 0, at shipout): The absolute value of the current page: starts at 1 and increases monotonically at each shipout.
 * `page` (default: 0, at shipout): The current page as given by `\thepage`: this may or may not be a numerical value, depending on the current style. Contrast with `abspage`. You get this value also with the standard `\label`/`\pageref`.
 * `pagenum` (default: 0, at shipout): The current page as arabic number. This is suitable for integer operations and comparisons.
 * `label` (default: `??`): The content of `\@currentlabel`. This is the value that you get also with the standard `\label`/`\ref`.
-* `title` (default: `\textbf{??}`): The content of `\@currentlabelname`. This command is filled beside others by the `nameref` package and some classes (e.g. `memoir`) and typically gives the title defined in the document by some sectioning command
+* `title` (default: `\textbf{??}`): The content of `\@currentlabelname`. This command is filled beside others by the `nameref` package and some classes (e.g., `memoir`) and typically gives the title defined in the document by some sectioning command.
 * `target` (default: (empty)): The content of `\@currentHref`. This command is normally filled by `hyperref` and holds the name of the last destination it created.
 * `pagetarget` (default: (empty), at shipout): The content of `\@currentHpage`. This command is filled by `hyperref` (version v7.01c or newer) and holds the name of the last page anchor it created.
 * `counter` (default: (empty)): The content of `\@currentcounter`. This command contains after a `\refstepcounter` the name of the counter.
 * `xpos`, `ypos` (default: 0, at shipout): These properties records the x and y coordinates of a point previously stored with `\pdfsavepos`/`\savepos`. E.g. (if bidi is used it can be necessary to save the position before and after the label):
-    ```latex
-    \pdfsavepos
-    \RecordProperties{myposition}{xpos,ypos}
-    \pdfsavepos
-    ```
+
+```latex
+\pdfsavepos
+\RecordProperties{myposition}{xpos,ypos}
+\pdfsavepos
+```
 
 Class and package authors can define more properties to store other values they are interested in.
 
@@ -881,20 +1002,22 @@ Class and package authors can define more properties to store other values they 
 ```
 
 These commands declare or change a property `<name>`. If a new property is declared within a package it is suggested that its name is always structured as follows: `<package-name>/<property-name>`. `<setpoint>` is either `now` or `shipout` and decides if the value is written directly or at the next shipout. `<default>` is used if the property is referenced but not yet known, e.g., in the first run. `<code>` is the code executed when storing the value. For example, the `pagenum` property is declared as
+
 ```latex
 \NewProperty{pagenum}{shipout}{0}{\the\value{page}}
 ```
+
 Only change properties that you have declared. The declarations of standard properties of LaTeX and properties of other packages should never be altered!
 
 The commands related to properties are offered as a set of CamelCase commands for traditional LaTeX2e packages (and for use in the document preamble if needed) as well as `expl3` commands for modern packages, that use the L3 programming layer of LaTeX. The `expl3` commands and more details can be found in `ltproperties-doc.pdf`.
 
-#### 5.6.1 Templates (prototype document commands)
+### 5.6.1 Templates (prototype document commands)
 
-Templates as defined by LaTeX are a mechanism to cleanly separate the three layers needed for writing a document
+Templates as defined by LaTeX are a mechanism to cleanly separate the three layers needed for writing a document:
 
-1.  authoring of the text with mark-up;
-2.  document layout design;
-3.  implementation (with TeX programming) of the design.
+1. authoring of the text with mark-up;
+2. document layout design;
+3. implementation (with TeX programming) of the design.
 
 They allow document authors to modify design without altering code, and allow programmers to make portable changes to classes. Implementing this mechanism requires a number of steps and a family of commands which allow variation in outcomes. A typical use of templates will make use of most or all of `\NewTemplateType`, `\DeclareTemplateInterface`, `\DeclareTemplateCode`, `\DeclareInstance` and `\UseInstance`, plus potentially some more specialised commands. These are described in `lttemplates-doc` in full detail.
 
@@ -907,15 +1030,18 @@ Active links in a document need targets to which they can jump to. Such targets 
 \MakeLinkTarget[<prefix>]{}
 \MakeLinkTarget*{<target name>}
 ```
+
 This command prepares the creations of targets.
 
 ```latex
 \LinkTargetOn
 \LinkTargetOff
 ```
+
 These commands allow to enable and disable locally the creation of targets. This can be useful to suppress targets otherwise created automatically by `\refstepcounter`.
 
 `\NextLinkTarget{<target name>}`
+
 This changes the name of the next target that will be created.
 
 ### 5.8 Querying document command argument specifications
@@ -926,16 +1052,16 @@ There are some specialized cases in which a package author may need to query the
 
 For nearly 40 years LaTeX's output routine (the mechanism to paginate the document and attach footnotes, floats and headers & footers) was a largely hardwired algorithm with a limited number of configuration possibilities. Packages or classes that attempted to alter one or the other aspect of the process had to overwrite the internals with the usual problems: incompatibilities and out of date code whenever something was changed in LaTeX. To improve this situation and to support the production of accessible PDF documents we started in 2024 to refactor the output routine and have added a number of hooks and sockets, so that packages that want to adjust the output routine can do so safely without the dangers associated with that in the past. For packages, we implemented the following hooks:
 
-* `build/page/before`, `build/page/after`: These two hooks enable packages to prepend or append code to the page processing in the output routine. They are implemented as mirrored hooks.
-    Technically, they are executed at the start and the end of the internal LaTeX2e `\@outputpage` command, respectively. A number of packages alter that command to place code in exactly these two places—they can now simply add their code to the hooks instead.
+* `build/page/before`, `build/page/after`: These two hooks enable packages to prepend or append code to the page processing in the output routine. They are implemented as mirrored hooks. Technically, they are executed at the start and the end of the internal LaTeX2e `\@outputpage` command, respectively. A number of packages alter that command to place code in exactly these two places—they can now simply add their code to the hooks instead.
 * `build/page/reset`: Packages that set up special conventions for text in the main galley (such as catcode changes, etc.) can use this hook to undo these changes within the output routine, so that they aren't applied to unrelated material, e.g., the text for running header or footers.
-* `build/column/before`, `build/column/after`: These two hooks enable packages to prepend or append code to the column processing in the output routine. They are implemented as mirrored hooks.
-    Technically, they are executed at the start and the end of the internal LaTeX2e `\@makecol` command, respectively. A number of packages alter `\@makecol` to place code in exactly these two places—they can now simply add their code to the hooks instead.
+* `build/column/before`, `build/column/after`: These two hooks enable packages to prepend or append code to the column processing in the output routine. They are implemented as mirrored hooks. Technically, they are executed at the start and the end of the internal LaTeX2e `\@makecol` command, respectively. A number of packages alter `\@makecol` to place code in exactly these two places—they can now simply add their code to the hooks instead.
 
-We also added a number of sockets for configuring the algorithm and to support tagging. One socket that is of interest for class files but also for user in the document preamble is `build/column/outputbox`. It defines how the column text, the column floats (top and bottom) and the footnotes are combined, i.e. their order and spacing. To change the layout all one has to do is to assign a different predefined plug to the socket with
+We also added a number of sockets for configuring the algorithm and to support tagging. One socket that is of interest for class files but also for user in the document preamble is `build/column/outputbox`. It defines how the column text, the column floats (top and bottom) and the footnotes are combined, i.e., their order and spacing. To change the layout all one has to do is to assign a different predefined plug to the socket with
+
 ```latex
 \AssignSocketPlug{build/column/outputbox}{<plug-name>}
 ```
+
 The predeclared plugs are the following:
 
 * `space-footnotes-floats`: After the galley text there is a vertical `\vfill` followed by the footnotes, followed by the bottom floats, if any.
@@ -962,6 +1088,7 @@ The *-forms of these commands should be used to define commands that are not, in
 ```
 
 This command takes the same arguments as `\newcommand` but it declares a robust command, even if some code within the `<definition>` is fragile. You can use this command to define new robust commands, or to redefine existing commands and make them robust. A log is put into the transcript file if a command is redefined. For example, if `\seq` is defined as follows:
+
 ```latex
 \DeclareRobustCommand{\seq}[2][n]{%
   \ifmmode
@@ -971,10 +1098,13 @@ This command takes the same arguments as `\newcommand` but it declares a robust 
   \fi
 }
 ```
+
 Then the command `\seq` can be used in moving arguments, even though `\ifmmode` cannot, for example:
+
 ```latex
 \section{Stuff about sequences $\seq{x}$}
 ```
+
 Note also that there is no need to put a `\relax` before the `\ifmmode` at the beginning of the definition; this is because the protection given by this `\relax` against expansion at the wrong time will be provided internally.
 
 ```latex
@@ -997,6 +1127,7 @@ There are some commands designed especially for use within the `<code>` argument
 This makes `<option-name>` a 'declared option' of the class or package in which it is put. The `<code>` argument contains the code to be executed if that option is specified for the class or package; it can contain any valid LaTeX2e construct.
 
 Example:
+
 ```latex
 \DeclareOption{twoside}{\@twosidetrue}
 ```
@@ -1024,22 +1155,28 @@ This causes the current option to be added to the list of 'unused options'.
 This command executes the `<code>` for each selected option. We shall first describe how `\ProcessOptions` works in a package file, and then how this differs in a class file. To understand in detail what `\ProcessOptions` does in a package file, you have to know the difference between local and global options.
 
 * **Local options** are those which have been explicitly specified for this particular package in the `<options>` argument of any of these:
-    ```latex
-    \PassOptionsToPackage{<options>} \usepackage[<options>]
-    \RequirePackage[<options>]
-    ```
+
+```latex
+\PassOptionsToPackage{<options>} \usepackage[<options>]
+\RequirePackage[<options>]
+```
+
 * **Global options** are any other options that are specified by the author in the `<options>` argument of `\documentclass[<options>]`.
 
 For example, suppose that a document begins:
+
 ```latex
 \documentclass[german,twocolumn]{article}
 \usepackage{gerhardt}
 ```
+
 whilst package `gerhardt` calls package `fred` with:
+
 ```latex
 \PassOptionsToPackage{german,dvips,a4paper}{fred}
 \RequirePackage[errorshow]{fred}
 ```
+
 then:
 
 * `fred`'s local options are `german`, `dvips`, `a4paper` and `errorshow`;
@@ -1051,6 +1188,7 @@ When `\ProcessOptions` is called, the following happen.
 * Then, for each remaining local option, the command `\ds@<option>` is executed if it has been defined somewhere (other than by a `\DeclareOption`); otherwise, the 'default option code' is executed. If no default option code has been declared then an error message is produced. This is done in the order in which these options were specified.
 
 Throughout this process, the system ensures that the code declared for an option is executed at most once. Returning to the example, if `fred.sty` contains:
+
 ```latex
 \DeclareOption{dvips}{\typeout{DVIPS}}
 \DeclareOption{german}{\typeout{GERMAN}}
@@ -1058,14 +1196,17 @@ Throughout this process, the system ensures that the code declared for an option
 \DeclareOption*{\PackageWarning{fred}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 ```
+
 then the result of processing this document will be:
+
 ```text
 DVIPS
 GERMAN
 Package fred Warning: Unknown 'a4paper'.
 Package fred Warning: Unknown 'errorshow'.
 ```
- Note the following:
+
+Note the following:
 
 * the code for the `dvips` option is executed before that for the `german` option, because that is the order in which they are declared in `fred.sty`;
 * the code for the `german` option is executed only once, when the declared options are being processed;
@@ -1080,6 +1221,7 @@ This is like `\ProcessOptions` but it executes the options in the order specifie
 `\ExecuteOptions{<options-list>}`
 
 It can be used to provide a 'default option list' just before `\ProcessOptions`. For example, suppose that in a class file you want to set up the default design to be: two-sided printing; 11pt fonts; in two columns. Then it could specify:
+
 ```latex
 \ExecuteOptions{11pt,twoside,twocolumn}
 ```

@@ -1,41 +1,144 @@
 ---
 applyTo: '**/*.cwl'
 ---
-# TeXstudio CWL Format Definition
+# cwl形式の解説
 
-## Syntax
-Format: `<command>[args][#classification]`
-Comment: Starts with `#`
+## 4.13 cwl形式の解説
 
-## Argument Semantics (inside `{}` or `[]`)
-- `%text`: Text (spellchecked)
-- `%title`: Section title
-- `%label`: Label reference
-- `%bibid`: Bib ID
-- `%cmd`: Command definition
-- `%file`: Filename
-- `%color`: Color name
-- `%plain`: No processing
+cwlはcompletion word list（補完単語リスト）の略であり、もともとは補完の際に並べられるコマンドを定義するためKileで使用されていたファイル形式である。
+TeXstudioではcwlの拡張書式を用いて、追加の意味情報を含ませたりカーソルやプレースホルダの配置を行えるようにしている。
+TeXstudioでは次の目的のためにcwlを利用している：
 
-## Classifications (Suffix `#`)
-| Key | Meaning | Key | Meaning |
-| :-- | :-- | :-- | :-- |
-| `S` | Structure | `T` | Title (`\title`) |
-| `M` | Math mode only | `m` | No math mode |
-| `n` | Text mode only | `t` | Tabbing env |
-| `r` | Ref (`\ref`) | `c` | Cite (`\cite`) |
-| `C` | Complex cite | `l` | Label def (`\label`) |
-| `L` | Length | `d` | Def (`\newcommand`) |
-| `g` | Graphic (`\includegraphics`) | `i` | Include (`\include`) |
-| `u` | Package (`\usepackage`) | `b` | Bib (`\bibliography`) |
-| `U` | URL | `D` | TODO item |
-| `B` | Color def | `*` | Rare (hidden in completion) |
+- 自動補完の事前設定
+- 現在の文書における有効なコマンドの認識（\usepackage文に基づく）
+- エディタ上の追加コンテキストを提供する意味情報;例：\refのようなコマンドは参照されるラベルが存在するかどうかを確認する。
 
-## Special Directives
-- `#include:pkgname` : Load `pkgname.cwl`
-- `#keyvals:cmd[,cmd2]` ... `#endkeyvals` : Define key/value pairs for `cmd`.
-  - `key` or `key=#val1,val2`
-  - `key##L` : Value is length
-  - `key##l` : Value is label def
-  - `key=%<text%>` : Value is spellchecked text
-  - `#c` : Completion only (no syntax check)
+### 4.13.1 cwlファイルの書式
+
+cwlファイルの各行ではコマンドが定義されている。
+コメント行も可能であり、`#`で始めればよい。
+コマンド構文は次の形で表される。
+
+```
+<command>[#classification]
+```
+
+分類classificationがない場合、そのコマンドはLaTeX文書のあらゆる位置で有効であるとみなされる。
+文字`#`は、次のような特別な意味があるので、`command`内で使用することはできない：
+
+- `#include:<packagename>`（行の最初で）：packagename.cwlも読み込む。これはあるパッケージが他のパッケージに依存していることを示すのに使用する。
+- `#repl:<search> <replacement>`（行の最初で）：文字の置換を定義する（例：ドイツ語に対して"a -> ä）。スペルチェック(babel)における文字置換に対してのみ用いられる。
+- `#keyvals:<command>`（行の最初で）：`command`に対するkeyvalsの定義を開始する（ソースコードのgraphicx.cwlを参照）。キーに対する可能な値を指定するため、#の後ろにそれらを追加する（例：`mode=#text,math`）。
+  単一のキー／値の代わりに、完全な特殊リストを与えることができる（例：`color=#%color`、tikz.cwlも参照のこと）。
+  `command`は2つの部分からなる（例：\documentclass/thesisはコマンド\documentclassが引数としてthesisを使用する場合にのみ有効である）。
+  #cが追加されている場合、keyvalsは補完にのみ用いられて構文チェックには用いられない。
+- `#endkeyvals`（行の最初で）：keyvalsの定義の終わりを示す（ソースコードのgraphicx.cwlを参照）。
+- `#ifOption:<option>`（行の最初で）：以降のブロックは、<option>がusepackageコマンドで使われた場合にのみ読み込まれる（例：\usepackage[svgnames]{color} -> option=svgnames）
+- `#endif`（行の最初で）：条件ブロックの終わりを示す
+- `#`（`#include,#repl,#keyvals,#endkeyvals`を除いた行の最初で）：この行はコメントであり、無視される。
+- `#`（行中で）：コマンドcommandと分類classificationを分ける。
+
+cwlファイルはUTF-8としてエンコードされていなければならない。
+
+### 4.13.2 コマンド書式
+
+最も単純な形式では、文書で見られるようにコマンドは単なる有効なLaTeX表記である（例：`\section{title}`）。
+既定では全てのオプションはプレースホルダとして扱われる。
+かわりに、`%|`でカーソルの停止位置を定義（例：`\left(%|\right)`）するか、`%< %>`を用いてオプションの一部のみをプレースホルダとしてしるし付け（例：`\includegraphics[scale=%<1%>]{file}`）してもよい。
+改行は`%n`でコマンドに含めることができる。
+
+#### 引数の名前
+
+引数の名前は、補完ウィンドウに表示され、補完後はエディタ上にプレースホルダとして表示される。
+一般的に、引数の名前は好きなように自由に名付けてよい。
+我々は意味ある名前を与えることを勧める（例：`\parbox[arg1]{arg2}{arg3}`ではなく`\parbox[position]{width}{text}`）。
+
+特別な意味を持つ引数名がいくつかある：
+
+| 引数名 | 意味 |
+|--------|------|
+| `text`あるいは`%text`で終わる | スペルチェッカーはこの引数内で作動する（既定では引数はスペルチェックされない）。 |
+| `title`あるいは`short title` | スペルチェッカーはこの引数内で作動する（既定では引数はスペルチェックされない）。さらに、引数は（section内のように）ボールド体で設定される。 |
+| `bibid`と`cite key` | コマンド内で使用される場合、"C"と分類される。下の分類子解説を見よ。 |
+| `cmd`と`command`あるいは`%cmd`で終わる | コマンドに対する定義（例：\newcommand{cmd}）。この例の"cmd"は引数は無く、何も機能性を伝えないとみなされる。 |
+| `def`と`definition` | コマンドの実際の定義（例：\newcommand{cmd}{definition}）。この例の"definition"は構文チェックに対しては無視される。 |
+| `args` | コマンドに対する引数の数（例：\newcommand{cmd}[args]{definition}）。 |
+| `package` | パッケージ名（例：\usepackage{package}） |
+| `title`と`short title` | section名（例：\section{title}） |
+| `color` | 色名（例：\textcolor{color}） |
+| `width`、`length`、`height`あるいは`%l`で終わる | 幅または長さのオプション（例：\abc{size%l}） |
+| `cols`と`preamble` | tabularなどでの列定義（例：\begin{tabular}{cols}） |
+| `file` | ファイル名 |
+| `URL` | URL |
+| `options` | パッケージオプション（例：\usepackage[options]） |
+| `imagefile` | 画像のファイル名 |
+| `key` | ラベル／参照のキー |
+| オプション`#r`付きの`label`または`%ref`で終わるキー | 参照キー |
+| `labellist` | cleverefで用いられるラベルのリスト |
+| `bib file`と`bib files` | 参考文献ファイル |
+| `class` | ドキュメントクラス |
+| `placement`と`position` | 環境の位置 |
+| `beamertheme` | beamerのテーマ（例：\usebeamertheme{beamertheme}） |
+| `keys`、`keyvals`そして`%<options%>` | キー／値のリスト |
+
+### 4.13.3 分類の書式
+
+次の分類がTXSでは有効である：
+
+| 分類子 | 意味 |
+|--------|------|
+| `*` | 「全て」タブでのみ補完に用いられる珍しいコマンド。この印は他の分類子とともに用いてもよい。 |
+| `S` | 補完の際に全く表示されない。この印は他の分類子とともに用いてもよい。 |
+| `m` | 数式環境でのみ有効 |
+| `t` | tabular環境（または同様の環境）でのみ有効 |
+| `T` | tabbing環境でのみ有効 |
+| `n` | テキスト環境（つまり数式環境でない）でのみ有効 |
+| `r` | このコマンドは"\ref{key}"のような参照を表すことを示す。 |
+| `c` | このコマンドは"\cite{key}"のような引用を表すことを示す。 |
+| `C` | このコマンドは"\textcquote{bibid}{text}"のような複雑な引用を表すことを示す。キーは`bibid`として与えられる必要がある。 |
+| `l` | このコマンドは"\label{key}"のようなラベルを表すことを示す。 |
+| `d` | このコマンドは"\newcommand{cmd}{def}"のような定義コマンドを表すことを示す。 |
+| `g` | このコマンドは"\includegraphics{file}"のような画像読み込みコマンドを表すことを示す。 |
+| `i` | このコマンドは"\include{file}"のようなファイル読み込みコマンドを表すことを示す。 |
+| `u` | このコマンドは"\usepackage{package}"のようなパッケージ使用コマンドを表すことを示す。 |
+| `b` | このコマンドは"\bibliography{bib}"のような参考文献を表すことを示す。 |
+| `U` | このコマンドは"\url{URL}"のようなurlコマンドを表すことを示す（ただしURLはチェックされない） |
+| `D` | このコマンドはtodo項目を表すことを示す（サイドパネルのtodoリストに追加される） |
+| `B` | このコマンドは色を表すことを示す（色補完に対してのみ利用され、構文チェックには用いられない） |
+| `s` | このコマンドは特別な定義を表すことを示す。定義クラスは"#"の後に与えられる。クラス名は%に続ける必要がある（例：%color）。以下の例も参照のこと。 |
+| `V` | このコマンドはverbatimのような環境"\begin{Verbatim}"を表すことを示す。 |
+| `/env1,env2,...` | 環境env1、env2…内でのみ有効 |
+| `\env` | 環境の別名であることを表し、"env"環境のようにその環境が扱われることを意味する。これはenv=math, tabularに対して有用である。 |
+
+引数の意味を指定する分類子（cやiのような）は常に最初の非オプションパラメータに適用される。
+これはcwl書式とTXSのLaTeXパーサーの現在の限界によるものである。
+例えば、`\ref{label}#r`と`\ref[option]{label}#r`は期待通りに働くが、
+`\ref{arg}{label}#r`は`arg`を参照として解釈する。
+我々はこのような場合にはどの分類も指定しないことを勧める。
+
+**例**
+
+| 行 | 解説 |
+|----|------|
+| `# test` | コメント |
+| `\typein{msg}#*` | 「全て」タブの補完にのみ表示される珍しいコマンド |
+| `\sqrt{arg}#m` | 数式モードでのみ有効 |
+| `\pageref{key}#r` | 補完に正しく使用される参照コマンドを表す。 |
+| `\vector(xslope,yslope){length}#*/picture` | picture環境でのみ有効な珍しいコマンド |
+| `\begin{align}#\math` | コマンドの妥当性や構文強調に関しては、"align"環境が数式環境のように扱われることを表す！ |
+| `\definecolor{name}{model}{color-spec}#s#%color` | `name`を特殊リスト`%color`に追加する |
+
+### 4.13.4 cwlガイドライン
+
+TeXstudioはパッケージからcwlを自動的に作成するが、こうした自動生成されたcwlは意味ある引数名やコマンドの分類を含んでいない。
+従って多くのパッケージに対して手動調整したcwlファイルが同梱されている。
+我々はユーザーの新しいcwlファイルへの寄与を奨励する。
+これらは次の属性を持つ：
+
+- **package-based:** それぞれのcwlは一つのパッケージに対応している。例外は基本的な(La)TeXコマンドを含むcwlであるが、それらは我々がすでに書いているのでユーザーが悩む必要はない。cwlファイルは、自動読み込みが機能するようにパッケージと同じ名前をつけるべきである。もし`\usepackage{mypackage}`という記述があれば、TeXstudioは利用可能であればmypackage.cwlを読み込む。
+
+- **complete:** cwlはパッケージの全てのコマンドを含むべきである。もしエディタで未指定のコマンドを使用すると、構文チェッカーはそれをunknown（未知）としるし付けする。
+
+- **specific:** コマンドは可能であれば分類すべきである。これによりTeXstudioはコマンドに追加のコンテキストを与えることができる（例：数式コマンドが数式環境の外で使用されている場合に警告したり、参照や引用を確認したりする）。
+
+- **priorized:** いくつかのパッケージでは非常に多くのコマンドが指定されているかもしれない。珍しいものを*分類子でしるし付けして、滅多に使わないコマンドで補完が重くなるのを防ぐ。
