@@ -1,6 +1,47 @@
 \documentclass{jlreq}
 \usepackage{my-common}
 
+\NewDocumentCommand\tuple{m}{%
+  \left( #1 \right)%
+}
+
+% 内積
+\NewDocumentCommand\innerproduct{o m m}{%
+  \left\langle #2, #3 \right\rangle%
+  \IfValueT{#1}{_{#1}}%
+}
+
+% ノルム
+\NewDocumentCommand{\norm}{o m}{%
+  \left\| #2 \right\|%
+  \IfValueT{#1}{_{#1}}%
+}
+
+% 距離
+\NewDocumentCommand{\distance}{o m}{%
+  \mathop{\mathrm{#2}}%
+  \IfValueT{#1}{_{#1}}%
+}
+
+% 等長変換群
+\NewDocumentCommand\Isom{}{%
+  \mathop{\mathrm{Isom}}\nolimits%
+}
+
 \begin{document}
-$\Aut$
+
+$V = \tuple{V, \innerproduct{}{}}$を内積空間とする．
+このとき，$v \in V$上のノルム$\norm{v}$を
+\begin{equation}
+  \norm{v} = \sqrt{\innerproduct{v}{v}}
+\end{equation}
+で定義すれば，$V$上の距離$\distance{d}$が
+\begin{equation}
+  \distance{d}(u, v) = \norm{v - u}
+\end{equation}
+で定められる．このとき，等長変換群$\Isom V$は
+\begin{equation}
+  \Isom V = \SetComprehension{f : V \to V}{\forall u, v \in V \distance{d}(f(u), f(v)) = \distance{d}(u, v)}
+\end{equation}
+で与えられる．
 \end{document}
