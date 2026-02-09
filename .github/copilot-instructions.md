@@ -1,1 +1,2 @@
-本環境では、cwlはTeXstudioにおける補完単語リストファイルを意味する。
+- 本環境では、cwlはTeXstudioにおける補完単語リストファイルを意味する。
+- jlreqパッケージについては、 #file:./instructions/jlreq.instructions.md を参照すること。
