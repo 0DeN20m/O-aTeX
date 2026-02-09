@@ -10,7 +10,16 @@
       "name": "amssymb"
     },
     {
+      "name": "amsthm"
+    },
+    {
       "name": "hyperref"
+    },
+    {
+      "name": "makeidx"
+    },
+    {
+      "name": "luatexja-ruby"
     }
   ],
   "macros": [
@@ -35,7 +44,7 @@
       "unusual": true,
       "arg": {
         "format": "{}[]",
-        "snippet": "GenericMathOperator{${1:symbol}}[${2:subscript}]"
+        "snippet": "GenericMathOperator{${1:symbol}}[${2:sub}]"
       }
     },
     {
@@ -43,7 +52,7 @@
       "unusual": true,
       "arg": {
         "format": "{}[]",
-        "snippet": "GenericMathOperator*{${1:symbol}}[${2:subscript}]"
+        "snippet": "GenericMathOperator*{${1:symbol}}[${2:sub}]"
       }
     },
     {
@@ -51,7 +60,7 @@
       "unusual": true,
       "arg": {
         "format": "{}[][]",
-        "snippet": "GenericMathOperator{${1:symbol}}[${2:subscript}][${3:superscript}]"
+        "snippet": "GenericMathOperator{${1:symbol}}[${2:sub}][${3:super}]"
       }
     },
     {
@@ -59,59 +68,457 @@
       "unusual": true,
       "arg": {
         "format": "{}[][]",
-        "snippet": "GenericMathOperator*{${1:symbol}}[${2:subscript}][${3:superscript}]"
+        "snippet": "GenericMathOperator*{${1:symbol}}[${2:sub}][${3:super}]"
       }
     },
     {
-      "name": "N"
-    },
-    {
-      "name": "Z"
-    },
-    {
-      "name": "Q"
-    },
-    {
-      "name": "R"
-    },
-    {
-      "name": "C"
-    },
-    {
-      "name": "id"
-    },
-    {
-      "name": "Aut"
-    },
-    {
-      "name": "Aut",
+      "name": "GenericMathOperator",
+      "unusual": true,
       "arg": {
-        "format": "[]",
-        "snippet": "Aut[${1:of}]"
+        "format": "[]{}",
+        "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}"
       }
     },
     {
-      "name": "End"
-    },
-    {
-      "name": "End",
+      "name": "GenericMathOperator*",
+      "unusual": true,
       "arg": {
-        "format": "[]",
-        "snippet": "End[${1:of}]"
+        "format": "[]{}",
+        "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}"
       }
     },
     {
-      "name": "Hom"
+      "name": "GenericMathOperator",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[]",
+        "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}[${3:sub}]"
+      }
     },
     {
-      "name": "Hom",
+      "name": "GenericMathOperator*",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[]",
+        "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}[${3:sub}]"
+      }
+    },
+    {
+      "name": "GenericMathOperator",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[][]",
+        "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
+      }
+    },
+    {
+      "name": "GenericMathOperator*",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[][]",
+        "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
+      }
+    },
+    {
+      "name": "GenericTuple",
+      "unusual": true,
+      "arg": {
+        "format": "{}{}{}",
+        "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}"
+      }
+    },
+    {
+      "name": "GenericTuple",
+      "unusual": true,
+      "arg": {
+        "format": "{}{}{}[]",
+        "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}[${4:sub}]"
+      }
+    },
+    {
+      "name": "GenericTuple",
+      "unusual": true,
+      "arg": {
+        "format": "{}{}{}[][]",
+        "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}[${4:sub}][${5:super}]"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "{}",
+        "snippet": "GenericVariable{${1:symbol}}"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "{}[]",
+        "snippet": "GenericVariable{${1:symbol}}[${2:sub}]"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "{}[][]",
+        "snippet": "GenericVariable{${1:symbol}}[${2:sub}][${3:super}]"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}",
+        "snippet": "GenericVariable[${2:font}]{${1:symbol}}"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[]",
+        "snippet": "GenericVariable[${2:font}]{${1:symbol}}[${3:sub}]"
+      }
+    },
+    {
+      "name": "GenericVariable",
+      "unusual": true,
+      "arg": {
+        "format": "[]{}[][]",
+        "snippet": "GenericVariable[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
+      }
+    },
+    {
+      "name": "naturalnumbers"
+    },
+    {
+      "name": "integers"
+    },
+    {
+      "name": "rationalnumbers"
+    },
+    {
+      "name": "realnumbers"
+    },
+    {
+      "name": "complexnumbers"
+    },
+    {
+      "name": "dummy"
+    },
+    {
+      "name": "tuple",
+      "arg": {
+        "format": "{}",
+        "snippet": "tuple{${1:content}}"
+      }
+    },
+    {
+      "name": "norm",
+      "arg": {
+        "format": "{}",
+        "snippet": "norm{${1:of}}"
+      }
+    },
+    {
+      "name": "norm",
+      "arg": {
+        "format": "[]{}",
+        "snippet": "norm[${2:on}]{${1:of}}"
+      }
+    },
+    {
+      "name": "innerproduct",
+      "arg": {
+        "format": "{}{}",
+        "snippet": "innerproduct{${1:elem1}}{${2:elem2}}"
+      }
+    },
+    {
+      "name": "innerproduct",
+      "arg": {
+        "format": "[]{}{}",
+        "snippet": "innerproduct[${3:for}]{${1:elem1}}{${2:elem2}}"
+      }
+    },
+    {
+      "name": "identitymap"
+    },
+    {
+      "name": "identitymap",
       "arg": {
         "format": "[]",
-        "snippet": "Hom[${1:of}]"
+        "snippet": "identitymap[${1:of}]"
+      }
+    },
+    {
+      "name": "automorphisms"
+    },
+    {
+      "name": "automorphisms",
+      "arg": {
+        "format": "[]",
+        "snippet": "automorphisms[${1:of}]"
+      }
+    },
+    {
+      "name": "endomorphisms"
+    },
+    {
+      "name": "endomorphisms",
+      "arg": {
+        "format": "[]",
+        "snippet": "endomorphisms[${1:of}]"
+      }
+    },
+    {
+      "name": "homset"
+    },
+    {
+      "name": "homset",
+      "arg": {
+        "format": "[]",
+        "snippet": "homset[${1:of}]"
+      }
+    },
+    {
+      "name": "isometries"
+    },
+    {
+      "name": "isometries",
+      "arg": {
+        "format": "[]",
+        "snippet": "isometries[${1:of}]"
+      }
+    },
+    {
+      "name": "distance",
+      "arg": {
+        "format": "{}",
+        "snippet": "distance{${1:var}}"
+      }
+    },
+    {
+      "name": "distance",
+      "arg": {
+        "format": "[]{}",
+        "snippet": "distance[${2:on}]{${1:var}}"
+      }
+    },
+    {
+      "name": "term",
+      "arg": {
+        "format": "{}",
+        "snippet": "term{${1:term}}"
+      }
+    },
+    {
+      "name": "term",
+      "arg": {
+        "format": "[]{}",
+        "snippet": "term[${2:yomi}]{${1:term}}"
+      }
+    },
+    {
+      "name": "term",
+      "arg": {
+        "format": "{}[]",
+        "snippet": "term{${1:term}}[${2:alt}]"
+      }
+    },
+    {
+      "name": "term",
+      "arg": {
+        "format": "[]{}[]",
+        "snippet": "term[${2:yomi}]{${1:term}}[${3:alt}]"
       }
     }
   ],
-  "envs": [],
+  "envs": [
+    {
+      "name": "axiom"
+    },
+    {
+      "name": "axiom",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "axiom*"
+    },
+    {
+      "name": "axiom*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "definition"
+    },
+    {
+      "name": "definition",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "definition*"
+    },
+    {
+      "name": "definition*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "proposition"
+    },
+    {
+      "name": "proposition",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "proposition*"
+    },
+    {
+      "name": "proposition*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "theorem"
+    },
+    {
+      "name": "theorem",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "theorem*"
+    },
+    {
+      "name": "theorem*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "lemma"
+    },
+    {
+      "name": "lemma",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "lemma*"
+    },
+    {
+      "name": "lemma*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "corollary"
+    },
+    {
+      "name": "corollary",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "corollary*"
+    },
+    {
+      "name": "corollary*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "example"
+    },
+    {
+      "name": "example",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "example*"
+    },
+    {
+      "name": "example*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "question"
+    },
+    {
+      "name": "question",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "question*"
+    },
+    {
+      "name": "question*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "answer"
+    },
+    {
+      "name": "answer",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    },
+    {
+      "name": "answer*"
+    },
+    {
+      "name": "answer*",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      }
+    }
+  ],
   "keys": {},
   "args": []
 }
