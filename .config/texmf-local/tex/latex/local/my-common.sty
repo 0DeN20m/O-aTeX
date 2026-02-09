@@ -1,10 +1,13 @@
-\ProvidesPackage{my-common}[2025/12/20]
+\ProvidesPackage{my-common}[2026/02/09 汎用コマンド]
 
 % Packages --------------------------------------
 
 \RequirePackage{luatexja}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{makeidx}
+\RequirePackage{luatexja-ruby} % ルビ作成用
 \RequirePackage[unicode=true]{hyperref}
 
 % Formatting ------------------------------------
@@ -15,46 +18,131 @@
 % 数式の途中改行許可
 \allowdisplaybreaks[1]
 
+% Environments ----------------------------------
+
+\newtheorem{axiom}{公理}[section]
+\newtheorem*{axiom*}{公理}
+\newtheorem{definition}[axiom]{定義}
+\newtheorem*{definition*}{定義}
+
+\newtheorem{proposition}{命題}[section]
+\newtheorem*{proposition*}{命題}
+\newtheorem{theorem}[proposition]{定理}
+\newtheorem*{theorem*}{定理}
+\newtheorem{lemma}[proposition]{補題}
+\newtheorem*{lemma*}{補題}
+\newtheorem{corollary}[proposition]{系}
+\newtheorem*{corollary*}{系}
+
+\newtheorem{example}{例}[section]
+\newtheorem*{example*}{例}
+
+\newtheorem{question}{問題}[section]
+\newtheorem*{question*}{問題}
+\newtheorem{answer}{解答例}[section]
+\newtheorem*{answer*}{解答例}
+
 % functions -------------------------------------
 
 % 関数記号の定義を簡略化するマクロ
 % 
 % * : 添え字位置を指定（*ありで上下，無しで右上右下）
+% o : フォント（デフォルトは\mathrm）
 % m : 関数名
 % o : 下付き添え字（オプション）
 % o : 上付き添え字（オプション）
-\NewDocumentCommand\GenericMathOperator{s m o o}{%
-  \mathop{\mathrm{#2}}%
-  \IfBooleanTF{#1}{\limits}{\nolimits}%
-  \IfValueT{#3}{_{#3}}%
-  \IfValueT{#4}{^{#4}}%
+\NewDocumentCommand\GenericMathOperator{somoo}{
+  \mathop{
+    \IfValueTF{#2}{#2{#3}}{\mathrm{#3}}
+  }
+  \IfBooleanTF{#1}{\limits}{\nolimits}
+  \IfValueT{#4}{_{#4}}
+  \IfValueT{#5}{^{#5}}
+}
+
+% タプル系統の定義を簡略化するマクロ
+% 
+% m : 左括弧記号
+% m : 右括弧記号
+% m : 中身
+% o : 下付き添え字（オプション）
+% o : 上付き添え字（オプション）
+\NewDocumentCommand\GenericTuple{mmmoo}{
+  \left#1 #3 \right#2
+  \IfValueT{#4}{_{#4}}
+  \IfValueT{#5}{^{#5}}
+}
+
+% 変数系統の定義を簡略化するマクロ
+%
+% o : フォント（デフォルトはそのまま）
+% m : 変数名
+% o : 下付き添え字（オプション）
+% o : 上付き添え字（オプション）
+\NewDocumentCommand\GenericVariable{omoo}{
+  \IfValueTF{#2}{#2{#1}}{#1}
+  \IfValueT{#3}{_{#3}}
+  \IfValueT{#4}{^{#4}}
 }
 
 % Symbols ---------------------------------------
 
 % 自然数の集合
-\NewDocumentCommand\N{}{\mathord{\mathbb{N}}}
+\NewDocumentCommand\naturals{}{\mathord{\mathbb{N}}}
 % 整数の集合
-\NewDocumentCommand\Z{}{\mathord{\mathbb{Z}}}
+\NewDocumentCommand\integers{}{\mathord{\mathbb{Z}}}
 % 有理数の集合
-\NewDocumentCommand\Q{}{\mathord{\mathbb{Q}}}
+\NewDocumentCommand\rationals{}{\mathord{\mathbb{Q}}}
 % 実数の集合
-\NewDocumentCommand\R{}{\mathord{\mathbb{R}}}
+\NewDocumentCommand\reals{}{\mathord{\mathbb{R}}}
 % 複素数の集合
-\NewDocumentCommand\C{}{\mathord{\mathbb{C}}}
+\NewDocumentCommand\complexes{}{\mathord{\mathbb{C}}}
+% ダミー変数
+\NewDocumentCommand\dummy{}{\mathord{-}}
+
+% Tuples ---------------------------------------
+
+% タプル
+\NewDocumentCommand\tuple{m}{\GenericTuple{(}{)}{#1}}
+
+% ノルム
+\NewDocumentCommand\norm{om}{\GenericTuple{\|}{\|}{#2}[#1]}
+
+% 内積
+\NewDocumentCommand\innerprod{omm}{\GenericTuple{\langle}{\rangle}{#2, #3}[#1]}
+
+% Operators -------------------------------------
 
 % 恒等射
-\NewDocumentCommand\id{}{\GenericMathOperator{id}}
+\NewDocumentCommand\identitymap{o}{\GenericMathOperator{id}[#1]}
 
 % 自己同型
-\NewDocumentCommand\Aut{o}{%
-  \IfValueTF{#1}{\GenericMathOperator{Aut}[#1]}{\GenericMathOperator{Aut}}%
-}
+\NewDocumentCommand\automorphisms{o}{\GenericMathOperator{Aut}[#1]}
 % 自己準同型
-\NewDocumentCommand\End{o}{%
-  \IfValueTF{#1}{\GenericMathOperator{End}[#1]}{\GenericMathOperator{End}}%
-}
+\NewDocumentCommand\endomorphisms{o}{\GenericMathOperator{End}[#1]}
 % Hom集合
-\NewDocumentCommand\Hom{o}{%
-  \IfValueTF{#1}{\GenericMathOperator{Hom}[#1]}{\GenericMathOperator{Hom}}%
+\NewDocumentCommand\homset{o}{\GenericMathOperator{Hom}[#1]}
+% 等長変換群
+\NewDocumentCommand\isometries{o}{\GenericMathOperator{Isom}[#1]}
+
+% Variables ------------------------------------- 
+
+% 距離
+\NewDocumentCommand\distance{om}{\GenericVariable{#2}[#1]}
+
+% makeidx ---------------------------------------
+
+% 用語定義を行う．
+% 
+% 第1引数：読み（オプション）
+% 第2引数：用語（必須）
+% 第3引数：別名（オプション）
+% 
+% TODO: 別名も\index{#3|seealso{#1}}で登録できるようにしたい！
+% 
+% 使用例：\Term[へんびぶんほうていしき]{偏微分方程式}[Partial Differential Equation; PDE]
+%   -> 偏微分方程式（Partial Differential Equation; PDE）
+\NewDocumentCommand\term{omo}{
+  \IfValueTF{#1}{\emph{\ruby{#2}{#1}}\index{#1@#2}}{\emph{#2}\index{#2}}
+  \IfValueT{#3}{（#3）}
 }
