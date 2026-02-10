@@ -45,6 +45,7 @@
 \crefname{question*}{問題}{問題}
 \crefname{answer}{解答例}{解答例}
 \crefname{answer*}{解答例}{解答例}
+\crefname{proof}{証明}{証明}
 
 % 接続詞
 \newcommand\crefpairconjunction{と} % 2つのとき
@@ -66,6 +67,9 @@
 \newtheorem*{lemma*}{補題}
 \newtheorem{corollary}[proposition]{系}
 \newtheorem*{corollary*}{系}
+\newtheorem*{myproof}{証明}
+% 既存の証明環境を上書き
+\renewenvironment{proof}{\begin{myproof}}{\end{myproof}}
 
 \newtheorem{example}{例}[section]
 \newtheorem*{example*}{例}
