@@ -6,9 +6,11 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
-\RequirePackage{makeidx}
+\RequirePackage{makeidx} % 索引作成用
 \RequirePackage{luatexja-ruby} % ルビ作成用
 \RequirePackage[unicode=true]{hyperref}
+\RequirePackage{cleveref} % 参照時に自動で名前を付与
+\RequirePackage{autonum} % 参照しない数式から番号を削除
 
 % Formatting ------------------------------------
 
@@ -17,6 +19,37 @@
 
 % 数式の途中改行許可
 \allowdisplaybreaks[1]
+
+% cleveref --------------------------------------
+
+\crefname{equation}{式}{式}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+
+% 定理環境
+\crefname{axiom}{公理}{公理}
+\crefname{axiom*}{公理}{公理}
+\crefname{definition}{定義}{定義}
+\crefname{definition*}{定義}{定義}
+\crefname{proposition}{命題}{命題}
+\crefname{proposition*}{命題}{命題}
+\crefname{theorem}{定理}{定理}
+\crefname{theorem*}{定理}{定理}
+\crefname{lemma}{補題}{補題}
+\crefname{lemma*}{補題}{補題}
+\crefname{corollary}{系}{系}
+\crefname{corollary*}{系}{系}
+\crefname{example}{例}{例}
+\crefname{example*}{例}{例}
+\crefname{question}{問題}{問題}
+\crefname{question*}{問題}{問題}
+\crefname{answer}{解答例}{解答例}
+\crefname{answer*}{解答例}{解答例}
+
+% 接続詞
+\newcommand\crefpairconjunction{と} % 2つのとき
+\newcommand\crefrangeconjunction{から} % 連続する3つ以上のとき
+\newcommand\crefmiddleconjunction{，} % 連続しない3つ以上のときの中間
 
 % Environments ----------------------------------
 
