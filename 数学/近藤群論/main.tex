@@ -1,39 +1,37 @@
 \documentclass{jlreq}
 \usepackage{my-common}
 
-\NewDocumentCommand\tuple{m}{%
-  \left( #1 \right)%
-}
+% 本の体裁に合わせる
 
-% 内積
-\NewDocumentCommand\innerproduct{o m m}{%
-  \left\langle #2, #3 \right\rangle%
-  \IfValueT{#1}{_{#1}}%
+\RenewBlockHeading{section}{1}{%
+  font=\bfseries\Large,%
+  label_format=第\thesection 章%
 }
-
-% ノルム
-\NewDocumentCommand{\norm}{o m}{%
-  \left\| #2 \right\|%
-  \IfValueT{#1}{_{#1}}%
+\RenewBlockHeading{subsection}{2}{%
+  font=\bfseries\large,%
+  label_format=\S\thesubsection%
 }
-
-% 距離
-\NewDocumentCommand{\distance}{o m}{%
-  \mathop{\mathrm{#2}}%
-  \IfValueT{#1}{_{#1}}%
+\renewcommand{\thesubsubsection}{\alph{subsubsection}}
+\RenewBlockHeading{subsubsection}{3}{%
+  font=\bfseries\rmfamily,%
+  label_format=\thesubsubsection）%
 }
-
-% 等長変換群
-\NewDocumentCommand\Isom{}{%
-  \mathop{\mathrm{Isom}}\nolimits%
+\SetBlockHeadingSpaces{
+  [lines=5]{_section,23pt,_subsection,16pt,_subsubsection,8pt}%
 }
 
 \begin{document}
 
-$V = \tuple{V, \innerproduct{}{}}$を内積空間とする．
+\section{群論}
+
+\subsection{群の概念}
+
+\subsubsection{半群}
+
+$V = \tuple{V, \innerprod{\dummy}{\dummy}}$を内積空間とする．
 このとき，$v \in V$上のノルム$\norm{v}$を
 \begin{equation}
-  \norm{v} = \sqrt{\innerproduct{v}{v}}
+  \norm{v} = \sqrt{\innerprod{v}{v}}
 \end{equation}
 で定義すれば，$V$上の距離$\distance{d}$が
 \begin{equation}
@@ -41,7 +39,8 @@ $V = \tuple{V, \innerproduct{}{}}$を内積空間とする．
 \end{equation}
 で定められる．このとき，等長変換群$\Isom V$は
 \begin{equation}
-  \Isom V = \SetComprehension{f : V \to V}{\forall u, v \in V \distance{d}(f(u), f(v)) = \distance{d}(u, v)}
+  \Isom V =
 \end{equation}
 で与えられる．
+
 \end{document}
