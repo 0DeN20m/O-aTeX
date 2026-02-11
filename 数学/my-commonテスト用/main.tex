@@ -1,20 +1,254 @@
-\documentclass{jlreq}
+\documentclass[landscape]{jlreq}
 \usepackage{my-common}
+
+% ページをまたぐ表を作る
+% NOTE: Infinite glue shrinkage found in box being split [4]
+%       は無視していい（うざいけど）
+\usepackage{longtable}
+
+\makeindex
 
 \begin{document}
 
-\section{かっこいい節}
+\tableofcontents
 
-\subsection{素晴らしい小節}
+\section{この\LaTeX{}ファイルの目的}
 
-\begin{theorem}\label{super-thm}
-  最強の大定理
+\texttt{my-common.sty}で定義したコマンドや環境，各種設定の挙動や見た目を確認するためのテストファイルです．
+
+\section{\texttt{\textbackslash section}等の見た目と余白}
+
+% \section, \subsection, \subsubsectionを連続で使用したとき・本文を挟んだときなど，考えうる組み合わせを網羅する
+
+本文を挟まずに連続したセクションを使用する場合の余白確認です．
+
+\subsection{サブセクション}
+
+\subsubsection{サブサブセクション}
+
+本文を挟まない場合の余白確認．
+
+\subsection{別のサブセクション}
+
+\subsubsection{別のサブサブセクション}
+
+本文を挟んだ場合の余白確認です．
+この場合，前との余白がどのように変わるかを観察します．
+
+\subsection{副題付きのサブセクション}[副題]
+
+\section{各種環境}
+
+% my-common.styで定義されている環境を網羅する
+
+\subsection{定理的環境}
+
+\begin{axiom}
+  すばらしい公理．
+\end{axiom}
+
+\begin{axiom*}
+  優れた番号なし公理．
+\end{axiom*}
+
+\begin{definition}
+  基本的な定義．
+\end{definition}
+
+\begin{definition*}
+  重要な番号なし定義．
+\end{definition*}
+
+\begin{proposition}
+  有用な命題．
+\end{proposition}
+
+\begin{proposition*}
+  興味深い番号なし命題．
+\end{proposition*}
+
+\begin{theorem}
+  強力な定理．
 \end{theorem}
 
-\begin{proof}\label{super-proof}
-  分かりそう
+\begin{theorem*}
+  基本的な番号なし定理．
+\end{theorem*}
+
+\begin{lemma}
+  補助的な補題．
+\end{lemma}
+
+\begin{lemma*}
+  重要な番号なし補題．
+\end{lemma*}
+
+\begin{corollary}
+  直接的な系．
+\end{corollary}
+
+\begin{corollary*}
+  自明な番号なし系．
+\end{corollary*}
+
+\subsection{その他の環境}
+
+\begin{example}
+  具体的な例．
+\end{example}
+
+\begin{example*}
+  わかりやすい番号なし例．
+\end{example*}
+
+\begin{question}
+  興味深い問題．
+\end{question}
+
+\begin{question*}
+  簡潔な番号なし問題．
+\end{question*}
+
+\begin{answer}
+  詳しい解答例．
+\end{answer}
+
+\begin{answer*}
+  簡潔な番号なし解答例．
+\end{answer*}
+
+\begin{proof}
+  厳密な証明．
 \end{proof}
 
-\cref{super-thm}の証明は\cref{super-proof}に示した。
+\section{各種コマンド}
+
+\subsection{数式用コマンド}
+
+% my-common.styで定義されている，数式内で使用するコマンドを網羅する
+% table環境で表にまとめる
+% 実際の入力，出力，補足覧を設ける
+
+
+\begin{longtable}{|l|l|l|l|}
+  \caption{数式用コマンド一覧}                                                                                                                 \\
+  \hline
+  コマンド名                                   & 入力                                                & 出力                       & 補足         \\
+  \hline
+  \endhead
+
+  \hline
+  \multicolumn{4}{|r|}{次ページへ続く}                                                                                                       \\
+  \hline
+  \endfoot
+
+  \hline
+  \multicolumn{4}{|r|}{以上}                                                                                                            \\
+  \hline
+  \endlastfoot
+
+  \multicolumn{4}{|l|}{\text{数値集合関連のコマンド}}                                                                                            \\
+  \hline
+  \texttt{\textbackslash naturalnumbers}  & （なし）                                              & $\naturalnumbers$        & 自然数の集合     \\
+  \texttt{\textbackslash integers}        & （なし）                                              & $\integers$              & 整数の集合      \\
+  \texttt{\textbackslash rationalnumbers} & （なし）                                              & $\rationalnumbers$       & 有理数の集合     \\
+  \texttt{\textbackslash realnumbers}     & （なし）                                              & $\realnumbers$           & 実数の集合      \\
+  \texttt{\textbackslash complexnumbers}  & （なし）                                              & $\complexnumbers$        & 複素数の集合     \\
+  \texttt{\textbackslash dummy}           & （なし）                                              & $\displaystyle \dummy$   & ダミー変数      \\
+  \hline
+  \multicolumn{4}{|l|}{\text{タプル関連のコマンド}}                                                                                             \\
+  \hline
+  \texttt{\textbackslash tuple}           & \texttt{\textbackslash tuple\{a, b, c\}}          & $(a, b, c)$              & タプル        \\
+  \texttt{\textbackslash norm}            & \texttt{\textbackslash norm\{x\}}                 & $\norm{x}$               & ノルム（既定）    \\
+                                          & \texttt{\textbackslash norm[1]\{x\}}              & $\norm[1]{x}$            & ノルム（下付き）   \\
+  \texttt{\textbackslash innerproduct}    & \texttt{\textbackslash innerproduct\{u\}\{v\}}    & $\innerproduct{u}{v}$    & 内積（既定）     \\
+                                          & \texttt{\textbackslash innerproduct[1]\{u\}\{v\}} & $\innerproduct[1]{u}{v}$ & 内積（下付き）    \\
+  \hline
+  \multicolumn{4}{|l|}{\text{関数・写像関連のコマンド}}                                                                                           \\
+  \hline
+  \texttt{\textbackslash identitymap}     & \texttt{\textbackslash identitymap}               & $\identitymap$           & 恒等射（既定）    \\
+                                          & \texttt{\textbackslash identitymap[G]}            & $\identitymap[G]$        & 恒等射（下付き）   \\
+  \texttt{\textbackslash automorphisms}   & \texttt{\textbackslash automorphisms}             & $\automorphisms$         & 自己同型（既定）   \\
+                                          & \texttt{\textbackslash automorphisms[X]}          & $\automorphisms[X]$      & 自己同型（下付き）  \\
+  \texttt{\textbackslash endomorphisms}   & \texttt{\textbackslash endomorphisms}             & $\endomorphisms$         & 自己準同型（既定）  \\
+                                          & \texttt{\textbackslash endomorphisms[X]}          & $\endomorphisms[X]$      & 自己準同型（下付き） \\
+  \texttt{\textbackslash homset}          & \texttt{\textbackslash homset}                    & $\homset$                & Hom集合（既定）  \\
+                                          & \texttt{\textbackslash homset[G]}                 & $\homset[G]$             & Hom集合（下付き） \\
+  \texttt{\textbackslash isometries}      & \texttt{\textbackslash isometries}                & $\isometries$            & 等長変換群（既定）  \\
+                                          & \texttt{\textbackslash isometries[X]}             & $\isometries[X]$         & 等長変換群（下付き） \\
+  \hline
+  \multicolumn{4}{|l|}{\text{その他の変数関連のコマンド}}                                                                                          \\
+  \hline
+  \texttt{\textbackslash distance}        & \texttt{\textbackslash distance\{d\}}             & $\distance{d}$           & 距離（既定）     \\
+                                          & \texttt{\textbackslash distance[1]\{d\}}          & $\distance[1]{d}$        & 距離（下付き）    \\
+  \hline
+\end{longtable}
+
+\subsubsection{使用例}
+
+$\naturalnumbers$，$\integers$，$\realnumbers$は数学で最も一般的に使用される数値集合です．
+
+ベクトル$\mathbf{v}$のノルムは$\norm{\mathbf{v}}$で表され，内積は$\innerproduct{\mathbf{u}}{\mathbf{v}}$で表します．
+
+群$G$の自己同型群は$\automorphisms[G]$で表します．
+
+\subsection{本文用コマンド}
+
+% my-common.styで定義されている，本文内で使用するコマンドを網羅する
+% table環境で表にまとめる
+% 実際の入力，出力，補足覧を設ける
+
+\begin{longtable}[]{|l|l|l|l|}
+  \hline
+  コマンド名                        & 入力                                                                         & 出力                                                & 補足     \\
+  \hline
+  \multicolumn{4}{|l|}{\text{用語定義用コマンド}}                                                                                                                                 \\
+  \hline
+  \texttt{\textbackslash term} & \texttt{\textbackslash term\{偏微分\}}                                        & \term{偏微分}                                        & 基本的な用語 \\
+                               & \texttt{\textbackslash term\{偏微分方程式\}[partial differential equation; PDE]} & \term{偏微分方程式}[partial differential equation; PDE] & 別名付き   \\
+                               & \texttt{\textbackslash term[えびら]\{箙\}}                                     & \term[えびら]{箙}                                     & 読がな付き  \\
+  \hline
+\end{longtable}
+
+\section{使用例}
+
+\subsection{群の定義}
+
+\begin{definition}
+  集合$G$に対して，\term{二項演算}[binary operation]$\cdot: G \times G \to G$が定義されているとする．
+  組$(G, \cdot)$が\term{群}[group]であるとは，以下の条件を満たすことである：
+
+  \begin{enumerate}
+    \item（結合律）任意の$a, b, c \in G$に対して$(a \cdot b) \cdot c = a \cdot (b \cdot c)$が成立する．
+    \item（単位元の存在）ある$e \in G$が存在して，すべての$a \in G$に対して$e \cdot a = a \cdot e = a$が成立する．
+    \item（逆元の存在）各$a \in G$に対して，ある$a^{-1} \in G$が存在して$a \cdot a^{-1} = a^{-1} \cdot a = e$が成立する．
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  $\integers$は通常の加法$+$に関して群をなす．
+  ここで単位元は$0$であり，$a \in \integers$の逆元は$-a$である．
+\end{example}
+
+\begin{example}
+  $\realnumbers \setminus \{0\}$は通常の乗法に関して群をなす．
+  この場合も\term{可換群}[commutative group; abelian group]である．
+\end{example}
+
+\begin{definition}
+  群$G$の\term{自己同型}[automorphism]とは，$\phi: G \to G$が全単射で，
+  すべての$a, b \in G$に対して$\phi(a \cdot b) = \phi(a) \cdot \phi(b)$を満たす準同型である．
+  群$G$のすべての自己同型からなる集合を$\automorphisms[G]$と表す．
+\end{definition}
+
+\begin{theorem}
+  群$G$に対して，$\automorphisms(G)$は関数合成を演算として群をなす．
+  これを$G$の\term{自己同型群}[automorphism group]と呼ぶ．
+\end{theorem}
+
+ベクトル空間においては，ベクトル$\mathbf{v}$に対してそのノルムを$\norm{\mathbf{v}}$と表す．
+また，ベクトル$\mathbf{u}, \mathbf{v}$の内積は$\innerproduct{\mathbf{u}}{\mathbf{v}}$と表記する．
+
+\printindex
 
 \end{document}
