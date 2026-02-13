@@ -119,13 +119,13 @@
 \identitymap#m
 \identitymap[of]#m
 \automorphisms#m
-\automorphisms[of]#m
+\automorphisms[in]#m
 \endomorphisms#m
-\endomorphisms[of]#m
+\endomorphisms[in]#m
 \homset#m
-\homset[of]#m
+\homset[in]#m
 \isometries#m
-\isometries[of]#m
+\isometries[on]#m
 
 # variables
 
