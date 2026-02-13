@@ -117,7 +117,7 @@
 % o : 下付き添え字（オプション）
 % o : 上付き添え字（オプション）
 \NewDocumentCommand\GenericVariable{omoo}{
-  \IfValueTF{#2}{#2{#1}}{#1}
+  \IfValueTF{#1}{#1{#2}}{#2}
   \IfValueT{#3}{_{#3}}
   \IfValueT{#4}{^{#4}}
 }
