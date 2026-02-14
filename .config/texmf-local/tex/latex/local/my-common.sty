@@ -2,12 +2,18 @@
 
 % Packages --------------------------------------
 
+% 無いと始まらないパッケージ達
 \RequirePackage{luatexja}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
-\RequirePackage{makeidx} % 索引作成用
+
+% 索引用
+\RequirePackage{makeidx}
+
+% 便利パッケージたち
 \RequirePackage{luatexja-ruby} % ルビ作成用
+\RequirePackage{bm} % ベクトル用
 \RequirePackage[unicode=true]{hyperref}
 \RequirePackage{cleveref} % 参照時に自動で名前を付与
 \RequirePackage{autonum} % 参照しない数式から番号を削除
@@ -88,13 +94,13 @@
 % m : 関数名
 % o : 下付き添え字（オプション）
 % o : 上付き添え字（オプション）
-\NewDocumentCommand\GenericMathOperator{somoo}{
-  \mathop{
-    \IfValueTF{#2}{#2{#3}}{\mathrm{#3}}
-  }
-  \IfBooleanTF{#1}{\limits}{\nolimits}
-  \IfValueT{#4}{_{#4}}
-  \IfValueT{#5}{^{#5}}
+\NewDocumentCommand\GenericMathOperator{somoo}{%
+  \mathop{%
+    \IfValueTF{#2}{#2{#3}}{\mathrm{#3}}%
+  }%
+  \IfBooleanTF{#1}{\limits}{\nolimits}%
+  \IfValueT{#4}{_{#4}}%
+  \IfValueT{#5}{^{#5}}%
 }
 
 % タプル系統の定義を簡略化するマクロ
@@ -104,10 +110,10 @@
 % m : 中身
 % o : 下付き添え字（オプション）
 % o : 上付き添え字（オプション）
-\NewDocumentCommand\GenericTuple{mmmoo}{
-  \left#1 #3 \right#2
-  \IfValueT{#4}{_{#4}}
-  \IfValueT{#5}{^{#5}}
+\NewDocumentCommand\GenericTuple{mmmoo}{%
+  \left#1 #3 \right#2%
+  \IfValueT{#4}{_{#4}}%
+  \IfValueT{#5}{^{#5}}%
 }
 
 % 変数系統の定義を簡略化するマクロ
@@ -116,10 +122,10 @@
 % m : 変数名
 % o : 下付き添え字（オプション）
 % o : 上付き添え字（オプション）
-\NewDocumentCommand\GenericVariable{omoo}{
-  \IfValueTF{#1}{#1{#2}}{#2}
-  \IfValueT{#3}{_{#3}}
-  \IfValueT{#4}{^{#4}}
+\NewDocumentCommand\GenericVariable{omoo}{%
+  \IfValueTF{#1}{#1{#2}}{#2}%
+  \IfValueT{#3}{_{#3}}%
+  \IfValueT{#4}{^{#4}}%
 }
 
 % Symbols ---------------------------------------
@@ -144,7 +150,6 @@
 
 % ノルム
 \NewDocumentCommand\norm{om}{\GenericTuple{\|}{\|}{#2}[#1]}
-
 % 内積
 \NewDocumentCommand\innerproduct{omm}{\GenericTuple{\langle}{\rangle}{#2, #3}[#1]}
 
@@ -166,20 +171,27 @@
 
 % 距離
 \NewDocumentCommand\distance{om}{\GenericVariable{#2}[#1]}
+% ベクトル
+\NewDocumentCommand\vect{om}{\bm{#2}}
 
 % makeidx ---------------------------------------
 
 % 用語定義を行う．
 % 
-% 第1引数：読み（オプション）
-% 第2引数：用語（必須）
-% 第3引数：別名（オプション）
+% s: *付きでルビ表示
+% o: 読み（オプション）
+% m: 用語（必須）
+% o: 別名（オプション）
 % 
 % TODO: 別名も\index{#3|seealso{#1}}で登録できるようにしたい！
 % 
 % 使用例：\Term[へんびぶんほうていしき]{偏微分方程式}[Partial Differential Equation; PDE]
 %   -> 偏微分方程式（Partial Differential Equation; PDE）
-\NewDocumentCommand\term{omo}{
-  \IfValueTF{#1}{\emph{\ruby{#2}{#1}}\index{#1@#2}}{\emph{#2}\index{#2}}
-  \IfValueT{#3}{（#3）}
+\NewDocumentCommand\term{somo}{%
+  \IfValueTF{#2}{%
+    \emph{\IfBooleanTF{#1}{\ruby{#3}{#2}}{#3}}\index{#2@#3}%
+  }{%
+    \emph{#3}\index{#3}%
+  }%
+  \IfValueT{#4}{（#4）}%
 }

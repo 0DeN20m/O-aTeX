@@ -131,6 +131,7 @@
 
 \distance{var}#m
 \distance[on]{var}#m
+\vect{var}#m
 
 # makeidx
 
