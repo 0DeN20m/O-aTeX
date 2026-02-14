@@ -131,56 +131,56 @@
 
 
 \begin{longtable}{|l|l|l|l|}
-  \caption{数式用コマンド一覧}                                                                                                                 \\
+  \caption{数式用コマンド一覧}                                                                                                                      \\
   \hline
-  コマンド名                                   & 入力                                                & 出力                       & 補足         \\
+  コマンド名                                   & 入力例                                               & 出力                       & 補足              \\
   \hline
   \endhead
 
   \hline
-  \multicolumn{4}{|r|}{次ページへ続く}                                                                                                       \\
+  \multicolumn{4}{|r|}{次ページへ続く}                                                                                                            \\
   \hline
   \endfoot
 
   \hline
-  \multicolumn{4}{|r|}{以上}                                                                                                            \\
+  \multicolumn{4}{|r|}{以上}                                                                                                                 \\
   \hline
   \endlastfoot
 
-  \multicolumn{4}{|l|}{\text{数値集合関連のコマンド}}                                                                                            \\
+  \multicolumn{4}{|l|}{\text{数値集合関連のコマンド}}                                                                                                 \\
   \hline
-  \texttt{\textbackslash naturalnumbers}  & （なし）                                              & $\naturalnumbers$        & 自然数の集合     \\
-  \texttt{\textbackslash integers}        & （なし）                                              & $\integers$              & 整数の集合      \\
-  \texttt{\textbackslash rationalnumbers} & （なし）                                              & $\rationalnumbers$       & 有理数の集合     \\
-  \texttt{\textbackslash realnumbers}     & （なし）                                              & $\realnumbers$           & 実数の集合      \\
-  \texttt{\textbackslash complexnumbers}  & （なし）                                              & $\complexnumbers$        & 複素数の集合     \\
-  \texttt{\textbackslash dummy}           & （なし）                                              & $\displaystyle \dummy$   & ダミー変数      \\
+  \texttt{\textbackslash naturalnumbers}  & \texttt{\textbackslash naturalnumbers}            & $\naturalnumbers$        & 自然数の集合          \\
+  \texttt{\textbackslash integers}        & \texttt{\textbackslash integers}                  & $\integers$              & 整数の集合           \\
+  \texttt{\textbackslash rationalnumbers} & \texttt{\textbackslash rationalnumbers}           & $\rationalnumbers$       & 有理数の集合          \\
+  \texttt{\textbackslash realnumbers}     & \texttt{\textbackslash realnumbers}               & $\realnumbers$           & 実数の集合           \\
+  \texttt{\textbackslash complexnumbers}  & \texttt{\textbackslash complexnumbers}            & $\complexnumbers$        & 複素数の集合          \\
+  \texttt{\textbackslash dummy}           & \texttt{\textbackslash dummy}                     & $\displaystyle \dummy$   & ダミー変数           \\
   \hline
-  \multicolumn{4}{|l|}{\text{タプル関連のコマンド}}                                                                                             \\
+  \multicolumn{4}{|l|}{\text{タプル関連のコマンド}}                                                                                                  \\
   \hline
-  \texttt{\textbackslash tuple}           & \texttt{\textbackslash tuple\{a, b, c\}}          & $(a, b, c)$              & タプル        \\
-  \texttt{\textbackslash norm}            & \texttt{\textbackslash norm\{x\}}                 & $\norm{x}$               & ノルム（既定）    \\
-                                          & \texttt{\textbackslash norm[1]\{x\}}              & $\norm[1]{x}$            & ノルム（下付き）   \\
-  \texttt{\textbackslash innerproduct}    & \texttt{\textbackslash innerproduct\{u\}\{v\}}    & $\innerproduct{u}{v}$    & 内積（既定）     \\
-                                          & \texttt{\textbackslash innerproduct[1]\{u\}\{v\}} & $\innerproduct[1]{u}{v}$ & 内積（下付き）    \\
+  \texttt{\textbackslash tuple}           & \texttt{\textbackslash tuple\{a, b, c\}}          & $(a, b, c)$              & タプル             \\
+  \texttt{\textbackslash norm}            & \texttt{\textbackslash norm\{x\}}                 & $\norm{x}$               & ノルム             \\
+                                          & \texttt{\textbackslash norm[1]\{x\}}              & $\norm[1]{x}$            & ノルム（下付き）        \\
+  \texttt{\textbackslash innerproduct}    & \texttt{\textbackslash innerproduct\{u\}\{v\}}    & $\innerproduct{u}{v}$    & 内積              \\
+                                          & \texttt{\textbackslash innerproduct[V]\{u\}\{v\}} & $\innerproduct[V]{u}{v}$ & $V$における内積       \\
   \hline
-  \multicolumn{4}{|l|}{\text{関数・写像関連のコマンド}}                                                                                           \\
+  \multicolumn{4}{|l|}{\text{関数・写像関連のコマンド}}                                                                                                \\
   \hline
-  \texttt{\textbackslash identitymap}     & \texttt{\textbackslash identitymap}               & $\identitymap$           & 恒等射（既定）    \\
-                                          & \texttt{\textbackslash identitymap[G]}            & $\identitymap[G]$        & 恒等射（下付き）   \\
-  \texttt{\textbackslash automorphisms}   & \texttt{\textbackslash automorphisms}             & $\automorphisms$         & 自己同型（既定）   \\
-                                          & \texttt{\textbackslash automorphisms[X]}          & $\automorphisms[X]$      & 自己同型（下付き）  \\
-  \texttt{\textbackslash endomorphisms}   & \texttt{\textbackslash endomorphisms}             & $\endomorphisms$         & 自己準同型（既定）  \\
-                                          & \texttt{\textbackslash endomorphisms[X]}          & $\endomorphisms[X]$      & 自己準同型（下付き） \\
-  \texttt{\textbackslash homset}          & \texttt{\textbackslash homset}                    & $\homset$                & Hom集合（既定）  \\
-                                          & \texttt{\textbackslash homset[G]}                 & $\homset[G]$             & Hom集合（下付き） \\
-  \texttt{\textbackslash isometries}      & \texttt{\textbackslash isometries}                & $\isometries$            & 等長変換群（既定）  \\
-                                          & \texttt{\textbackslash isometries[X]}             & $\isometries[X]$         & 等長変換群（下付き） \\
+  \texttt{\textbackslash identitymap}     & \texttt{\textbackslash identitymap}               & $\identitymap$           & 恒等射             \\
+                                          & \texttt{\textbackslash identitymap[X]}            & $\identitymap[X]$        & $X$の恒等射         \\
+  \texttt{\textbackslash automorphisms}   & \texttt{\textbackslash automorphisms G}           & $\automorphisms G$       & $G$の自己同型群       \\
+                                          & \texttt{\textbackslash automorphisms[N] H}        & $\automorphisms[N] H$    & $H$の$N$上の自己同型群  \\
+  \texttt{\textbackslash endomorphisms}   & \texttt{\textbackslash endomorphisms G}           & $\endomorphisms G$       & $G$の自己準同型群      \\
+                                          & \texttt{\textbackslash endomorphisms[N] H}        & $\endomorphisms[N] H$    & $H$の$N$上の自己準同型群 \\
+  \texttt{\textbackslash homset}          & \texttt{\textbackslash homset(X, Y)}              & $\homset(X, Y)$          & Hom集合           \\
+                                          & \texttt{\textbackslash homset[A](X, Y)}           & $\homset[A](X, Y)$       & $A$内のHom集合      \\
+  \texttt{\textbackslash isometries}      & \texttt{\textbackslash isometries X}              & $\isometries X$          & 等長変換群           \\
+                                          & \texttt{\textbackslash isometries[X]}             & $\isometries[X]$         & 等長変換群（下付き）      \\
   \hline
-  \multicolumn{4}{|l|}{\text{その他の変数関連のコマンド}}                                                                                          \\
+  \multicolumn{4}{|l|}{\text{その他の変数関連のコマンド}}                                                                                               \\
   \hline
-  \texttt{\textbackslash distance}        & \texttt{\textbackslash distance\{d\}}             & $\distance{d}$           & 距離（既定）     \\
-                                          & \texttt{\textbackslash distance[1]\{d\}}          & $\distance[1]{d}$        & 距離（下付き）    \\
+  \texttt{\textbackslash distance}        & \texttt{\textbackslash distance\{d\}}             & $\distance{d}$           & 距離              \\
+                                          & \texttt{\textbackslash distance[1]\{d\}}          & $\distance[1]{d}$        & 距離（下付き）         \\
   \hline
 \end{longtable}
 
@@ -198,7 +198,7 @@ $\naturalnumbers$，$\integers$，$\realnumbers$は数学で最も一般的に�
 % table環境で表にまとめる
 % 実際の入力，出力，補足覧を設ける
 
-\begin{longtable}[]{|l|l|l|l|}
+\begin{longtable}{|l|l|l|l|}
   \hline
   コマンド名                        & 入力                                                                         & 出力                                                & 補足     \\
   \hline
@@ -206,7 +206,7 @@ $\naturalnumbers$，$\integers$，$\realnumbers$は数学で最も一般的に�
   \hline
   \texttt{\textbackslash term} & \texttt{\textbackslash term\{偏微分\}}                                        & \term{偏微分}                                        & 基本的な用語 \\
                                & \texttt{\textbackslash term\{偏微分方程式\}[partial differential equation; PDE]} & \term{偏微分方程式}[partial differential equation; PDE] & 別名付き   \\
-                               & \texttt{\textbackslash term[えびら]\{箙\}}                                     & \term[えびら]{箙}                                     & 読がな付き  \\
+                               & \texttt{\textbackslash term*[えびら]\{箙\}}                                    & \term*[えびら]{箙}                                    & 読がな付き  \\
   \hline
 \end{longtable}
 
@@ -246,8 +246,14 @@ $\naturalnumbers$，$\integers$，$\realnumbers$は数学で最も一般的に�
   これを$G$の\term{自己同型群}[automorphism group]と呼ぶ．
 \end{theorem}
 
-ベクトル空間においては，ベクトル$\mathbf{v}$に対してそのノルムを$\norm{\mathbf{v}}$と表す．
-また，ベクトル$\mathbf{u}, \mathbf{v}$の内積は$\innerproduct{\mathbf{u}}{\mathbf{v}}$と表記する．
+ベクトル空間においては，ベクトル$\vect{v}$に対してそのノルムを$\norm{\vect{v}}$と表す．
+また，ベクトル$\vect{u}, \vect{v}$の内積は$\innerproduct{\vect{u}}{\vect{v}}$と表記する．
+\begin{equation}
+  \mathop{\mathrm{test}}\nolimits_x^y z
+\end{equation}
+\begin{equation}
+  \mathop{\mathrm{test}_x^y}\nolimits z
+\end{equation}
 
 \printindex
 
