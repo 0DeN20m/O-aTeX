@@ -1,0 +1,84 @@
+{
+    "macros": {
+        "naturalnumbers": {
+            "detail": "ℕ",
+            "doc": "自然数全体の集合"
+        },
+        "integers": {
+            "detail": "ℤ",
+            "doc": "整数全体の集合"
+        },
+        "rationalnumbers": {
+            "detail": "ℚ",
+            "doc": "有理数全体の集合"
+        },
+        "realnumbers": {
+            "detail": "ℝ",
+            "doc": "実数全体の集合"
+        },
+        "complexnumbers": {
+            "detail": "ℂ",
+            "doc": "複素数全体の集合"
+        },
+        "tuple": {
+            "doc": "一般的なタプル"
+        },
+        "norm": {
+            "doc": "ノルム"
+        },
+        "innerproduct": {
+            "doc": "内積"
+        },
+        "identitymap": {
+            "detail": "id",
+            "doc": "恒等写像"
+        },
+        "automorphisms": {
+            "detail": "Aut",
+            "doc": "自己同型群"
+        },
+        "endomorphisms": {
+            "detail": "End",
+            "doc": "自己準同型"
+        },
+        "homset": {
+            "detail": "Hom",
+            "doc": "Hom集合"
+        },
+        "term": {
+            "doc": "用語を索引に登録する。"
+        },
+        "term*": {
+            "doc": "用語を索引に登録する（読み仮名付き）。"
+        }
+    },
+    "envs": {
+        "axiom": {
+            "doc": "公理環境"
+        },
+        "definition": {
+            "doc": "定義環境"
+        },
+        "proposition": {
+            "doc": "命題環境"
+        },
+        "theorem": {
+            "doc": "定理環境"
+        },
+        "lemma": {
+            "doc": "補題環境"
+        },
+        "corollary": {
+            "doc": "系環境"
+        },
+        "example": {
+            "doc": "例環境"
+        },
+        "question": {
+            "doc": "問題環境"
+        },
+        "answer": {
+            "doc": "解答環境"
+        }
+    }
+}

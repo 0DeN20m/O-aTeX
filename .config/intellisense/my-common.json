@@ -192,19 +192,29 @@
       }
     },
     {
-      "name": "naturalnumbers"
+      "name": "naturalnumbers",
+      "detail": "ℕ",
+      "doc": "自然数全体の集合"
     },
     {
-      "name": "integers"
+      "name": "integers",
+      "detail": "ℤ",
+      "doc": "整数全体の集合"
     },
     {
-      "name": "rationalnumbers"
+      "name": "rationalnumbers",
+      "detail": "ℚ",
+      "doc": "有理数全体の集合"
     },
     {
-      "name": "realnumbers"
+      "name": "realnumbers",
+      "detail": "ℝ",
+      "doc": "実数全体の集合"
     },
     {
-      "name": "complexnumbers"
+      "name": "complexnumbers",
+      "detail": "ℂ",
+      "doc": "複素数全体の集合"
     },
     {
       "name": "dummy"
@@ -214,75 +224,96 @@
       "arg": {
         "format": "{}",
         "snippet": "tuple{${1:content}}"
-      }
+      },
+      "doc": "一般的なタプル"
     },
     {
       "name": "norm",
       "arg": {
         "format": "{}",
         "snippet": "norm{${1:of}}"
-      }
+      },
+      "doc": "ノルム"
     },
     {
       "name": "norm",
       "arg": {
         "format": "[]{}",
         "snippet": "norm[${2:on}]{${1:of}}"
-      }
+      },
+      "doc": "ノルム"
     },
     {
       "name": "innerproduct",
       "arg": {
         "format": "{}{}",
         "snippet": "innerproduct{${1:elem1}}{${2:elem2}}"
-      }
+      },
+      "doc": "内積"
     },
     {
       "name": "innerproduct",
       "arg": {
         "format": "[]{}{}",
         "snippet": "innerproduct[${3:for}]{${1:elem1}}{${2:elem2}}"
-      }
+      },
+      "doc": "内積"
     },
     {
-      "name": "identitymap"
+      "name": "identitymap",
+      "detail": "id",
+      "doc": "恒等写像"
     },
     {
       "name": "identitymap",
       "arg": {
         "format": "[]",
         "snippet": "identitymap[${1:of}]"
-      }
+      },
+      "detail": "id",
+      "doc": "恒等写像"
     },
     {
-      "name": "automorphisms"
+      "name": "automorphisms",
+      "detail": "Aut",
+      "doc": "自己同型群"
     },
     {
       "name": "automorphisms",
       "arg": {
         "format": "[]",
         "snippet": "automorphisms[${1:in}]"
-      }
+      },
+      "detail": "Aut",
+      "doc": "自己同型群"
     },
     {
-      "name": "endomorphisms"
+      "name": "endomorphisms",
+      "detail": "End",
+      "doc": "自己準同型"
     },
     {
       "name": "endomorphisms",
       "arg": {
         "format": "[]",
         "snippet": "endomorphisms[${1:in}]"
-      }
+      },
+      "detail": "End",
+      "doc": "自己準同型"
     },
     {
-      "name": "homset"
+      "name": "homset",
+      "detail": "Hom",
+      "doc": "Hom集合"
     },
     {
       "name": "homset",
       "arg": {
         "format": "[]",
         "snippet": "homset[${1:in}]"
-      }
+      },
+      "detail": "Hom",
+      "doc": "Hom集合"
     },
     {
       "name": "isometries"
@@ -320,68 +351,78 @@
       "arg": {
         "format": "{}",
         "snippet": "term{${1:term}}"
-      }
+      },
+      "doc": "用語を索引に登録する。"
     },
     {
       "name": "term",
       "arg": {
         "format": "[]{}",
         "snippet": "term[${2:yomi}]{${1:term}}"
-      }
+      },
+      "doc": "用語を索引に登録する。"
     },
     {
       "name": "term",
       "arg": {
         "format": "{}[]",
         "snippet": "term{${1:term}}[${2:alt}]"
-      }
+      },
+      "doc": "用語を索引に登録する。"
     },
     {
       "name": "term",
       "arg": {
         "format": "[]{}[]",
         "snippet": "term[${2:yomi}]{${1:term}}[${3:alt}]"
-      }
+      },
+      "doc": "用語を索引に登録する。"
     },
     {
       "name": "term*",
       "arg": {
         "format": "{}",
         "snippet": "term*{${1:term}}"
-      }
+      },
+      "doc": "用語を索引に登録する（読み仮名付き）。"
     },
     {
       "name": "term*",
       "arg": {
         "format": "[]{}",
         "snippet": "term*[${2:yomi}]{${1:term}}"
-      }
+      },
+      "doc": "用語を索引に登録する（読み仮名付き）。"
     },
     {
       "name": "term*",
       "arg": {
         "format": "{}[]",
         "snippet": "term*{${1:term}}[${2:alt}]"
-      }
+      },
+      "doc": "用語を索引に登録する（読み仮名付き）。"
     },
     {
       "name": "term*",
       "arg": {
         "format": "[]{}[]",
         "snippet": "term*[${2:yomi}]{${1:term}}[${3:alt}]"
-      }
+      },
+      "doc": "用語を索引に登録する（読み仮名付き）。"
     }
   ],
   "envs": [
     {
-      "name": "axiom"
+      "name": "axiom",
+      "doc": "公理環境"
     },
     {
       "name": "axiom",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "公理環境"
     },
     {
       "name": "axiom*"
@@ -394,14 +435,16 @@
       }
     },
     {
-      "name": "definition"
+      "name": "definition",
+      "doc": "定義環境"
     },
     {
       "name": "definition",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "定義環境"
     },
     {
       "name": "definition*"
@@ -414,14 +457,16 @@
       }
     },
     {
-      "name": "proposition"
+      "name": "proposition",
+      "doc": "命題環境"
     },
     {
       "name": "proposition",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "命題環境"
     },
     {
       "name": "proposition*"
@@ -434,14 +479,16 @@
       }
     },
     {
-      "name": "theorem"
+      "name": "theorem",
+      "doc": "定理環境"
     },
     {
       "name": "theorem",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "定理環境"
     },
     {
       "name": "theorem*"
@@ -454,14 +501,16 @@
       }
     },
     {
-      "name": "lemma"
+      "name": "lemma",
+      "doc": "補題環境"
     },
     {
       "name": "lemma",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "補題環境"
     },
     {
       "name": "lemma*"
@@ -474,14 +523,16 @@
       }
     },
     {
-      "name": "corollary"
+      "name": "corollary",
+      "doc": "系環境"
     },
     {
       "name": "corollary",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "系環境"
     },
     {
       "name": "corollary*"
@@ -494,14 +545,16 @@
       }
     },
     {
-      "name": "example"
+      "name": "example",
+      "doc": "例環境"
     },
     {
       "name": "example",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "例環境"
     },
     {
       "name": "example*"
@@ -514,14 +567,16 @@
       }
     },
     {
-      "name": "question"
+      "name": "question",
+      "doc": "問題環境"
     },
     {
       "name": "question",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "問題環境"
     },
     {
       "name": "question*"
@@ -534,14 +589,16 @@
       }
     },
     {
-      "name": "answer"
+      "name": "answer",
+      "doc": "解答環境"
     },
     {
       "name": "answer",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "解答環境"
     },
     {
       "name": "answer*"

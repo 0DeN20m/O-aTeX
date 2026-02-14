@@ -1,0 +1,75 @@
+{
+    "macros": {
+        "Aut": {
+            "detail": "Aut",
+            "doc": "自己同型群"
+        },
+        "BurnsideRing": {
+            "doc": "Burnside環"
+        },
+        "C": {
+            "detail": "ℂ",
+            "doc": "複素数全体の集合"
+        },
+        "Card": {
+            "doc": "集合の濃度"
+        },
+        "CatAbGrps": {
+            "detail": "Ab",
+            "doc": "可換群の圏"
+        },
+        "CatFinSets": {
+            "detail": "FinSets",
+            "doc": "有限集合の圏"
+        },
+        "CatSets": {
+            "detail": "Sets",
+            "doc": "集合の圏"
+        },
+        "CatSheaves": {
+            "detail": "Sh",
+            "doc": "層の圏"
+        },
+        "Colim": {
+            "detail": "colim",
+            "doc": "余極限"
+        },
+        "End": {
+            "detail": "End",
+            "doc": "自己準同型環"
+        },
+        "Hom": {
+            "detail": "Hom",
+            "doc": "Hom集合"
+        },
+        "id": {
+            "detail": "id",
+            "doc": "恒等写像"
+        },
+        "Im": {
+            "detail": "ℑ",
+            "doc": "\\mathfrak{i} (eufrak), imaginary part"
+        },
+        "Ker": {
+            "detail": "Ker",
+            "doc": "核"
+        },
+        "Lim": {
+            "detail": "lim",
+            "doc": "極限"
+        },
+        "N": {
+            "detail": "ℕ",
+            "doc": "自然数全体の集合"
+        },
+        "Q": {
+            "detail": "ℚ",
+            "doc": "有理数全体の集合"
+        },
+        "R": {
+            "detail": "ℝ",
+            "doc": "実数全体の集合"
+        }
+    },
+    "envs": {}
+}

@@ -21,41 +21,59 @@
       "name": "nolimits"
     },
     {
-      "name": "Aut"
+      "name": "Aut",
+      "detail": "Aut",
+      "doc": "自己同型群"
     },
     {
-      "name": "BurnsideRing"
+      "name": "BurnsideRing",
+      "doc": "Burnside環"
     },
     {
-      "name": "C"
+      "name": "C",
+      "detail": "ℂ",
+      "doc": "複素数全体の集合"
     },
     {
       "name": "Card",
       "arg": {
         "format": "{}",
         "snippet": "Card{${1:set}}"
-      }
+      },
+      "doc": "集合の濃度"
     },
     {
-      "name": "CatAbGrps"
+      "name": "CatAbGrps",
+      "detail": "Ab",
+      "doc": "可換群の圏"
     },
     {
-      "name": "CatFinSets"
+      "name": "CatFinSets",
+      "detail": "FinSets",
+      "doc": "有限集合の圏"
     },
     {
-      "name": "CatSets"
+      "name": "CatSets",
+      "detail": "Sets",
+      "doc": "集合の圏"
     },
     {
-      "name": "CatSheaves"
+      "name": "CatSheaves",
+      "detail": "Sh",
+      "doc": "層の圏"
     },
     {
-      "name": "Colim"
+      "name": "Colim",
+      "detail": "colim",
+      "doc": "余極限"
     },
     {
       "name": "Def"
     },
     {
-      "name": "End"
+      "name": "End",
+      "detail": "End",
+      "doc": "自己準同型環"
     },
     {
       "name": "FixedPtMap"
@@ -68,17 +86,23 @@
       }
     },
     {
-      "name": "Hom"
+      "name": "Hom",
+      "detail": "Hom",
+      "doc": "Hom集合"
     },
     {
       "name": "Hom",
       "arg": {
         "format": "[]",
         "snippet": "Hom[${1:cat}]"
-      }
+      },
+      "detail": "Hom",
+      "doc": "Hom集合"
     },
     {
-      "name": "id"
+      "name": "id",
+      "detail": "id",
+      "doc": "恒等写像"
     },
     {
       "name": "Im",
@@ -86,10 +110,14 @@
       "doc": "\\mathfrak{i} (eufrak), imaginary part"
     },
     {
-      "name": "Ker"
+      "name": "Ker",
+      "detail": "Ker",
+      "doc": "核"
     },
     {
-      "name": "Lim"
+      "name": "Lim",
+      "detail": "lim",
+      "doc": "極限"
     },
     {
       "name": "MarkHom"
@@ -102,7 +130,9 @@
       }
     },
     {
-      "name": "N"
+      "name": "N",
+      "detail": "ℕ",
+      "doc": "自然数全体の集合"
     },
     {
       "name": "Normalizer"
@@ -139,10 +169,14 @@
       "name": "Power"
     },
     {
-      "name": "Q"
+      "name": "Q",
+      "detail": "ℚ",
+      "doc": "有理数全体の集合"
     },
     {
-      "name": "R"
+      "name": "R",
+      "detail": "ℝ",
+      "doc": "実数全体の集合"
     },
     {
       "name": "Tuple",
