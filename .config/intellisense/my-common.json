@@ -261,7 +261,7 @@
       "name": "automorphisms",
       "arg": {
         "format": "[]",
-        "snippet": "automorphisms[${1:of}]"
+        "snippet": "automorphisms[${1:in}]"
       }
     },
     {
@@ -271,7 +271,7 @@
       "name": "endomorphisms",
       "arg": {
         "format": "[]",
-        "snippet": "endomorphisms[${1:of}]"
+        "snippet": "endomorphisms[${1:in}]"
       }
     },
     {
@@ -281,7 +281,7 @@
       "name": "homset",
       "arg": {
         "format": "[]",
-        "snippet": "homset[${1:of}]"
+        "snippet": "homset[${1:in}]"
       }
     },
     {
@@ -291,7 +291,7 @@
       "name": "isometries",
       "arg": {
         "format": "[]",
-        "snippet": "isometries[${1:of}]"
+        "snippet": "isometries[${1:on}]"
       }
     },
     {
@@ -306,6 +306,13 @@
       "arg": {
         "format": "[]{}",
         "snippet": "distance[${2:on}]{${1:var}}"
+      }
+    },
+    {
+      "name": "vect",
+      "arg": {
+        "format": "{}",
+        "snippet": "vect{${1:var}}"
       }
     },
     {
@@ -334,6 +341,34 @@
       "arg": {
         "format": "[]{}[]",
         "snippet": "term[${2:yomi}]{${1:term}}[${3:alt}]"
+      }
+    },
+    {
+      "name": "term*",
+      "arg": {
+        "format": "{}",
+        "snippet": "term*{${1:term}}"
+      }
+    },
+    {
+      "name": "term*",
+      "arg": {
+        "format": "[]{}",
+        "snippet": "term*[${2:yomi}]{${1:term}}"
+      }
+    },
+    {
+      "name": "term*",
+      "arg": {
+        "format": "{}[]",
+        "snippet": "term*{${1:term}}[${2:alt}]"
+      }
+    },
+    {
+      "name": "term*",
+      "arg": {
+        "format": "[]{}[]",
+        "snippet": "term*[${2:yomi}]{${1:term}}[${3:alt}]"
       }
     }
   ],
