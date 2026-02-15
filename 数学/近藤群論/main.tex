@@ -20,6 +20,8 @@
   [lines=5]{_section,23pt,_subsection,16pt,_subsubsection,8pt}%
 }
 
+\makeindex
+
 \begin{document}
 
 \section{群論}
@@ -28,19 +30,38 @@
 
 \subsubsection{半群}
 
-$V = \tuple{V, \innerprod{\dummy}{\dummy}}$を内積空間とする．
+\begin{definition}
+  $S$を集合とする．
+  写像$S \times S \to S$が定まっているとき，$S$の上に\term[えんざんがていぎされている]{演算が定義されている}という．
+\end{definition}
+
+$S$の上に演算$f$が定義されているとき，任意の$x, y \in S$に対して，
+\begin{equation}
+  xy = f(x, y)
+\end{equation}
+と表すことが多い．
+
+\subsection{剰余類と剰余群}
+
+\subsection{準同型写像}
+
+\subsubsection{準同型と同型}
+
+$V = \tuple{V, \innerproduct{\dummy}{\dummy}}$を内積空間とする．
 このとき，$v \in V$上のノルム$\norm{v}$を
 \begin{equation}
-  \norm{v} = \sqrt{\innerprod{v}{v}}
+  \norm{v} = \sqrt{\innerproduct{v}{v}}
 \end{equation}
 で定義すれば，$V$上の距離$\distance{d}$が
 \begin{equation}
   \distance{d}(u, v) = \norm{v - u}
 \end{equation}
-で定められる．このとき，等長変換群$\Isom V$は
+で定められる．このとき，
 \begin{equation}
-  \Isom V =
+  \isometries V = \{ f \colon \}
 \end{equation}
-で与えられる．
+を\term[とうちょうへんかんぐん]{等長変換群}[isometory]と呼ぶ．
+
+\printindex
 
 \end{document}
