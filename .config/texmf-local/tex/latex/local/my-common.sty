@@ -132,14 +132,19 @@
 
 % 自然数の集合
 \NewDocumentCommand\naturalnumbers{}{\mathord{\mathbb{N}}}
+\NewDocumentCommand\N{}{\naturalnumbers}
 % 整数の集合
 \NewDocumentCommand\integers{}{\mathord{\mathbb{Z}}}
+\NewDocumentCommand\Z{}{\integers}
 % 有理数の集合
 \NewDocumentCommand\rationalnumbers{}{\mathord{\mathbb{Q}}}
+\NewDocumentCommand\Q{}{\rationalnumbers}
 % 実数の集合
 \NewDocumentCommand\realnumbers{}{\mathord{\mathbb{R}}}
+\NewDocumentCommand\R{}{\realnumbers}
 % 複素数の集合
 \NewDocumentCommand\complexnumbers{}{\mathord{\mathbb{C}}}
+\NewDocumentCommand\C{}{\complexnumbers}
 % ダミー変数
 \NewDocumentCommand\dummy{}{\mathord{-}}
 
@@ -152,27 +157,36 @@
 \NewDocumentCommand\norm{om}{\GenericTuple{\|}{\|}{#2}[#1]}
 % 内積
 \NewDocumentCommand\innerproduct{omm}{\GenericTuple{\langle}{\rangle}{#2, #3}[#1]}
+\NewDocumentCommand\innerprod{omm}{\innerproduct[#1]{#2}{#3}}
 
 % Operators -------------------------------------
 
 % 恒等射
 \NewDocumentCommand\identitymap{o}{\GenericMathOperator{id}[#1]}
+\NewDocumentCommand\id{o}{\identitymap[#1]}
 
 % 自己同型
 \NewDocumentCommand\automorphisms{o}{\GenericMathOperator{Aut}[#1]}
+\NewDocumentCommand\Aut{o}{\automorphisms[#1]}
 % 自己準同型
 \NewDocumentCommand\endomorphisms{o}{\GenericMathOperator{End}[#1]}
+\NewDocumentCommand\End{o}{\endomorphisms[#1]}
 % Hom集合
 \NewDocumentCommand\homset{o}{\GenericMathOperator{Hom}[#1]}
+\NewDocumentCommand\Hom{o}{\homset[#1]}
 % 等長変換群
 \NewDocumentCommand\isometries{o}{\GenericMathOperator{Isom}[#1]}
+\NewDocumentCommand\Isom{o}{\isometries[#1]}
 
 % Variables ------------------------------------- 
 
 % 距離
 \NewDocumentCommand\distance{om}{\GenericVariable{#2}[#1]}
 % ベクトル
+% NOTE: \vectorはLaTeXの組み込みコマンドなのでダメ
 \NewDocumentCommand\vect{om}{\bm{#2}}
+% 写像
+\NewDocumentCommand\map{mmm}{#1 \colon #2 \to #3}
 
 % makeidx ---------------------------------------
 
