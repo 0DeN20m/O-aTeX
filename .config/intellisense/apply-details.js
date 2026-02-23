@@ -14,29 +14,112 @@
  *   node apply-details.js
  */
 
-const fs = require('fs');
-const path = require('path');
+import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
+import { basename, join, dirname } from 'path';
+import { pathToFileURL } from 'url';
+
+/**
+ * 1つのエントリにdetail/docを適用する
+ * @param {object} target - intellisenseのエントリ（macro/env）
+ * @param {object} detailInfo - details側の情報
+ * @returns {boolean} 既存値を上書きしたか
+ */
+function applyDetailAndDoc(target, detailInfo) {
+    let wasOverwritten = false;
+
+    for (const field of ['detail', 'doc']) {
+        if (detailInfo[field] !== undefined) {
+            if (target[field] !== undefined) {
+                wasOverwritten = true;
+            }
+            if (detailInfo[field] === null) {
+                delete target[field];
+            } else {
+                target[field] = detailInfo[field];
+            }
+        }
+    }
+
+    return wasOverwritten;
+}
+
+/**
+ * エントリに対応するdetails情報を取得する
+ * 優先順位:
+ * 1. "name|arg.format"（引数形式ごとの個別設定）
+ * 2. "name"（従来互換の共通設定）
+ * @param {object} entry - intellisenseのエントリ（macro/env）
+ * @param {object} detailsMap - details側の名前→情報マップ
+ * @returns {object|undefined}
+ */
+function getDetailInfo(entry, detailsMap) {
+    const format = entry.arg?.format;
+    if (typeof format === 'string') {
+        const variantKey = `${entry.name}|${format}`;
+        if (detailsMap[variantKey]) {
+            return detailsMap[variantKey];
+        }
+    }
+
+    return detailsMap[entry.name];
+}
+
+/**
+ * 複数エントリにdetail/docを適用して件数を集計する
+ * @param {Array<object>} entries - intellisenseのエントリ配列
+ * @param {object} detailsMap - details側の名前→情報マップ
+ * @returns {{count: number, overwritten: number}}
+ */
+function applyDetailsToEntries(entries, detailsMap) {
+    let count = 0;
+    let overwritten = 0;
+
+    for (const entry of entries) {
+        const detailInfo = getDetailInfo(entry, detailsMap);
+        if (!detailInfo) {
+            continue;
+        }
+
+        const wasOverwritten = applyDetailAndDoc(entry, detailInfo);
+        count++;
+        if (wasOverwritten) {
+            overwritten++;
+        }
+    }
+
+    return { count, overwritten };
+}
 
 /**
  * detail/doc情報をインテリセンスファイルに適用する
  * @param {string} intellisenseFile - インテリセンスJSONファイルのパス
  */
 function applyDetails(intellisenseFile) {
-    const baseName = path.basename(intellisenseFile, '.json');
-    const detailsFile = path.join(path.dirname(intellisenseFile), `${baseName}.details.json`);
+    const baseName = basename(intellisenseFile, '.json');
+    const detailsFile = join(dirname(intellisenseFile), `${baseName}.details.json`);
 
     // detailsファイルが存在しない場合はスキップ
-    if (!fs.existsSync(detailsFile)) {
+    if (!existsSync(detailsFile)) {
         console.log(`⏭️  ${baseName}: detailsファイルが見つかりません (${detailsFile})`);
         return;
     }
 
     console.log(`📝 処理中: ${baseName}.json`);
 
-    // ファイル読み込み
-    const intellisense = JSON.parse(fs.readFileSync(intellisenseFile, 'utf8'));
-    const details = JSON.parse(fs.readFileSync(detailsFile, 'utf8'));
+    // ファイル読み込み（パースエラー時にファイル名付きで例外を投げ直す）
+    let intellisense;
+    try {
+        intellisense = JSON.parse(readFileSync(intellisenseFile, 'utf8'));
+    } catch (e) {
+        throw new Error(`intellisense JSON のパースに失敗しました: ${intellisenseFile}\n${e.message}`);
+    }
 
+    let details;
+    try {
+        details = JSON.parse(readFileSync(detailsFile, 'utf8'));
+    } catch (e) {
+        throw new Error(`details JSON のパースに失敗しました: ${detailsFile}\n${e.message}`);
+    }
     let macroCount = 0;
     let macroOverwritten = 0;
     let envCount = 0;
@@ -44,84 +127,20 @@ function applyDetails(intellisenseFile) {
 
     // マクロにdetail/docを適用
     if (details.macros && intellisense.macros) {
-        for (const macro of intellisense.macros) {
-            const detailInfo = details.macros[macro.name];
-            if (detailInfo) {
-                let wasOverwritten = false;
-
-                // detailの適用（nullの場合は削除、それ以外は上書き）
-                if (detailInfo.detail !== undefined) {
-                    if (macro.detail !== undefined) {
-                        wasOverwritten = true;
-                    }
-                    if (detailInfo.detail === null) {
-                        delete macro.detail;
-                    } else {
-                        macro.detail = detailInfo.detail;
-                    }
-                }
-
-                // docの適用（nullの場合は削除、それ以外は上書き）
-                if (detailInfo.doc !== undefined) {
-                    if (macro.doc !== undefined) {
-                        wasOverwritten = true;
-                    }
-                    if (detailInfo.doc === null) {
-                        delete macro.doc;
-                    } else {
-                        macro.doc = detailInfo.doc;
-                    }
-                }
-
-                macroCount++;
-                if (wasOverwritten) {
-                    macroOverwritten++;
-                }
-            }
-        }
+        const result = applyDetailsToEntries(intellisense.macros, details.macros);
+        macroCount = result.count;
+        macroOverwritten = result.overwritten;
     }
 
     // 環境にdetail/docを適用
     if (details.envs && intellisense.envs) {
-        for (const env of intellisense.envs) {
-            const detailInfo = details.envs[env.name];
-            if (detailInfo) {
-                let wasOverwritten = false;
-
-                // detailの適用（nullの場合は削除、それ以外は上書き）
-                if (detailInfo.detail !== undefined) {
-                    if (env.detail !== undefined) {
-                        wasOverwritten = true;
-                    }
-                    if (detailInfo.detail === null) {
-                        delete env.detail;
-                    } else {
-                        env.detail = detailInfo.detail;
-                    }
-                }
-
-                // docの適用（nullの場合は削除、それ以外は上書き）
-                if (detailInfo.doc !== undefined) {
-                    if (env.doc !== undefined) {
-                        wasOverwritten = true;
-                    }
-                    if (detailInfo.doc === null) {
-                        delete env.doc;
-                    } else {
-                        env.doc = detailInfo.doc;
-                    }
-                }
-
-                envCount++;
-                if (wasOverwritten) {
-                    envOverwritten++;
-                }
-            }
-        }
+        const result = applyDetailsToEntries(intellisense.envs, details.envs);
+        envCount = result.count;
+        envOverwritten = result.overwritten;
     }
 
     // ファイル書き込み
-    fs.writeFileSync(intellisenseFile, JSON.stringify(intellisense, null, 2) + '\n', 'utf8');
+    writeFileSync(intellisenseFile, JSON.stringify(intellisense, null, 2) + '\n', 'utf8');
 
     console.log(`✅ ${baseName}: マクロ ${macroCount}個（上書き${macroOverwritten}）、環境 ${envCount}個（上書き${envOverwritten}）に適用しました\n`);
 }
@@ -136,7 +155,7 @@ function main() {
         // 引数なし: カレントディレクトリの全.jsonファイルを処理（.details.jsonは除く）
         console.log('📁 カレントディレクトリの全インテリセンスファイルを処理します\n');
 
-        const files = fs.readdirSync('.')
+        const files = readdirSync('.')
             .filter(file => file.endsWith('.json') && !file.endsWith('.details.json'));
 
         if (files.length === 0) {
@@ -150,7 +169,7 @@ function main() {
     } else {
         // 引数あり: 指定されたファイルを処理
         for (const file of args) {
-            if (!fs.existsSync(file)) {
+            if (!existsSync(file)) {
                 console.error(`❌ ファイルが見つかりません: ${file}`);
                 continue;
             }
@@ -162,7 +181,7 @@ function main() {
 }
 
 // 実行
-if (require.main === module) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
     try {
         main();
     } catch (error) {
@@ -171,4 +190,4 @@ if (require.main === module) {
     }
 }
 
-module.exports = { applyDetails };
+export default { applyDetails };
