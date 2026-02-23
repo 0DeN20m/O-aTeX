@@ -5,6 +5,9 @@
 #include:hyperref
 #include:makeidx
 #include:luatexja-ruby
+#include:bm
+#include:cleveref
+#include:autonum
 
 # theorem environments
 
@@ -71,6 +74,10 @@
 \begin{answer*}[heading]#n
 \end{answer*}#n
 
+\begin{myproof}#n
+\begin{myproof}[heading]#n
+\end{myproof}#n
+
 # functions
 
 \GenericMathOperator{symbol}#*
@@ -100,10 +107,15 @@
 # symbols
 
 \naturalnumbers#m
+\N#m
 \integers#m
+\Z#m
 \rationalnumbers#m
+\Q#m
 \realnumbers#m
+\R#m
 \complexnumbers#m
+\C#m
 \dummy#m
 
 # tuples
@@ -113,25 +125,38 @@
 \norm[on]{of}#m
 \innerproduct{elem1}{elem2}#m
 \innerproduct[for]{elem1}{elem2}#m
+\innerprod{elem1}{elem2}#m
+\innerprod[for]{elem1}{elem2}#m
 
 # operators
 
 \identitymap#m
 \identitymap[of]#m
+\id#m
+\id[of]#m
 \automorphisms#m
 \automorphisms[in]#m
+\Aut#m
+\Aut[in]#m
 \endomorphisms#m
 \endomorphisms[in]#m
+\End#m
+\End[in]#m
 \homset#m
 \homset[in]#m
+\Hom#m
+\Hom[in]#m
 \isometries#m
 \isometries[on]#m
+\Isom#m
+\Isom[on]#m
 
 # variables
 
 \distance{var}#m
 \distance[on]{var}#m
 \vect{var}#m
+\map{map}{domain}{codomain}#m
 
 # makeidx
 

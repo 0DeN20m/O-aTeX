@@ -20,6 +20,15 @@
     },
     {
       "name": "luatexja-ruby"
+    },
+    {
+      "name": "bm"
+    },
+    {
+      "name": "cleveref"
+    },
+    {
+      "name": "autonum"
     }
   ],
   "macros": [
@@ -29,7 +38,8 @@
       "arg": {
         "format": "{}",
         "snippet": "GenericMathOperator{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -37,7 +47,8 @@
       "arg": {
         "format": "{}",
         "snippet": "GenericMathOperator*{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericMathOperator",
@@ -45,7 +56,8 @@
       "arg": {
         "format": "{}[]",
         "snippet": "GenericMathOperator{${1:symbol}}[${2:sub}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -53,7 +65,8 @@
       "arg": {
         "format": "{}[]",
         "snippet": "GenericMathOperator*{${1:symbol}}[${2:sub}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericMathOperator",
@@ -61,7 +74,8 @@
       "arg": {
         "format": "{}[][]",
         "snippet": "GenericMathOperator{${1:symbol}}[${2:sub}][${3:super}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -69,7 +83,8 @@
       "arg": {
         "format": "{}[][]",
         "snippet": "GenericMathOperator*{${1:symbol}}[${2:sub}][${3:super}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericMathOperator",
@@ -77,7 +92,8 @@
       "arg": {
         "format": "[]{}",
         "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -85,7 +101,8 @@
       "arg": {
         "format": "[]{}",
         "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericMathOperator",
@@ -93,7 +110,8 @@
       "arg": {
         "format": "[]{}[]",
         "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}[${3:sub}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -101,7 +119,8 @@
       "arg": {
         "format": "[]{}[]",
         "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}[${3:sub}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericMathOperator",
@@ -109,7 +128,8 @@
       "arg": {
         "format": "[]{}[][]",
         "snippet": "GenericMathOperator[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する。"
     },
     {
       "name": "GenericMathOperator*",
@@ -117,7 +137,8 @@
       "arg": {
         "format": "[]{}[][]",
         "snippet": "GenericMathOperator*[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
-      }
+      },
+      "doc": "可変引数の数学演算子を生成する（*版）。"
     },
     {
       "name": "GenericTuple",
@@ -125,7 +146,8 @@
       "arg": {
         "format": "{}{}{}",
         "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}"
-      }
+      },
+      "doc": "括弧を指定したタプル表記を生成する。"
     },
     {
       "name": "GenericTuple",
@@ -133,7 +155,8 @@
       "arg": {
         "format": "{}{}{}[]",
         "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}[${4:sub}]"
-      }
+      },
+      "doc": "括弧を指定したタプル表記を生成する。"
     },
     {
       "name": "GenericTuple",
@@ -141,7 +164,8 @@
       "arg": {
         "format": "{}{}{}[][]",
         "snippet": "GenericTuple{${1:lparen}}{${2:rparen}}{${3:content}}[${4:sub}][${5:super}]"
-      }
+      },
+      "doc": "括弧を指定したタプル表記を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -149,7 +173,8 @@
       "arg": {
         "format": "{}",
         "snippet": "GenericVariable{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -157,7 +182,8 @@
       "arg": {
         "format": "{}[]",
         "snippet": "GenericVariable{${1:symbol}}[${2:sub}]"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -165,7 +191,8 @@
       "arg": {
         "format": "{}[][]",
         "snippet": "GenericVariable{${1:symbol}}[${2:sub}][${3:super}]"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -173,7 +200,8 @@
       "arg": {
         "format": "[]{}",
         "snippet": "GenericVariable[${2:font}]{${1:symbol}}"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -181,7 +209,8 @@
       "arg": {
         "format": "[]{}[]",
         "snippet": "GenericVariable[${2:font}]{${1:symbol}}[${3:sub}]"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "GenericVariable",
@@ -189,10 +218,16 @@
       "arg": {
         "format": "[]{}[][]",
         "snippet": "GenericVariable[${2:font}]{${1:symbol}}[${3:sub}][${4:super}]"
-      }
+      },
+      "doc": "可変引数の変数記号を生成する。"
     },
     {
       "name": "naturalnumbers",
+      "detail": "ℕ",
+      "doc": "自然数全体の集合"
+    },
+    {
+      "name": "N",
       "detail": "ℕ",
       "doc": "自然数全体の集合"
     },
@@ -202,7 +237,17 @@
       "doc": "整数全体の集合"
     },
     {
+      "name": "Z",
+      "detail": "ℤ",
+      "doc": "整数全体の集合"
+    },
+    {
       "name": "rationalnumbers",
+      "detail": "ℚ",
+      "doc": "有理数全体の集合"
+    },
+    {
+      "name": "Q",
       "detail": "ℚ",
       "doc": "有理数全体の集合"
     },
@@ -212,12 +257,24 @@
       "doc": "実数全体の集合"
     },
     {
+      "name": "R",
+      "detail": "ℝ",
+      "doc": "実数全体の集合"
+    },
+    {
       "name": "complexnumbers",
       "detail": "ℂ",
       "doc": "複素数全体の集合"
     },
     {
-      "name": "dummy"
+      "name": "C",
+      "detail": "ℂ",
+      "doc": "複素数全体の集合"
+    },
+    {
+      "name": "dummy",
+      "detail": "-",
+      "doc": "ダミー変数。"
     },
     {
       "name": "tuple",
@@ -241,7 +298,7 @@
         "format": "[]{}",
         "snippet": "norm[${2:on}]{${1:of}}"
       },
-      "doc": "ノルム"
+      "doc": "ノルム（添え字付き）"
     },
     {
       "name": "innerproduct",
@@ -257,6 +314,22 @@
         "format": "[]{}{}",
         "snippet": "innerproduct[${3:for}]{${1:elem1}}{${2:elem2}}"
       },
+      "doc": "内積（添え字付き）"
+    },
+    {
+      "name": "innerprod",
+      "arg": {
+        "format": "{}{}",
+        "snippet": "innerprod{${1:elem1}}{${2:elem2}}"
+      },
+      "doc": "内積"
+    },
+    {
+      "name": "innerprod",
+      "arg": {
+        "format": "[]{}{}",
+        "snippet": "innerprod[${3:for}]{${1:elem1}}{${2:elem2}}"
+      },
       "doc": "内積"
     },
     {
@@ -271,7 +344,21 @@
         "snippet": "identitymap[${1:of}]"
       },
       "detail": "id",
+      "doc": "恒等写像（添え字付き）"
+    },
+    {
+      "name": "id",
+      "detail": "id",
       "doc": "恒等写像"
+    },
+    {
+      "name": "id",
+      "arg": {
+        "format": "[]",
+        "snippet": "id[${1:of}]"
+      },
+      "detail": "id",
+      "doc": "恒等写像（添え字付き）"
     },
     {
       "name": "automorphisms",
@@ -285,7 +372,21 @@
         "snippet": "automorphisms[${1:in}]"
       },
       "detail": "Aut",
+      "doc": "自己同型群（添え字付き）"
+    },
+    {
+      "name": "Aut",
+      "detail": "Aut",
       "doc": "自己同型群"
+    },
+    {
+      "name": "Aut",
+      "arg": {
+        "format": "[]",
+        "snippet": "Aut[${1:in}]"
+      },
+      "detail": "Aut",
+      "doc": "自己同型群（添え字付き）"
     },
     {
       "name": "endomorphisms",
@@ -299,7 +400,21 @@
         "snippet": "endomorphisms[${1:in}]"
       },
       "detail": "End",
+      "doc": "自己準同型（添え字付き）"
+    },
+    {
+      "name": "End",
+      "detail": "End",
       "doc": "自己準同型"
+    },
+    {
+      "name": "End",
+      "arg": {
+        "format": "[]",
+        "snippet": "End[${1:in}]"
+      },
+      "detail": "End",
+      "doc": "自己準同型（添え字付き）"
     },
     {
       "name": "homset",
@@ -313,38 +428,80 @@
         "snippet": "homset[${1:in}]"
       },
       "detail": "Hom",
+      "doc": "Hom集合（添え字付き）"
+    },
+    {
+      "name": "Hom",
+      "detail": "Hom",
       "doc": "Hom集合"
     },
     {
-      "name": "isometries"
+      "name": "Hom",
+      "arg": {
+        "format": "[]",
+        "snippet": "Hom[${1:in}]"
+      },
+      "detail": "Hom",
+      "doc": "Hom集合（添え字付き）"
+    },
+    {
+      "name": "isometries",
+      "doc": "等長変換群"
     },
     {
       "name": "isometries",
       "arg": {
         "format": "[]",
         "snippet": "isometries[${1:on}]"
-      }
+      },
+      "doc": "等長変換群（添え字付き）"
+    },
+    {
+      "name": "Isom",
+      "detail": "Isom",
+      "doc": "等長変換群"
+    },
+    {
+      "name": "Isom",
+      "arg": {
+        "format": "[]",
+        "snippet": "Isom[${1:on}]"
+      },
+      "detail": "Isom",
+      "doc": "等長変換群（添え字付き）"
     },
     {
       "name": "distance",
       "arg": {
         "format": "{}",
         "snippet": "distance{${1:var}}"
-      }
+      },
+      "doc": "一般の距離の書式を適用する。"
     },
     {
       "name": "distance",
       "arg": {
         "format": "[]{}",
         "snippet": "distance[${2:on}]{${1:var}}"
-      }
+      },
+      "doc": "一般の距離の書式を適用する（添え字付き）。"
     },
     {
       "name": "vect",
       "arg": {
         "format": "{}",
         "snippet": "vect{${1:var}}"
-      }
+      },
+      "doc": "ベクトル記号を生成する。"
+    },
+    {
+      "name": "map",
+      "arg": {
+        "format": "{}{}{}",
+        "snippet": "map{${1:map}}{${2:domain}}{${3:codomain}}"
+      },
+      "detail": "f: X → Y",
+      "doc": "写像をdomain, codomain付きで表記する。"
     },
     {
       "name": "term",
@@ -425,14 +582,16 @@
       "doc": "公理環境"
     },
     {
-      "name": "axiom*"
+      "name": "axiom*",
+      "doc": "公理環境（非番号付き）"
     },
     {
       "name": "axiom*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "公理環境（非番号付き）"
     },
     {
       "name": "definition",
@@ -447,14 +606,16 @@
       "doc": "定義環境"
     },
     {
-      "name": "definition*"
+      "name": "definition*",
+      "doc": "定義環境（非番号付き）"
     },
     {
       "name": "definition*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "定義環境（非番号付き）"
     },
     {
       "name": "proposition",
@@ -469,14 +630,16 @@
       "doc": "命題環境"
     },
     {
-      "name": "proposition*"
+      "name": "proposition*",
+      "doc": "命題環境（非番号付き）"
     },
     {
       "name": "proposition*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "命題環境（非番号付き）"
     },
     {
       "name": "theorem",
@@ -491,14 +654,16 @@
       "doc": "定理環境"
     },
     {
-      "name": "theorem*"
+      "name": "theorem*",
+      "doc": "定理環境（非番号付き）"
     },
     {
       "name": "theorem*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "定理環境（非番号付き）"
     },
     {
       "name": "lemma",
@@ -513,14 +678,16 @@
       "doc": "補題環境"
     },
     {
-      "name": "lemma*"
+      "name": "lemma*",
+      "doc": "補題環境（非番号付き）"
     },
     {
       "name": "lemma*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "補題環境（非番号付き）"
     },
     {
       "name": "corollary",
@@ -535,14 +702,16 @@
       "doc": "系環境"
     },
     {
-      "name": "corollary*"
+      "name": "corollary*",
+      "doc": "系環境（非番号付き）"
     },
     {
       "name": "corollary*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "系環境（非番号付き）"
     },
     {
       "name": "example",
@@ -557,14 +726,16 @@
       "doc": "例環境"
     },
     {
-      "name": "example*"
+      "name": "example*",
+      "doc": "例環境（非番号付き）"
     },
     {
       "name": "example*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "例環境（非番号付き）"
     },
     {
       "name": "question",
@@ -579,14 +750,16 @@
       "doc": "問題環境"
     },
     {
-      "name": "question*"
+      "name": "question*",
+      "doc": "問題環境（非番号付き）"
     },
     {
       "name": "question*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "問題環境（非番号付き）"
     },
     {
       "name": "answer",
@@ -601,14 +774,28 @@
       "doc": "解答環境"
     },
     {
-      "name": "answer*"
+      "name": "answer*",
+      "doc": "解答環境（非番号付き）"
     },
     {
       "name": "answer*",
       "arg": {
         "format": "[]",
         "snippet": "[${1:heading}]"
-      }
+      },
+      "doc": "解答環境（非番号付き）"
+    },
+    {
+      "name": "myproof",
+      "doc": "証明環境"
+    },
+    {
+      "name": "myproof",
+      "arg": {
+        "format": "[]",
+        "snippet": "[${1:heading}]"
+      },
+      "doc": "証明環境"
     }
   ],
   "keys": {},

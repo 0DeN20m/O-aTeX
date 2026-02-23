@@ -1,12 +1,205 @@
 {
     "macros": {
-        "naturalnumbers": {
-            "detail": "ℕ",
-            "doc": "自然数全体の集合"
+        "Aut": {
+            "detail": "Aut",
+            "doc": "自己同型群"
+        },
+        "Aut|[]": {
+            "detail": "Aut",
+            "doc": "自己同型群（添え字付き）"
+        },
+        "automorphisms": {
+            "detail": "Aut",
+            "doc": "自己同型群"
+        },
+        "automorphisms|[]": {
+            "detail": "Aut",
+            "doc": "自己同型群（添え字付き）"
+        },
+        "C": {
+            "detail": "ℂ",
+            "doc": "複素数全体の集合"
+        },
+        "complexnumbers": {
+            "detail": "ℂ",
+            "doc": "複素数全体の集合"
+        },
+        "distance|[]{}": {
+            "doc": "一般の距離の書式を適用する（添え字付き）。"
+        },
+        "distance|{}": {
+            "doc": "一般の距離の書式を適用する。"
+        },
+        "dummy": {
+            "detail": "-",
+            "doc": "ダミー変数。"
+        },
+        "End": {
+            "detail": "End",
+            "doc": "自己準同型"
+        },
+        "End|[]": {
+            "detail": "End",
+            "doc": "自己準同型（添え字付き）"
+        },
+        "endomorphisms": {
+            "detail": "End",
+            "doc": "自己準同型"
+        },
+        "endomorphisms|[]": {
+            "detail": "End",
+            "doc": "自己準同型（添え字付き）"
+        },
+        "GenericMathOperator*|[]{}": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator*|[]{}[]": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator*|[]{}[][]": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator*|{}": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator*|{}[]": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator*|{}[][]": {
+            "doc": "可変引数の数学演算子を生成する（*版）。"
+        },
+        "GenericMathOperator|[]{}": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericMathOperator|[]{}[]": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericMathOperator|[]{}[][]": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericMathOperator|{}": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericMathOperator|{}[]": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericMathOperator|{}[][]": {
+            "doc": "可変引数の数学演算子を生成する。"
+        },
+        "GenericTuple|{}{}{}": {
+            "doc": "括弧を指定したタプル表記を生成する。"
+        },
+        "GenericTuple|{}{}{}[]": {
+            "doc": "括弧を指定したタプル表記を生成する。"
+        },
+        "GenericTuple|{}{}{}[][]": {
+            "doc": "括弧を指定したタプル表記を生成する。"
+        },
+        "GenericVariable|[]{}": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "GenericVariable|[]{}[]": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "GenericVariable|[]{}[][]": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "GenericVariable|{}": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "GenericVariable|{}[]": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "GenericVariable|{}[][]": {
+            "doc": "可変引数の変数記号を生成する。"
+        },
+        "Hom": {
+            "detail": "Hom",
+            "doc": "Hom集合"
+        },
+        "Hom|[]": {
+            "detail": "Hom",
+            "doc": "Hom集合（添え字付き）"
+        },
+        "homset": {
+            "detail": "Hom",
+            "doc": "Hom集合"
+        },
+        "homset|[]": {
+            "detail": "Hom",
+            "doc": "Hom集合（添え字付き）"
+        },
+        "id": {
+            "detail": "id",
+            "doc": "恒等写像"
+        },
+        "id|[]": {
+            "detail": "id",
+            "doc": "恒等写像（添え字付き）"
+        },
+        "identitymap": {
+            "detail": "id",
+            "doc": "恒等写像"
+        },
+        "identitymap|[]": {
+            "detail": "id",
+            "doc": "恒等写像（添え字付き）"
+        },
+        "innerprod|[]{}{}": {
+            "doc": "内積"
+        },
+        "innerprod|{}{}": {
+            "doc": "内積"
+        },
+        "innerproduct|[]{}{}": {
+            "doc": "内積（添え字付き）"
+        },
+        "innerproduct|{}{}": {
+            "doc": "内積"
         },
         "integers": {
             "detail": "ℤ",
             "doc": "整数全体の集合"
+        },
+        "Isom": {
+            "detail": "Isom",
+            "doc": "等長変換群"
+        },
+        "Isom|[]": {
+            "detail": "Isom",
+            "doc": "等長変換群（添え字付き）"
+        },
+        "isometries": {
+            "doc": "等長変換群"
+        },
+        "isometries|[]": {
+            "doc": "等長変換群（添え字付き）"
+        },
+        "map|{}{}{}": {
+            "detail": "f: X → Y",
+            "doc": "写像をdomain, codomain付きで表記する。"
+        },
+        "N": {
+            "detail": "ℕ",
+            "doc": "自然数全体の集合"
+        },
+        "naturalnumbers": {
+            "detail": "ℕ",
+            "doc": "自然数全体の集合"
+        },
+        "norm|[]{}": {
+            "doc": "ノルム（添え字付き）"
+        },
+        "norm|{}": {
+            "doc": "ノルム"
+        },
+        "Q": {
+            "detail": "ℚ",
+            "doc": "有理数全体の集合"
+        },
+        "R": {
+            "detail": "ℝ",
+            "doc": "実数全体の集合"
         },
         "rationalnumbers": {
             "detail": "ℚ",
@@ -16,69 +209,161 @@
             "detail": "ℝ",
             "doc": "実数全体の集合"
         },
-        "complexnumbers": {
-            "detail": "ℂ",
-            "doc": "複素数全体の集合"
-        },
-        "tuple": {
-            "doc": "一般的なタプル"
-        },
-        "norm": {
-            "doc": "ノルム"
-        },
-        "innerproduct": {
-            "doc": "内積"
-        },
-        "identitymap": {
-            "detail": "id",
-            "doc": "恒等写像"
-        },
-        "automorphisms": {
-            "detail": "Aut",
-            "doc": "自己同型群"
-        },
-        "endomorphisms": {
-            "detail": "End",
-            "doc": "自己準同型"
-        },
-        "homset": {
-            "detail": "Hom",
-            "doc": "Hom集合"
-        },
         "term": {
             "doc": "用語を索引に登録する。"
         },
         "term*": {
             "doc": "用語を索引に登録する（読み仮名付き）。"
+        },
+        "term*|[]{}": {
+            "doc": "用語を索引に登録する（読み仮名付き）。"
+        },
+        "term*|[]{}[]": {
+            "doc": "用語を索引に登録する（読み仮名付き）。"
+        },
+        "term*|{}": {
+            "doc": "用語を索引に登録する（読み仮名付き）。"
+        },
+        "term*|{}[]": {
+            "doc": "用語を索引に登録する（読み仮名付き）。"
+        },
+        "term|[]{}": {
+            "doc": "用語を索引に登録する。"
+        },
+        "term|[]{}[]": {
+            "doc": "用語を索引に登録する。"
+        },
+        "term|{}": {
+            "doc": "用語を索引に登録する。"
+        },
+        "term|{}[]": {
+            "doc": "用語を索引に登録する。"
+        },
+        "tuple|{}": {
+            "doc": "一般的なタプル"
+        },
+        "vect|{}": {
+            "doc": "ベクトル記号を生成する。"
+        },
+        "Z": {
+            "detail": "ℤ",
+            "doc": "整数全体の集合"
         }
     },
     "envs": {
+        "answer": {
+            "doc": "解答環境"
+        },
+        "answer*": {
+            "doc": "解答環境（非番号付き）"
+        },
+        "answer*|[]": {
+            "doc": "解答環境（非番号付き）"
+        },
+        "answer|[]": {
+            "doc": "解答環境"
+        },
         "axiom": {
             "doc": "公理環境"
         },
-        "definition": {
-            "doc": "定義環境"
+        "axiom*": {
+            "doc": "公理環境（非番号付き）"
         },
-        "proposition": {
-            "doc": "命題環境"
+        "axiom*|[]": {
+            "doc": "公理環境（非番号付き）"
         },
-        "theorem": {
-            "doc": "定理環境"
-        },
-        "lemma": {
-            "doc": "補題環境"
+        "axiom|[]": {
+            "doc": "公理環境"
         },
         "corollary": {
             "doc": "系環境"
         },
+        "corollary*": {
+            "doc": "系環境（非番号付き）"
+        },
+        "corollary*|[]": {
+            "doc": "系環境（非番号付き）"
+        },
+        "corollary|[]": {
+            "doc": "系環境"
+        },
+        "definition": {
+            "doc": "定義環境"
+        },
+        "definition*": {
+            "doc": "定義環境（非番号付き）"
+        },
+        "definition*|[]": {
+            "doc": "定義環境（非番号付き）"
+        },
+        "definition|[]": {
+            "doc": "定義環境"
+        },
         "example": {
             "doc": "例環境"
+        },
+        "example*": {
+            "doc": "例環境（非番号付き）"
+        },
+        "example*|[]": {
+            "doc": "例環境（非番号付き）"
+        },
+        "example|[]": {
+            "doc": "例環境"
+        },
+        "lemma": {
+            "doc": "補題環境"
+        },
+        "lemma*": {
+            "doc": "補題環境（非番号付き）"
+        },
+        "lemma*|[]": {
+            "doc": "補題環境（非番号付き）"
+        },
+        "lemma|[]": {
+            "doc": "補題環境"
+        },
+        "myproof": {
+            "doc": "証明環境"
+        },
+        "myproof|[]": {
+            "doc": "証明環境"
+        },
+        "proposition": {
+            "doc": "命題環境"
+        },
+        "proposition*": {
+            "doc": "命題環境（非番号付き）"
+        },
+        "proposition*|[]": {
+            "doc": "命題環境（非番号付き）"
+        },
+        "proposition|[]": {
+            "doc": "命題環境"
         },
         "question": {
             "doc": "問題環境"
         },
-        "answer": {
-            "doc": "解答環境"
+        "question*": {
+            "doc": "問題環境（非番号付き）"
+        },
+        "question*|[]": {
+            "doc": "問題環境（非番号付き）"
+        },
+        "question|[]": {
+            "doc": "問題環境"
+        },
+        "theorem": {
+            "doc": "定理環境"
+        },
+        "theorem*": {
+            "doc": "定理環境（非番号付き）"
+        },
+        "theorem*|[]": {
+            "doc": "定理環境（非番号付き）"
+        },
+        "theorem|[]": {
+            "doc": "定理環境"
         }
     }
 }
