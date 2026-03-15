@@ -7,6 +7,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
+\RequirePackage{thmtools} % これがないとcleverefのcrefnameが正しく動作しない
 
 % 索引用
 \RequirePackage{makeidx}
@@ -59,6 +60,9 @@
 \newcommand\crefmiddleconjunction{，} % 連続しない3つ以上のときの中間
 
 % Environments ----------------------------------
+
+% 斜体を防ぐ
+\theoremstyle{definition}
 
 \newtheorem{axiom}{公理}[section]
 \newtheorem*{axiom*}{公理}
