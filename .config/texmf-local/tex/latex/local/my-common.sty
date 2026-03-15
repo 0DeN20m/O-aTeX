@@ -203,9 +203,9 @@
 %   -> 偏微分方程式（Partial Differential Equation; PDE）
 \NewDocumentCommand\term{somo}{%
   \IfValueTF{#2}{%
-    \emph{\IfBooleanTF{#1}{\ruby{#3}{#2}}{#3}}\index{#2@#3}%
+    \textsf{\IfBooleanTF{#1}{\ruby{#3}{#2}}{#3}}\index{#2@#3}%
   }{%
-    \emph{#3}\index{#3}%
+    \textsf{#3}\index{#3}%
   }%
   \IfValueT{#4}{（#4）}%
 }
