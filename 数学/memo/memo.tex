@@ -1,0 +1,129 @@
+\documentclass{jlreq}
+
+\usepackage{my-common}
+
+% A ⇒ Bの小見出し
+\NewDocumentCommand\implyheading{mm}{%
+  \noindent(#1 \Rightarrow\ #2)\quad%
+}
+
+% 同値類
+\NewDocumentCommand\equivcls{om}{%
+  \left[ #2 \right]%
+  \IfValueT{#1}{_{#1}}%
+}
+
+\makeindex
+
+\begin{document}
+
+\section{位相群の表現}
+
+\subsection{位相群}
+
+\begin{definition}\label{def:top_gp}
+  群$G$が以下の条件を満たすとき，$G$を\term[いそうぐん]{位相群}[topological group]と呼ぶ：
+  \begin{enumerate}
+    \item $G$はHausdorff位相空間である．
+    \item 直積空間$G \times G$から$G$への写像$\tuple{x, y} \mapsto xy$は連続である．
+    \item $G$から$G$への写像$x \mapsto x^{-1}$は連続である．
+  \end{enumerate}
+\end{definition}
+
+\section{位相群の商群が位相群となるための条件}
+
+位相群$G$の正規部分群$N \trianglelefteq G$による商空間$G/N$は，$N$が$G$に関して閉でなければHausdorffとならず，位相群の定義を満たさない．
+このことを確かめるのに，個人的には自然な射影$\map{\pi}{G}{G/N}$に関するsaturated性を考えるとうまくいった．
+
+\begin{definition}
+  $X, Y$を集合，$\map{f}{X}{Y}$を写像とする．
+  部分集合$S \subseteq X$が$S \supseteq f^{-1} f S$を満たすとき，$S$は\term[saturated]{$f$-saturated}であると言う．
+\end{definition}
+
+\begin{lemma}\label{prop:cond_for_quotient_sp_is_hausdorff}
+  $X$を位相空間，$\mathrel{R}$を$X$上の同値関係とする．
+  このとき，以下は同値である：
+  \begin{enumerate}
+    \item\label{item:quotient_is_hausdorff} $X/R$はHausdorffである．
+    \item\label{item:proj_hausdorff} 任意の$x, y \in X$に対して，$x \not\mathrel{R} y$ならば，$\pi$-saturatedな$X$の開集合$U \ni x, V \ni y$であって，$U \cap V = \emptyset$を満たすものが存在する．
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \implyheading{\ref{item:quotient_is_hausdorff}}{\ref{item:proj_hausdorff}}
+  任意に$x，y \in X$を取り，$x \not\mathrel{R} y$だとする．
+  このとき，$\pi x \ne \pi y$だから，\cref{item:quotient_is_hausdorff}より，$X/R$の開集合$U' \ni \pi x, V' \ni \pi y$であって，$U' \cap V' = \emptyset$を満たすものが存在する．
+  このとき，$U = \pi^{-1} U', V = \pi^{-1} V'$はそれぞれ$x, y$の$\pi$-saturatedな開近傍である．
+  実際，$U$は商位相の定め方より$X$の開集合であり，
+  \begin{align}
+    x & \in \pi^{-1} \pi x    \\
+      & \subseteq \pi^{-1} U' \\
+      & = U
+  \end{align}
+  を満たす．
+  さらに，$\pi$は全射だから，$\pi^{-1} \pi U = \pi^{-1} \pi \pi^{-1} U' = \pi^{-1} U' = U$が分かる．
+
+  \implyheading{\ref{item:proj_hausdorff}}{\ref{item:quotient_is_hausdorff}}
+  任意に$\pi x, \pi y \in X/R$を取り，$\pi x \ne \pi y$だとする．
+  $x \not\mathrel{R} y$だから，\cref{item:proj_hausdorff}より，$x$と$y$の$\pi$-saturatedな開近傍$U, V$であって，$U \cap V = \emptyset$を満たすものが存在する．
+  このとき，$\pi U$と$\pi V$はそれぞれ$\pi x, \pi y$の開近傍である．
+  さらに，
+  \begin{align}
+    \pi^{-1} (\pi U \cap \pi V) & = \pi^{-1} \pi U \cap \pi^{-1} \pi V \\
+                                & = U \cap V                           \\
+                                & = \emptyset
+  \end{align}
+  であることと，$\pi$が全射であることから，$\pi U \cap \pi V = \emptyset$が分かる．
+\end{proof}
+
+\begin{lemma}\label{prop:proj_is_open}
+  自然な射影$\map{\pi}{G}{G/N}$は開写像である．
+\end{lemma}
+
+\begin{proof}
+  任意に$U \in \mathcal{O}_G$を取る．
+  $\overline{U} = \pi^{-1} \pi U$が$G$の開集合であることを示せばよい．
+  任意に$x \in \overline{U}$を取る．
+  このとき，$xN \cap U \ne \emptyset$である．
+  実際，$\pi x \in \pi U$ゆえ，ある$y \in U$が存在して$\pi x = \pi y$を満たし，$y \in \pi^{-1} \pi x \cap U$である．
+  したがって，ある$g \in N$が存在して，$xg \in U$となる．
+  $g$の右からの作用は同相写像だから，$Ug^{-1} \subseteq \overline{U}$は$G$における$x$の近傍である．
+\end{proof}
+
+\begin{proposition}
+  $G$を位相群，$N \trianglelefteq G$を正規部分群とする．
+  以下は同値である．
+  \begin{enumerate}
+    \item\label{item:g/n_is_top_gp} 商空間$G/N$は位相群である．
+    \item\label{item:n_is_closed} $N$は$G$の閉集合である．
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \implyheading{\ref{item:g/n_is_top_gp}}{\ref{item:n_is_closed}}任意に$x \in G \setminus N$を取る．
+  このとき，$xN \ne N$である．
+  さらに，$G/N$はHausdorffなので，$xN$の開近傍$U$と$N$の開近傍$V$であって，$U \cap V = \emptyset$を満たすものが存在する．
+  商位相の定義から，$\pi^{-1} U$は$x$の開近傍であり，
+  \begin{align}
+    \pi^{-1} U \cap N & \subseteq \pi^{-1} U \cap \pi^{-1} V \\
+                      & = \pi^{-1}(U \cap V)                 \\
+                      & = \emptyset
+  \end{align}
+  を満たす．
+  よって，$\pi^{-1} U \subseteq G \setminus N$となるから，$G \setminus N$は開集合であり，したがって，$N$は閉集合となる．
+
+  \implyheading{\ref{item:n_is_closed}}{\ref{item:g/n_is_top_gp}}商空間$G/N$上で，群の演算と逆元を取る操作は連続となる．
+  したがって，$G/N$がHausdorffであることを確かめればよい．
+  \cref{prop:cond_for_quotient_sp_is_hausdorff}より，任意の$x, y \in G$に対して，$xN \ne yN$ならば，$x$と$y$が$\pi$-saturatedな開近傍で分離できることを示せばよい．
+
+  位相群の定義より，連続写像$\map{f}{G \times G}{G}$が$\tuple{g, h} \mapsto h^{-1}g$で定まる．
+  いま，$f(x, y) = y^{-1}x \in G \setminus N$ゆえ，$f(x, y)$の開近傍$U \subseteq G \setminus N$が存在する．
+  $f$は連続なので，$f^{-1} U$は開集合であり，積位相の定め方から，$x, y$の開近傍$U_1, U_2$であって，$f^{-1} U = U_1 \times U_2$を満たすものが存在する．
+  $\overline{U_i} = \pi^{-1} \pi U_i\ (i = 1, 2)$すれば，\cref{prop:proj_is_open}より，$\overline{U_1}, \overline{U_2}$は$x, y$の$\pi$-saturatedな開近傍である．
+  ここで，$z \in \overline{U_1} \cap \overline{U_2}$を満たす$z$が存在すると仮定すると，$z = u_1 g_1 = u_2 g_2\ (u_i \in U_i, g_i \in N)$と表せるが，$f(u_1, u_2) = u_2^{-1} u_1 = g_2 g_1^{-1} \in (G \setminus N) \cap N$となり矛盾．
+  したがって，$\overline{U_1} \cap \overline{U_2} = \emptyset$である．
+\end{proof}
+
+\printindex
+
+\end{document}
