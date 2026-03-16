@@ -1,4 +1,8 @@
-\ProvidesPackage{my-common}[2026/02/09 汎用コマンド]
+\ProvidesClass{olass}[2026/03/16 オのクラスファイル]
+
+% class -----------------------------------------
+
+\LoadClass{jlreq}
 
 % Packages --------------------------------------
 
