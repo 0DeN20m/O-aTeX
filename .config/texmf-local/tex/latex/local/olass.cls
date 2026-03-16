@@ -4,6 +4,10 @@
 
 \LoadClass{jlreq}
 
+\jlreqsetup{%
+  theorem_beforeafter_space=1\zw,%
+}
+
 % Packages --------------------------------------
 
 % 無いと始まらないパッケージ達
