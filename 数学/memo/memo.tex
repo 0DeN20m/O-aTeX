@@ -2,6 +2,10 @@
 
 \usepackage{my-common}
 
+\jlreqsetup{%
+  theorem_beforeafter_space=1\zw,%
+}
+
 % A ⇒ Bの小見出し
 \NewDocumentCommand\implyheading{mm}{%
   \noindent(#1 \Rightarrow\ #2)\quad%
@@ -100,17 +104,8 @@
 \end{proposition}
 
 \begin{proof}
-  \implyheading{\ref{item:g/n_is_top_gp}}{\ref{item:n_is_closed}}任意に$x \in G \setminus N$を取る．
-  このとき，$xN \ne N$である．
-  さらに，$G/N$はHausdorffなので，$xN$の開近傍$U$と$N$の開近傍$V$であって，$U \cap V = \emptyset$を満たすものが存在する．
-  商位相の定義から，$\pi^{-1} U$は$x$の開近傍であり，
-  \begin{align}
-    \pi^{-1} U \cap N & \subseteq \pi^{-1} U \cap \pi^{-1} V \\
-                      & = \pi^{-1}(U \cap V)                 \\
-                      & = \emptyset
-  \end{align}
-  を満たす．
-  よって，$\pi^{-1} U \subseteq G \setminus N$となるから，$G \setminus N$は開集合であり，したがって，$N$は閉集合となる．
+  \implyheading{\ref{item:g/n_is_top_gp}}{\ref{item:n_is_closed}}$\{ N \} \subseteq G/N$は\cref{item:quotient_is_hausdorff}より閉集合である．
+  $\pi$は連続なので，$\pi^{-1} \left\{ N \right\} = N$は$G$で閉である．
 
   \implyheading{\ref{item:n_is_closed}}{\ref{item:g/n_is_top_gp}}商空間$G/N$上で，群の演算と逆元を取る操作は連続となる．
   したがって，$G/N$がHausdorffであることを確かめればよい．
